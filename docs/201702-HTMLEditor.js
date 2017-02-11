@@ -20,6 +20,7 @@ function ClickedEvent(e){
     element.innerHTML = "&nbsp;";
     element.style.border = "1px dotted yellow";
     element.addEventListener("click", ElementClickedEvent, false);
+    element.addEventListener("tap", ElementClickedEvent, false);
   }
 }
 
