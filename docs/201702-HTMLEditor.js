@@ -56,6 +56,18 @@ function ElementClickedEvent(e){
                 event.currentTarget.removeNode(true);
 		_editingText = false;
    }, true);
+	
+    _checkbox1 = e.currentTarget.appendChild(document.createElement("input"));
+    _checkbox1.id = Date.now();
+    _checkbox1.title = _element.id;
+    _checkbox1.type = "checkbox";
+    _checkbox1.value = "inline-block";	
+	   _checkbox1.addEventListener("click", function(event){
+                window.event.cancelBubble = true;
+                _id = document.getElementById(event.currentTarget.title).parentNode.id;
+                _aux = document.getElementById(event.currentTarget.title);
+                document.getElementById(_id).style.display = (_checkbox1.checked ? "inline-block" : "block");
+   }, true);
 }
 
 
