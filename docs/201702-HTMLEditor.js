@@ -10,7 +10,7 @@ function DocumentLoaded(e){
   document.body.title = "body";
 }
 
-var _editingText = false;
+_editingText = false;
 
 function ClickedEvent(e){
   window.event.cancelBubble = true;
@@ -28,27 +28,29 @@ function ElementClickedEvent(e){
     window.event.cancelBubble = true;
     if (_editingText) return;
  
-    var element = e.currentTarget.appendChild(document.createElement("textarea"));
-    element.id = Date.now();
-    element.title = e.currentTarget.id;
-    element.innerHTML = e.currentTarget.innerText;
-    element.style.border = "1px dotted white";
-    element.addEventListener("click", function(){}, true);
+	_aux = e.currentTarget.innerHTML;
+	e.currentTarget.innerHTML = "";
+    _element = e.currentTarget.appendChild(document.createElement("textarea"));
+    _element.id = Date.now();
+    _element.title = e.currentTarget.id;
+    _element.innerHTML = _aux;
+    _element.style.border = "1px dotted white";
+    _element.addEventListener("click", function(){}, true);
 
     _editingText = true;
 
-    var button = e.currentTarget.appendChild(document.createElement("input"));
-    button.id = Date.now();
-    button.title = element.id;
-    button.type = "button";
-    button.value = "Save";
+    _button = e.currentTarget.appendChild(document.createElement("input"));
+    _button.id = Date.now();
+    _button.title = _element.id;
+    _button.type = "button";
+    _button.value = "Save";
     //button.style.position = "fixed"; button.style.top = "0px";  button.style.width = "200px";
     //button.style.marginLeft = "auto";
     //button.style.marginRight = "auto";
-    button.addEventListener("click", function(event){
+    _button.addEventListener("click", function(event){
                 window.event.cancelBubble = true;
-                var _id = document.getElementById(event.currentTarget.title).parentNode.id;
-                var _aux = document.getElementById(event.currentTarget.title);
+                _id = document.getElementById(event.currentTarget.title).parentNode.id;
+                _aux = document.getElementById(event.currentTarget.title);
                 document.getElementById(event.currentTarget.title).removeNode(true);
                 document.getElementById(_id).innerHTML = _aux.value;
                 event.currentTarget.removeNode(true);
