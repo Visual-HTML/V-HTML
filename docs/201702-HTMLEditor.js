@@ -29,11 +29,11 @@ function ElementClickedEvent(e){
     if (_editingText) return;
  
 	_aux = e.currentTarget.innerHTML;
-	e.currentTarget.innerHTML = "";
+	e.currentTarget.innerHTML = "&nbsp";
     _element = e.currentTarget.appendChild(document.createElement("textarea"));
     _element.id = Date.now();
     _element.title = e.currentTarget.id;
-    _element.innerHTML = _aux;
+    _element.innerHTML = (_aux === "&nbsp;"? "" : _aux);
     _element.style.border = "1px dotted white";
     _element.addEventListener("click", function(){}, true);
 
@@ -52,7 +52,7 @@ function ElementClickedEvent(e){
                 _id = document.getElementById(event.currentTarget.title).parentNode.id;
                 _aux = document.getElementById(event.currentTarget.title);
                 document.getElementById(event.currentTarget.title).removeNode(true);
-                document.getElementById(_id).innerHTML = _aux.value;
+                document.getElementById(_id).innerHTML = (_aux.value === "" ? "&nbsp;" : _aux.value);
                 event.currentTarget.removeNode(true);
 		_editingText = false;
    }, true);
