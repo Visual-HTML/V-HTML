@@ -21,15 +21,6 @@ function ClickedEvent(e){
     element.style.border = "1px dotted yellow";
     element.addEventListener("click", ElementClickedEvent, false);
   }
-	
-	if (e.currentTarget.nodeName === "DIV") {
-	    var element = e.currentTarget.appendChild(document.createElement("div"));
-	    element.id = Date.now();
-	    element.innerHTML = "&nbsp;";
-	    element.style.border = "1px dotted yellow";
-	    element.addEventListener("click", ElementClickedEvent, false);
- 	 } 
-	
 }
 
 
