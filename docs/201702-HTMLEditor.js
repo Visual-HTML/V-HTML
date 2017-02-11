@@ -51,7 +51,11 @@ function ElementClickedEvent(e){
                 window.event.cancelBubble = true;
                 _id = document.getElementById(event.currentTarget.title).parentNode.id;
                 _aux = document.getElementById(event.currentTarget.title);
-                document.getElementById(event.currentTarget.title).remove();
+                try {
+			document.getElementById(event.currentTarget.title).removeNode(true);
+		} catch (xcp) {
+			document.getElementById(event.currentTarget.title).remove();
+		}
                 document.getElementById(_id).innerHTML = (_aux.value === "" ? "&nbsp;" : _aux.value);
                 event.currentTarget.removeNode(true);
 		_editingText = false;
