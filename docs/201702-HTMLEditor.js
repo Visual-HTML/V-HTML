@@ -53,7 +53,7 @@ function ElementClickedEvent(e){
                 _aux = document.getElementById(event.currentTarget.title);
                 try { document.getElementById(event.currentTarget.title).removeNode(true); } catch (xcp) { document.getElementById(event.currentTarget.title).remove(); }
                 document.getElementById(_id).innerHTML = (_aux.value === "" ? "&nbsp;" : _aux.value);
-                try { event.currentTarget.removeNode(true);} catch (xcp) {event.currentTarget.remov();}
+                try { event.currentTarget.removeNode(true);} catch (xcp) {event.currentTarget.remove();}
 		_editingText = false;
    }, true);
 	
