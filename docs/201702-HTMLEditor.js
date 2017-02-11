@@ -20,7 +20,6 @@ function ClickedEvent(e){
     element.innerHTML = "&nbsp;";
     element.style.border = "1px dotted yellow";
     element.addEventListener("click", ElementClickedEvent, false);
-    element.addEventListener("tap", ElementClickedEvent, false);
   }
 }
 
@@ -52,7 +51,7 @@ function ElementClickedEvent(e){
                 window.event.cancelBubble = true;
                 _id = document.getElementById(event.currentTarget.title).parentNode.id;
                 _aux = document.getElementById(event.currentTarget.title);
-                document.getElementById(event.currentTarget.title).removeNode(true);
+                document.getElementById(event.currentTarget.title).remove();
                 document.getElementById(_id).innerHTML = (_aux.value === "" ? "&nbsp;" : _aux.value);
                 event.currentTarget.removeNode(true);
 		_editingText = false;
