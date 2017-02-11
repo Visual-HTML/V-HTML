@@ -42,9 +42,9 @@ function ElementClickedEvent(e){
     button.title = element.id;
     button.type = "button";
     button.value = "Save";
-    button.style.position = "fixed"; button.style.top = "0px";  button.style.width = "200px";
-    button.style.marginLeft = "auto";
-    button.style.marginRight = "auto";
+    //button.style.position = "fixed"; button.style.top = "0px";  button.style.width = "200px";
+    //button.style.marginLeft = "auto";
+    //button.style.marginRight = "auto";
     button.addEventListener("click", function(event){
                 window.event.cancelBubble = true;
                 var _id = document.getElementById(event.currentTarget.title).parentNode.id;
