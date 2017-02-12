@@ -4,7 +4,15 @@
 <meta charset="utf-8" />
 <title>20170212-HTML Editor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>window.addEventListener("load", function(){
-    document.body.createElement("input");
-  },true);</script>
+<script>
+    window.addEventListener("load", function(){
+        _button = document.body.appendChild(document.createElement("input"));
+        _button.id = Date.now();
+        _button.type = "button";
+        _button.value = "Edit";
+        _button.addEventListener("click", function(event){
+            document.designMode = "on"; 
+            }, true);
+    },true);
+</script>
 </head><body></body></html>
