@@ -13,6 +13,7 @@ https://visual-html.github.io/V-HTML/201702-HTMLEditor.html
 [IE10 designMode behavior](20170212-IE-designMode.html)
 
 This provide basic editor function, a preview, it manage links (recognize them from plain text) and allow (if some security settings allow it) to add images... 19 lines (18 sloc)  595 Bytes, IE 10, no install, ...
+
 save as copy: save as from file only save the starter document, at this time, the only way to get edited content is to save the document from Developer tools/HTML/save Html
 
 
