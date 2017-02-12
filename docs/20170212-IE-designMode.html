@@ -4,9 +4,11 @@
 <meta charset="utf-8" />
 <title>20170212-HTML Editor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>window.addEventListener("load", function(){document.getElementById('Button_enable_designMode').style.display='block';},true);</script>
+<script>window.addEventListener("load", function(){
+    if (document.designMode == "on") document.getElementById('Button_enable_designMode').style.display='none';
+    else document.getElementById('Button_enable_designMode').style.display='block';
+  },true);</script>
 <script>function enable_designMode(){ document.designMode = "on"; }</script>
-<script>function hide_Button_enable_designMode(){ document.getElementById('Button_enable_designMode').style.display='none'; }</script>
 </head><body>
-<input id="Button_enable_designMode" type="button" value="edit" onclick="javascript:enable_designMode(); hide_Button_enable_designMode();" />
+<input id="Button_enable_designMode" type="button" value="edit" onclick="javascript:enable_designMode();" />
 </body></html>
