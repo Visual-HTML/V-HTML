@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="201702-HTMLEditor.js"></script>
 </head><body>
-<input type="button" 
-       onclick="javascript:document.designMode = (document.designMode == 'on' ? document.designMode = 'off' : document.designMode == 'on');"
+<input type="button" value="designMode"
+       onclick="javascript:document.designMode = (document.designMode == 'off' || document.designMode == 'Inherit' ? document.designMode = 'on' : document.designMode == 'off');"
+       />
 </body></html>
