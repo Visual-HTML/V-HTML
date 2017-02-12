@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
     window.addEventListener("load", function(){
-        _button = document.body.appendChild(document.createElement("input"));
+        _button = document.body.insertBefore(document.createElement("input"), document.body.firstChild);
         _button.id = Date.now();
         _button.type = "button";
         _button.value = "Edit";
