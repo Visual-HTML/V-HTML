@@ -28,7 +28,7 @@ An html editor... or begin with design mode: from HTML, see
 
 -----------------------------------------------
 [Running On](Test000.html)
-> A simple TOC / outline, the editor should be able to provide visual authoring of such structure
+>> A simple TOC / outline, the editor should be able to provide visual authoring of such structure
 applying "styles" (a title, a sub-title...) will generate html structure using correspondant semantic.
 Speaking of styles at this time, in this repo, mean semantic tag defined by [3. Semantics, structure, and APIs of HTML documents](https://www.w3.org/TR/html51/single-page.html#dom)
 -----------------------------------------------
