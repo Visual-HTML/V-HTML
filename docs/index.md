@@ -3,6 +3,8 @@
 
 > using contentEditable attribute [5.6.1. Making document regions editable: The contenteditable content attribute](https://www.w3.org/TR/html51/editing.html#making-document-regions-editable-the-contenteditable-content-attribute)
 
+[A4 sample page](20170213-body-contentEditable.html)	
+
 -----------------------------------------------
 
 https://visual-html.github.io/V-HTML/
