@@ -1,3 +1,10 @@
+-----------------------------------------------
+[Running On](20170213-IE-contentEditable.html)
+
+> using contentEditable attribute [5.6.1. Making document regions editable: The contenteditable content attribute](https://www.w3.org/TR/html51/editing.html#making-document-regions-editable-the-contenteditable-content-attribute)
+
+-----------------------------------------------
+
 https://visual-html.github.io/V-HTML/
 
 [https://visual-html.github.io/V-HTML/]
@@ -27,7 +34,7 @@ An html editor... or begin with design mode: from HTML, see
 
 
 -----------------------------------------------
-[Running On](Test000.html)
+[Sample Code](Test000.html)
 
 > A simple TOC / outline, the editor should be able to provide visual authoring of such structure
 applying "styles" (a title, a sub-title...) will generate html structure using correspondant semantic.
