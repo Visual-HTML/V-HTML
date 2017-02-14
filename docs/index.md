@@ -1,5 +1,10 @@
+# Editor Initialization
+
+[Editor Initialization](20170214/20170214.md)
+
 -----------------------------------------------
-[Running On](20170213-IE-contentEditable.html)
+
+[contentEditable](20170213-IE-contentEditable.html)
 
 > using contentEditable attribute [5.6.1. Making document regions editable: The contenteditable content attribute](https://www.w3.org/TR/html51/editing.html#making-document-regions-editable-the-contenteditable-content-attribute)
 
