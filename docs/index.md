@@ -1,4 +1,23 @@
 
+-----------------------------------------------
+
+[4.5.23. The b element4.5.23. The b element](https://www.w3.org/TR/html51/single-page.html#the-b-element)
+where the b element is appropriate is in marking, Example 289
+
+Semantic, defaults, ... b is formatting (bold), no semantic, it's important, it's the main data/information, it has to be bold!
+Difficulties to choose between a b element, a strong element or span+custom style, ...
+
+To follow a standard the code must be able to be maintained  and... quick, again to validate this we can begin on the 'hgroup element case', appeared in HTML5 it don't reappear in HTML51, this can become complex or simple according to the usage/structure rules.
+So after having reach a standard compliant code generator, it must follow the standard evolution, with a current maybe not really testable version because browsers don't support this version (at this time if generated code seem following what the spec describe, it is OK), and a version said stable that generate compliant code. 
+
+This formatting, well-known will validate the editing of a selection editor's function ...
+In all notepad, text application this is done by applying it to current selection
+Some make this formatting set until unset, this is valid for a lot of text formatting, when my cursor blink on a new blank page I can select Title or Quote style before typing... This to say that this behavior must be available in this editor.
+
+Generating compliant code can be reached with a simple editor with a title, a paragraph, some bold and italics but the succes reside also in the ability to answer complex and advanced needs making the product helpful for the multitude.
+
+-----------------------------------------------
+
 > Editor Initialization
 
 [Editor Initialization](20170214/20170214.md)
