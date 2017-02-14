@@ -1,7 +1,7 @@
 
 -----------------------------------------------
 
-[4.5.23. The b element4.5.23. The b element](https://www.w3.org/TR/html51/single-page.html#the-b-element)
+[4.5.23. The b element](https://www.w3.org/TR/html51/single-page.html#the-b-element)
 where the b element is appropriate is in marking, Example 289
 
 Semantic, defaults, ... b is formatting (bold), no semantic, it's important, it's the main data/information, it has to be bold!
@@ -20,7 +20,7 @@ Generating compliant code can be reached with a simple editor with a title, a pa
 
 > Editor Initialization
 
-[Editor Initialization](20170214/20170214.md)
+[Editor Initialization](20170214/)
 
 -----------------------------------------------
 
