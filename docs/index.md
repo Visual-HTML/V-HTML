@@ -1,7 +1,24 @@
 
 20170215- The Editor: how can I use the contentEditable attribute to drive editor's logic
 
-[VH2017](20170215-VH2017/) ... remain to clarify: what happen on Windows/Chrome starting on this code ? it just don't work ?!
+[VH2017](20170215-VH2017/) ... remain to clarify: what happen on Windows/Chrome starting on this code ? it just don't work ?!  
+On Windows/Safari, you don't get resizing !... only a simple, sample code can get 2 different docs for each browser
+in Ie:  ... Resize elements.  You can... ; in Safari: ... no resize title because it don't provide it...
+
+The first thing to check is the w3c specification or other sites (dev.mozilla, w3schools.com) which do a browser comparison
+and of course... What do you want ?
+
+So GitHub can help, I can start on a code, fork or patch on a source to work on
+a specific device(screen size/resolution),
+a specific OS,
+a specific browser (user-agent)
+
+All this making editor developers speak of native codes, building codes, while having a base/common code "managing" them.
+As I said: The same result page will have different codes, so each instruction making the code specific to xxx, will make the patch 
+or fork to manage it.  There is the try catch technique where you nest instructions needed for a browser but its 2 instructions 
+and 3 try to handle for... nothing in an execution context.
+This multi-code approach remove specificity to developer's target, all instructions become useful and of course avoid creating
+bottlenecks.  I thus, use the editor's code itself to validate those functionalities.
 
 -----------------------------------------------
 
