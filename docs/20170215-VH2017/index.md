@@ -1,8 +1,9 @@
+
 This is done on IE10:
 This is done assuming that consumer will provide designer code within a page, 
 and that all elments with designer purpose are set with contentEditable="true"
 
-(20170215-index.html)[20170215-index.html]
+[20170215-index.html](20170215-index.html)
 
 * any element get contentEditable:inherit if nothing is specified
 * using contentEditable expose a design function : resize of the element, you get resizing function and edit by default
