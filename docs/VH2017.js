@@ -18,7 +18,7 @@ function InitializeDocument(evt) {
 }
 
 function InitializeContent(evt) {
-    _elements = document.querySelectorAll('*');
+    var _elements = document.querySelectorAll('*');
 	for (var i = 0 ; i < _elements.length ; i++) {
 		_elements[i].addEventListener('click', ElementClicked, false);
 	}
