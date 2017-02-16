@@ -1,0 +1,198 @@
+<article>
+ <header>
+  <h2><a href="https://herbert.io">Short note on wearing shorts</a></h2>
+   <p>Posted on Wednesday, 10 February 2016 by Patrick Lauke.
+   <a href="https://herbert.io/short-note/#comments">6 comments</a></p>
+ </header>
+ <p>A fellow traveller posed an interesting question: Why do you wear shorts rather than
+ longs? The person was wearing culottes as the time, so I considered the question equivocal in nature,
+ but I attempted to provide an honest answer despite the dubiousness of the questioner’s dress.</p>
+ <p>The short answer is that I enjoy wearing shorts, the long answer is...</p>
+ <p><a href="https://herbert.io/short-note/">Continue reading: Short note on
+ wearing shorts</a></p>
+</article>
+
+<article itemscope itemtype="https://schema.org/BlogPosting">
+  <header>
+    <h2 itemprop="headline">The Very First Rule of Life</h2>
+    <p><time itemprop="datePublished" datetime="2016-02-28">3 days ago</time></p>
+  </header>
+  <p>If there’s a microphone anywhere near you, assume it’s hot and
+  sending whatever you’re saying to the world. Seriously.</p>
+  <p>...</p>
+  <footer>
+    <a itemprop="discussionUrl" href="?comments=1">Show comments...</a>
+  </footer>
+</article>
+
+<article itemscope itemtype="https://schema.org/BlogPosting">  <header>
+    <h2 itemprop="headline">The Very First Rule of Life</h2>
+    <p><time itemprop="datePublished" datetime="2009-10-09">3 days ago</time></p>
+  </header>
+   <p>If there’s a microphone anywhere near you, assume it’s hot and
+   sending whatever you’re saying to the world. Seriously.</p>
+   <p>...</p>
+  <section>
+    <h3>Comments</h3>
+    <ol>
+     <li itemprop="comment" itemscope itemtype="https://schema.org/UserComments" id="c1">
+        <p>Posted by: <span itemprop="creator" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">George Washington</span>
+        </span></p>
+        <p><time itemprop="commentTime" datetime="2009-10-10">15 minutes ago</time></p>
+        <p>Yeah! Especially when talking about your lobbyist friends!</p>
+     <li itemprop="comment" itemscope itemtype="https://schema.org/UserComments" id="c2">
+        <p>Posted by: <span itemprop="creator" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="name">George Hammond</span>
+        </span></p>
+        <p><time itemprop="commentTime" datetime="2009-10-10">5 minutes ago</time></p>
+        <p>Hey, you have the same first name as me.</p>
+     </li>
+   </ol>
+  </section>
+</article>
+
+<article>
+  <header>
+    <h2>Apples</h2>
+    <p>Tasty, delicious fruit!</p>
+  </header>
+  <p>The apple is the pomaceous fruit of the apple tree.</p>
+  <section aria-label="Red apples.">
+    <h3>Red Delicious</h3>
+    <p>These bright red apples are the most common found in many
+    supermarkets.</p>
+  </section>
+  <section aria-label="Green apples.">
+    <h3>Granny Smith</h3>
+    <p>These juicy, green apples make a great filling for
+    apple pies.</p>
+  </section>
+</article>
+
+<article class="book">
+  <header>
+    <h2>My Book</h2>
+    <p>A sample with not much content</p>
+    <p><small>Published by Dummy Publicorp Ltd.</small></p>
+  </header>
+
+  <section class="chapter">
+    <h3>My First Chapter</h3>
+    <p>This is the first of my chapters. It doesn’t say much.</p>
+    <p>But it has two paragraphs!</p>
+  </section>
+  <section class="chapter">
+    <h3>It Continues: The Second Chapter</h3>
+    <p>Bla dee bla, dee bla dee bla. Boom.</p>
+  </section>
+  <section class="chapter">
+    <h3>Chapter Three: A Further Example</h3>
+    <p>It’s not like a battle between brightness and earthtones would go
+    unnoticed.</p>
+    <p>But it might ruin my story.</p>
+  </section>
+  <section class="appendix">
+    <h3>Appendix A: Overview of Examples</h3>
+    <p>These are demonstrations.</p>
+  </section>
+  <section class="appendix">
+    <h3>Appendix B: Some Closing Remarks</h3>
+    <p>Hopefully this long example shows that you <em>can</em> style
+    sections, so long as they are used to indicate actual sections.</p>
+  </section>
+</article>
+
+<article>
+    <header>
+      <h2>Demos in Exampland</h2>
+      <p>Written by A. N. Other.</p>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="#public">Public demonstrations</a></li>
+        <li><a href="#destroy">Demolitions</a></li>
+        ...more...
+      </ul>
+    </nav>
+    <div>
+      <section id="public">
+        <h2>Public demonstrations</h2>
+        <p>...more...</p>
+      </section>
+      <section id="destroy">
+        <h2>Demolitions</h2>
+        <p>...more...</p>
+      </section>
+      ...more...
+    </div>
+    <footer>
+      <p><a href="?edit">Edit</a> | <a href="?delete">Delete</a> | <a href="?Rename">Rename</a></p>
+    </footer>
+</article>
+
+<article property="schema:blogPosts" typeof="schema:BlogPosting">
+      <header>
+        <h2 property="schema:headline">My Day at the Beach</h2>
+      </header>
+      <main property="schema:articleBody">
+        <p>Today I went to the beach and had a lot of fun.</p>
+        ...more content...
+      </main>
+      <footer>
+        <p>Posted <time property="schema:datePublished" datetime="2009-10-10">Thursday</time>.</p>
+      </footer>
+</article>
+
+<article>
+    <!-- this is a blog post -->
+    <h2>My last post</h2>
+    <p>This is my last post.</p>
+    <footer>
+      <p><a href="/last-post" rel=bookmark>Permalink</a>
+    </footer>
+  </article>
+  <article>
+    <!-- this is also a blog post -->
+    <h2>My first post</h2>
+    <p>This is my first post.</p>
+    <aside>
+      <!-- this aside is about the blog post, since it’s inside the
+      <article> element; it would be wrong, for instance, to put the
+        blogroll here, since the blogroll isn’t really related to this post
+        specifically, only to the page as a whole -->
+        <h1>Posting</h1>
+        <p>While I’m thinking about it, I wanted to say something about
+        posting. Posting is fun!</p>
+    </aside>
+    <footer>
+      <p><a href="/first-post" rel=bookmark>Permalink</a>
+    </footer>
+</article>
+
+<article>
+  <header>
+    <h1>Flexbox: The definitive guide</h1>
+    <aside>
+      <header>
+        <h2>About the author: Wes McSilly</h2>
+        <p><a href="./wes-mcsilly/">Contact him! (Why would you?)</a></p>
+      </header>
+      <p>Expert in nothing but Flexbox. Talented circus sideshow.</p>
+    </aside>
+  </header>
+  <p><ins>The guide about Flexbox was supposed to be here, but it
+    turned out Wes wasn’t a Flexbox expert either.</ins></p>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
