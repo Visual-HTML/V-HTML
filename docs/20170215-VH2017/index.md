@@ -15,3 +15,12 @@ I think I need to unify both techniques (VH2017v1.js), the difference in clicks 
 this will introduce a "mode" in the editor where you can access resize functions, of course the designer
 will also need to handle them but at this time I'm rather pleased to use it at the price to process after what
 IE will have generated as code e.g.: style="width: 734px; height: 171px;"
+
+---------------------------------------------------------
+
+(20170215-indexv1.html)[20170215-indexv1.html]
+
+This one base it's logic on classes, so I don't put elments in this design state, my functions (replacenode) is accessible
+clicking the element then the tag to use.---but I still don't have the resizing.
+
+
