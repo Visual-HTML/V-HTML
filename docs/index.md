@@ -1,5 +1,8 @@
+-----------------------------------------------
 
-20170215- The Editor: how can I use the contentEditable attribute to drive editor's logic
+[Latest](20170216.html)
+
+-----------------------------------------------
 
 [VH2017](20170215-VH2017/) ... remain to clarify: what happen on Windows/Chrome starting on this code ? it just don't work ?!  
 On Windows/Safari, you don't get resizing !... only a simple, sample code can get 2 different docs for each browser
