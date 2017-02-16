@@ -15,7 +15,6 @@ function InitializeUserAgent(evt) {
 function InitializeDocument(evt) {
 	VH2017.document.body.contentEditable.InitalValue = document.body.contentEditable;
 	VH2017.document.designMode.InitialValue = document.designMode;
-	document.designMode="on";
 }
 
 function InitializeContent(evt) {
