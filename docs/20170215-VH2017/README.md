@@ -1,4 +1,4 @@
-* This is done on IE10:
+# This is done on IE10:
 
 This is done assuming that consumer will provide designer code within a page, 
 and that all elments with designer purpose are set with contentEditable="true"
