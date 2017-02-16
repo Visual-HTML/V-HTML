@@ -1,7 +1,7 @@
 
 20170215- The Editor: how can I use the contentEditable attribute to drive editor's logic
 
-[VH2017](20170215-VH2017/)
+[VH2017](20170215-VH2017/) ... remain to clarify: what happen on Windows/Chrome starting on this code ? it just don't work ?!
 
 -----------------------------------------------
 
@@ -36,17 +36,6 @@ Generating compliant code can be reached with a simple editor with a title, a pa
 
 -----------------------------------------------
 
-https://visual-html.github.io/V-HTML/
-
-[https://visual-html.github.io/V-HTML/]
-
-(https://visual-html.github.io/V-HTML/)
-
-
-https://visual-html.github.io/V-HTML/201702-HTMLEditor.html
-
-----------------------------------
-
 #document.designMode
 [IE10 designMode behavior](20170212-IE-designMode.html)
 
@@ -54,26 +43,17 @@ This provide basic editor function, a preview, it manage links (recognize them f
 
 save as copy: save as from file only save the starter document, at this time, the only way to get edited content is to save the document from Developer tools/HTML/save Html
 
-
-
 -----------------------------------------------
+
 An html editor... or begin with design mode: from HTML, see
 
 * [5.6 Editing](http://www.w3.org/TR/html51/single-page.html#user-interaction-editing)
 * [5.6.2. Making entire documents editable: The designMode IDL attribute](http://www.w3.org/TR/html51/single-page.html#making-entire-documents-editable-the-designmode-idl-attribute)
 
-
-
 -----------------------------------------------
+
 [Sample Code](Test000.html)
 
 > A simple TOC / outline, the editor should be able to provide visual authoring of such structure
 applying "styles" (a title, a sub-title...) will generate html structure using correspondant semantic.
 Speaking of styles at this time, in this repo, mean semantic tag defined by [3.2.1. Semantics](https://www.w3.org/TR/html51/single-page.html#elements-semantics)
-
------------------------------------------------
-
-
-
-
-
