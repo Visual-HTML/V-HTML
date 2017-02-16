@@ -28,5 +28,4 @@ function ElementClicked(e) {
   e.stopPropagation();
   e.preventDefault();
   // a handle on current element is available in e.currentTarget
-  alert(e.currentTarget.nodeName);
 }
