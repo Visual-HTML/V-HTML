@@ -7,8 +7,6 @@ VH2017.document={};
 VH2017.document.body={};
 VH2017.document.body.contentEditable={};
 VH2017.document.body.designMode={};
-VH2017.DesignModeOn = function() { document.designMode = "on"; }
-VH2017.DesignModeOff = function() { document.designMode = "off"; }
 
 function InitializeUserAgent(evt) {
 	
