@@ -1,4 +1,7 @@
 
+20170215- The Editor: how can I use the contentEditable attribute to drive editor's logic
+[VH2017](20170215-VH2017)
+
 -----------------------------------------------
 
 [4.5.23. The b element](https://www.w3.org/TR/html51/single-page.html#the-b-element)
