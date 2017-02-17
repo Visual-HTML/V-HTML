@@ -36,7 +36,7 @@ function InitializeContent() {
 		_elements[i].addEventListener('click', ElementClicked, false);
 		_elements[i].addEventListener('keydown', ReturnPressed, false);
 		_elements[i].style.border = "1px dashed gray";		
-		_element.contentEditable = true;
+		_elements[i].contentEditable = true;
 	}
 	
 	if (_autoBlank) !InitializeDesigner();
