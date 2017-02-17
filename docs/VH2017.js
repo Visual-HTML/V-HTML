@@ -23,10 +23,12 @@ function InitializeDocument() {
 
 function InitializeContent() {
 	
+	var _autoBlank=false;
 	if (document.body.childNodes.length === 1) {
 		var _element = document.createElement("p");
 		_element.contentEditable = true;
 		document.body.appendChild(_element).focus();
+		_autoBlank=true;
 	}
 	
     _elements = document.body.querySelectorAll('*');
@@ -36,7 +38,7 @@ function InitializeContent() {
 		_elements[i].style.border = "1px dashed gray";
 	}
 	
-	//InitializeDesigner();
+	if (_autoBlank) !InitializeDesigner();
 }
 
 function InitializeDesigner(){
