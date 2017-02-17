@@ -1,38 +1,56 @@
 window.addEventListener('load', InitializeUserAgent, true);
-window.addEventListener('load', InitializeDocument, true);
-window.addEventListener('load', InitializeContent, true);
 
 VH2017 = {};
+VH2017.MainPanelUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/Sources/testmain.html";
 VH2017.document={};
 VH2017.document.body={};
 VH2017.document.body.contentEditable={};
 VH2017.document.body.designMode={};
 
-function InitializeUserAgent(evt) {
+function InitializeUserAgent(e) {
 	
+	InitializeDocument();
 }
 
-function InitializeDocument(evt) {
+function InitializeDocument() {
 	VH2017.document.body.contentEditable.InitalValue = document.body.contentEditable;
 	VH2017.document.body.designMode.InitialValue = document.designMode;
 	
-	/* if the page is set to design mode, VH don't go further */
 	if (VH2017.document.body.designMode.InitialValue.toLowerCase === "Inherit") return;
-	/* 
-	this mode allow so much that we will use it to open a blank sheet, user will be able to work 
-	in that mode and get the code injected to the VH page
-	*/
 	
-	/* contentEditable processing : in investigation */
+	InitializeContent();
+}
+
+function InitializeContent() {
 	
+	if (document.body.childNodes.length === 1) {
+		var _element = document.createElement("p");
+		_element.contentEditable = true;
+		document.body.appendChild(_element).focus();
+	}
+	
+    _elements = document.body.querySelectorAll('*');
+	for (var i = 0 ; i < _elements.length ; i++) {
+		_elements[i].addEventListener('click', ElementClicked, false);
+		_elements[i].addEventListener('keydown', ReturnPressed, false);
+		_elements[i].style.border = "1px dashed gray";
+	}
+	
+	//InitializeDesigner();
+}
+
+function InitializeDesigner(){
 	var xReq = new XMLHttpRequest();
-	xReq.open("GET", "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/Sources/testmain.html", true); 
+	xReq.open("GET", VH2017.MainPanelUrl, true); 
 	xReq.timeout = 2000;
-	xReq.ontimeout = function () {   } 
+	xReq.ontimeout = function () { };
 	xReq.onreadystatechange = function (e) {
 		if (xReq.readyState == 4) {         
 			if (xReq.status = "200") { 
-				document.body.innerHTML += xReq.response;
+			    var _element = document.createElement("div");
+				_element.Id = Date.now();
+				_element.innerHTML = xReq.response;
+				document.body.appendChild(_element);
 				} else {
 				
 				}
@@ -41,15 +59,21 @@ function InitializeDocument(evt) {
 	xReq.send(null);
 }
 
-function InitializeContent(evt) {
-    _elements = document.querySelectorAll('*');
-	for (var i = 0 ; i < _elements.length ; i++) {
-		_elements[i].addEventListener('click', ElementClicked, false);
-	}
-}
-
 function ElementClicked(e) {
   e.stopPropagation();
   e.preventDefault();
   // a handle on current element is available in e.currentTarget
+}
+function ReturnPressed(e) {
+	e.preventDefault();
+  if (e.which === 13) {
+	  var _element = document.createElement("p");
+	  
+		_element.addEventListener('click', ElementClicked, false);
+		_element.addEventListener('keydown', ReturnPressed, false);
+		_element.style.border = "1px dashed gray";
+		
+		_element.contentEditable = true;
+		document.body.appendChild(_element).focus();
+  }
 }
