@@ -68,8 +68,9 @@ function ElementClicked(e) {
   // a handle on current element is available in e.currentTarget
 }
 function ReturnPressed(e) {
-	e.preventDefault();
+	
   if (e.which === 13) {
+	  e.preventDefault();
 	  var _element = document.createElement("p");
 	  
 		_element.addEventListener('click', ElementClicked, false);
