@@ -32,7 +32,7 @@ function InitializeContent() {
 		_autoBlank=true;
 	}
 	
-    _elements = document.body.querySelectorAll('*');
+    var _elements = document.body.querySelectorAll('*');
 	for (var i = 0 ; i < _elements.length ; i++) {
 		_elements[i].addEventListener('click', ElementClicked, false);
 		_elements[i].addEventListener('keydown', ReturnPressed, false);
@@ -55,13 +55,16 @@ function InitializeDesigner(){
 				_element.Id = Date.now();
 				_element.innerHTML = xReq.response;
 				document.body.appendChild(_element);
+				InitializeDesigner_Step1();
 				} else {
 				
 				}
 			}
 		}
 	xReq.send(null);
-	
+}
+
+function InitializeDesigner_Step1() {
 	var xReq = new XMLHttpRequest();
 	xReq.open("GET", VH2017.PreviewPanelUrl, true); 
 	xReq.timeout = 2000;
@@ -69,15 +72,15 @@ function InitializeDesigner(){
 	xReq.onreadystatechange = function (e) {
 		if (xReq.readyState == 4) {         
 			if (xReq.status = "200") { 
-			    var _element = document.createElement("div");
-				_element.Id = Date.now();
-				_element.style.position="fixed";
-				_element.style.right="0";
-				_element.style.width="320px";				
-				_element.style.height="480px";
-				_element.style.overflowX="scroll";
-				_element.innerHTML = xReq.response;
-				document.body.appendChild(_element);
+			    var _element1 = document.createElement("div");
+				_element1.Id = Date.now();
+				_element1.style.position="fixed";
+				_element1.style.right="0";
+				_element1.style.width="320px";				
+				_element1.style.height="480px";
+				_element1.style.overflowX="scroll";
+				_element1.innerHTML = xReq.response;
+				document.body.appendChild(_element1);
 				} else {
 				
 				}
