@@ -1,3 +1,7 @@
+<style>
+div article:hover { background-color:#999999; }
+</style>
+
 <article>
  <header>
   <h2><a href="https://herbert.io">Short note on wearing shorts</a></h2>
