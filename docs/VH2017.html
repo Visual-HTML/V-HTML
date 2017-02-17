@@ -1,82 +1,83 @@
-window.addEventListener('load', InitializeUserAgent, true);
-
-VH2017 = {};
-VH2017.MainPanelUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/Sources/testmain.html";
-VH2017.document={};
-VH2017.document.body={};
-VH2017.document.body.contentEditable={};
-VH2017.document.body.designMode={};
-
-function InitializeUserAgent(e) {
-	
-	InitializeDocument();
-}
-
-function InitializeDocument() {
-	VH2017.document.body.contentEditable.InitalValue = document.body.contentEditable;
-	VH2017.document.body.designMode.InitialValue = document.designMode;
-	
-	if (VH2017.document.body.designMode.InitialValue.toLowerCase === "Inherit") return;
-	
-	InitializeContent();
-}
-
-function InitializeContent() {
-	
-	var _autoBlank=false;
-	if (document.body.childNodes.length === 1) {
-		var _element = document.createElement("p");
-		_element.contentEditable = true;
-		document.body.appendChild(_element).focus();
-		_autoBlank=true;
-	}
-	
-    _elements = document.body.querySelectorAll('*');
-	for (var i = 0 ; i < _elements.length ; i++) {
-		_elements[i].addEventListener('click', ElementClicked, false);
-		_elements[i].addEventListener('keydown', ReturnPressed, false);
-		_elements[i].style.border = "1px dashed gray";		
-		_elements[i].contentEditable = true;
-	}
-	
-	if (_autoBlank) !InitializeDesigner();
-}
-
-function InitializeDesigner(){
-	var xReq = new XMLHttpRequest();
-	xReq.open("GET", VH2017.MainPanelUrl, true); 
-	xReq.timeout = 2000;
-	xReq.ontimeout = function () { };
-	xReq.onreadystatechange = function (e) {
-		if (xReq.readyState == 4) {         
-			if (xReq.status = "200") { 
-			    var _element = document.createElement("div");
-				_element.Id = Date.now();
-				_element.innerHTML = xReq.response;
-				document.body.appendChild(_element);
-				} else {
-				
-				}
-			}
-		}
-	xReq.send(null);
-}
-
-function ElementClicked(e) {
-  e.stopPropagation();
-  e.preventDefault();
-  // a handle on current element is available in e.currentTarget
-}
-function ReturnPressed(e) {
-	e.preventDefault();
-  if (e.which === 13) {
-	  var _element = document.createElement("p");
-	  
-		_element.addEventListener('click', ElementClicked, false);
-		_element.addEventListener('keydown', ReturnPressed, false);
-		_element.style.border = "1px dashed gray";
-		
-		_element.contentEditable = true;
-		document.body.appendChild(_element).focus();
-  }
-}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Visual HTML 2017</title>
+<script src="VH2017.js"></script>
+<style>
+body { margin: 0; }
+h1, p { margin: 0; }
+body > header, body > footer { color: lightgray; background-color: gray; }
+body > article { width: 80%; margin-left: 10%; }
+h2 + article h3 { background-color: #6699CC; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Scalable Vector Graphics (SVG) 1.2</h1>
+  <p>W3C Working Draft 27 October 2004</p>
+  <dl>
+    <dt>This version:</dt>
+    <dd><a href="http://www.w3.org/TR/2004/WD-SVG12-20041027/">http://www.w3.org/TR/2004/WD-SVG12-20041027/</a></dd>
+    <dt>Previous version:</dt>
+    <dd><a href="http://www.w3.org/TR/2004/WD-SVG12-20040510/">http://www.w3.org/TR/2004/WD-SVG12-20040510/</a></dd>
+    <dt>Latest version of SVG 1.2:</dt>
+    <dd><a href="http://www.w3.org/TR/SVG12/">http://www.w3.org/TR/SVG12/</a></dd>
+    <dt>Latest SVG Recommendation:</dt>
+    <dd><a href="http://www.w3.org/TR/SVG/">http://www.w3.org/TR/SVG/</a></dd>
+    <dt>Editor:</dt>
+    <dd>Dean Jackson, W3C, <a href="mailto:dean@w3.org">dean@w3.org</a></dd>
+    <dt>Authors:</dt>
+    <dd>See <a href="#authors">Author List</a></dd>
+  </dl>
+  <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/">link</a> 
+</header>
+<article>
+  <h2><a href="http://bacon.example.com/?blog=109431">Bacon on a crowbar</a></h2>
+  <article>
+    <h3><strong>t3yw</strong> 12 points 1 hour ago</h3>
+    <p>I bet a narwhal would love that.</p>
+    <footer><a href="?pid=29578">permalink</a></footer>
+    <article>
+      <h3><strong>greg</strong> 8 points 1 hour ago</h3>
+      <blockquote>
+        <p>I bet a narwhal would love that.</p>
+      </blockquote>
+      <p>Dude narwhals don't eat bacon.</p>
+      <footer><a href="?pid=29579">permalink</a></footer>
+      <article>
+        <h3><strong>t3yw</strong> 15 points 1 hour ago</h3>
+        <blockquote>
+          <blockquote>
+            <p>I bet a narwhal would love that.</p>
+          </blockquote>
+          <p>Dude narwhals don't eat bacon.</p>
+        </blockquote>
+        <p>Next thing you'll be saying they don't get capes and wizard
+          hats either!</p>
+        <footer><a href="?pid=29580">permalink</a></footer>
+        <article>
+            <h3><strong>boing</strong> -5 points 1 hour ago</h3>
+            <p>narwhals are worse than ceiling cat</p>
+            <footer><a href="?pid=29581">permalink</a></footer>
+        </article>
+      </article>
+    </article>
+    <article>
+      <h3><strong>fred</strong> 1 points 23 minutes ago</h3>
+      <blockquote>
+        <p>I bet a narwhal would love that.</p>
+      </blockquote>
+      <p>I bet they'd love to peel a banana too.</p>
+      <footer><a href="?pid=29582">permalink</a></footer>
+    </article>
+  </article>
+</article>
+<footer>
+  <!-- site wide footer -->
+  <nav>
+    <p><a href="/credits.html">credits</a> — <a href="/tos.html">terms of service</a> — <a href="/index.html">blog index</a></p>
+  </nav>
+  <p>copyright &copy; 2009 ...</p>
+</footer>
+</body>
+</html>
