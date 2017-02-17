@@ -2,6 +2,7 @@ window.addEventListener('load', InitializeUserAgent, true);
 
 VH2017 = {};
 VH2017.MainPanelUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/Sources/testmain.html";
+VH2017.PreviewPanelUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/Sources/Default/Article000.txt";
 VH2017.document={};
 VH2017.document.body={};
 VH2017.document.body.contentEditable={};
@@ -52,6 +53,29 @@ function InitializeDesigner(){
 			if (xReq.status = "200") { 
 			    var _element = document.createElement("div");
 				_element.Id = Date.now();
+				_element.innerHTML = xReq.response;
+				document.body.appendChild(_element);
+				} else {
+				
+				}
+			}
+		}
+	xReq.send(null);
+	
+	var xReq = new XMLHttpRequest();
+	xReq.open("GET", VH2017.PreviewPanelUrl, true); 
+	xReq.timeout = 2000;
+	xReq.ontimeout = function () { };
+	xReq.onreadystatechange = function (e) {
+		if (xReq.readyState == 4) {         
+			if (xReq.status = "200") { 
+			    var _element = document.createElement("div");
+				_element.Id = Date.now();
+				_element.style.position="fixed";
+				_element.style.right="0";
+				_element.style.width="320px";				
+				_element.style.height="480px";
+				_element.style.overflowX="scroll";
 				_element.innerHTML = xReq.response;
 				document.body.appendChild(_element);
 				} else {
