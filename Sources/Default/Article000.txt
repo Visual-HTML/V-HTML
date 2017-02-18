@@ -1,6 +1,6 @@
 <div id="VH2017-Starters">
 <style>
-div#Starters article:hover { background-color:#999999; }
+div#VH2017-Starters article:hover { background-color:#999999; }
 </style>
 
 <button type="button"
