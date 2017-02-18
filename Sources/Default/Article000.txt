@@ -1,7 +1,8 @@
 <style>
-div article:hover { background-color:#999999; }
+div.Starters article:hover { background-color:#999999; }
 </style>
 
+<div class="Starters">
 <div onclick="injectHTML(event);">
 <article>
  <header>
@@ -208,4 +209,4 @@ div article:hover { background-color:#999999; }
 </article>
 </div>
 
-
+</div>
