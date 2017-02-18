@@ -7,9 +7,10 @@ VH2017.document={};
 VH2017.document.body={};
 VH2017.document.body.contentEditable={};
 VH2017.document.body.designMode={};
-VH2017.handlerKey = Date.now();
 VH2017.designerKey = Date.now();
 VH2017.currentTarget = null;
+VH2017.RemovePanel = function() { document.body.removeChild(document.getElementById('VH2017-main')); };
+VH2017.RemoveStarters = function() { document.body.removeChild(document.getElementById('VH2017-starters')); };
 
 function InitializeUserAgent(e) {
 	
@@ -23,7 +24,6 @@ function InitializeDocument() {
 	document.body.addEventListener('click', BodyClicked, false);
 	
 	if (VH2017.document.body.designMode.InitialValue.toLowerCase === "Inherit") return;
-	
 	InitializeContent();
 }
 
@@ -31,10 +31,10 @@ function InitializeContent() {
 	
 	var _autoBlank=false;
 	if (document.body.childNodes.length === 1) {
-		var _element = document.createElement("p");
-		_element.contentEditable = true;
-		document.body.appendChild(_element).focus();
-		_autoBlank=true;
+		var _element = document.createElement("div");
+		_element.id = "M" + Date.now() + Math.floor(Math.random() * 101);
+		VH2017.currentTarget = document.body.appendChild(_element);
+		_autoBlank = true;
 	}
 	
     var _elements = document.body.querySelectorAll('*');
@@ -42,12 +42,12 @@ function InitializeContent() {
 		_elements[i].addEventListener('click', ElementClicked, false);
 		_elements[i].addEventListener('keydown', ReturnPressed, false);
 		_elements[i].style.border = "1px dashed gray";
-		_elements[i].setAttribute("data-VH2017-hndk",VH2017.handlerKey);
+		_elements[i].setAttribute("data-VH2017-hndk", "L" + Date.now() + Math.floor(Math.random() * 101));
 		_elements[i].contentEditable = true;
 	}
-	VH2017.handlerKey = Date.now();
 	
-	if (_autoBlank) !InitializeDesigner();
+	if (_autoBlank) InitializeDesigner();
+	VH2017.currentTarget.focus();
 }
 
 function InitializeDesigner(){	
@@ -62,10 +62,10 @@ function InitializeDesigner(){
 		if (xReq.readyState == 4) {         
 			if (xReq.status = "200") { 
 			    var _element = document.createElement("div");
-				_element.Id = Date.now();
+				_element.id = "VH2017-main";
 				_element.setAttribute("data-VH2017-dsgk",VH2017.designerKey);
 				_element.innerHTML = xReq.response;
-				document.body.appendChild(_element);
+				document.body.insertBefore(_element, document.body.firstChild);
 				InitializeDesigner_Step1();
 				} else {
 				
@@ -84,7 +84,7 @@ function InitializeDesigner_Step1() {
 		if (xReq.readyState == 4) {         
 			if (xReq.status = "200") { 
 			    var _element = document.createElement("div");
-				_element.Id = Date.now();
+				_element.id = "VH2017-starters";
 				_element.setAttribute("data-VH2017-dsgk",VH2017.designerKey);
 				_element.style.position="fixed";
 				_element.style.right="0";
@@ -92,7 +92,10 @@ function InitializeDesigner_Step1() {
 				_element.style.height="480px";
 				_element.style.overflowX="scroll";
 				_element.innerHTML = xReq.response;
-				document.body.appendChild(_element);
+				document.body.insertBefore(_element, document.body.firstChild);
+				
+				
+		VH2017.currentTarget.focus();
 				} else {
 				
 				}
@@ -107,11 +110,11 @@ function ElementClicked(e) {
    
   /* look for and attach unhandled child nodes */
   for (var i = 0 ; i < e.currentTarget.childNodes.length ; i++) {
-	  if (e.currentTarget.childNodes[i].nodeType != 3 && 		 
+	  if (e.currentTarget.childNodes[i].nodeType === 1 &&		 
 		  e.currentTarget.childNodes[i].getAttribute('data-VH2017-hndk') === null){ 
 		e.currentTarget.childNodes[i].addEventListener('click', ElementClicked, false);
 		e.currentTarget.childNodes[i].addEventListener('keydown', ReturnPressed, false);
-		e.currentTarget.childNodes[i].setAttribute("data-VH2017-hndk",VH2017.handlerKey);
+		e.currentTarget.childNodes[i].setAttribute("data-VH2017-hndk", "I" + Date.now() + Math.floor(Math.random() * 101));
 		e.currentTarget.childNodes[i].style.border = "1px dashed gray";
 	  }
   }
@@ -122,30 +125,34 @@ function ElementClicked(e) {
 }
 function ReturnPressed(e) {
 	
-  if (e.which === 13) {
-	  e.preventDefault();
-	  
-	  /* look for and attach unhandled child nodes */
-	  for (var i = 0 ; i < e.currentTarget.childNodes.length ; i++) {
-		  if (e.currentTarget.childNodes[i].nodeType != 3 &&
+	if (e.which === 13) {
+		e.preventDefault();
+		
+		/* look for and attach unhandled child nodes */
+		for (var i = 0 ; i < e.currentTarget.childNodes.length ; i++) {
+		  if (e.currentTarget.childNodes[i].nodeType === 1 &&
 			  e.currentTarget.childNodes[i].getAttribute('data-VH2017-hndk') === null){ 
 			e.currentTarget.childNodes[i].addEventListener('click', ElementClicked, false);
 			e.currentTarget.childNodes[i].addEventListener('keydown', ReturnPressed, false);
-			e.currentTarget.childNodes[i].setAttribute("data-VH2017-hndk",VH2017.handlerKey);
+			e.currentTarget.childNodes[i].setAttribute("data-VH2017-hndk", "H" + Date.now() + Math.floor(Math.random() * 101));
 			e.currentTarget.childNodes[i].style.border = "1px dashed gray";
 		  }
-	  }
-	  
-	  var _element = document.createElement("p");
-	  
+		}
+		
+		var _element = document.createElement("p");
+		
 		_element.addEventListener('click', ElementClicked, false);
 		_element.addEventListener('keydown', ReturnPressed, false);
-		_element.setAttribute("data-VH2017-hndk",VH2017.handlerKey);
+		_element.setAttribute("data-VH2017-hndk", "G" + Date.now() + Math.floor(Math.random() * 101));
 		_element.style.border = "1px dashed gray";
+		_element.id = "F" + Date.now() + Math.floor(Math.random() * 101);
 		
 		_element.contentEditable = true;
-		document.body.appendChild(_element).focus();
-  }
+		VH2017.currentTarget = document.body.appendChild(_element);
+		VH2017.currentTarget.focus();
+		}
+	
+	
 }
 
 function BodyClicked(e) {
@@ -154,12 +161,12 @@ function BodyClicked(e) {
    
   /* look for and attach unhandled child nodes */
   for (var i = 0 ; i < e.currentTarget.childNodes.length ; i++) {
-	  if (e.currentTarget.childNodes[i].nodeType != 3 &&  
+	  if (e.currentTarget.childNodes[i].nodeType === 1 &&  
 		  e.currentTarget.childNodes[i].getAttribute('data-VH2017-dsgk') === null &&	
 		  e.currentTarget.childNodes[i].getAttribute('data-VH2017-hndk') === null){ 
 		e.currentTarget.childNodes[i].addEventListener('click', ElementClicked, false);
 		e.currentTarget.childNodes[i].addEventListener('keydown', ReturnPressed, false);
-		e.currentTarget.childNodes[i].setAttribute("data-VH2017-hndk",VH2017.handlerKey);
+		e.currentTarget.childNodes[i].setAttribute("data-VH2017-hndk", "E" + Date.now() + Math.floor(Math.random() * 101));
 		e.currentTarget.childNodes[i].style.border = "1px dashed gray";
 		e.currentTarget.childNodes[i].setAttribute("contentEditable","true");
 	  }
@@ -185,7 +192,8 @@ function ReplaceNode(elt, tagName) {
 	_element.style.textAlign = elt.style.textAlign;
 	_element.addEventListener('click', ElementClicked, false);
 	_element.addEventListener('keydown', ReturnPressed, false);
-	_element.setAttribute("data-VH2017-hndk",VH2017.handlerKey);
+	_element.setAttribute("data-VH2017-hndk", "C" + Date.now() + Math.floor(Math.random() * 101));
+	_element.id = "D" + Date.now() + Math.floor(Math.random() * 101);
 	_element.style.border = "1px dashed gray";
 				
 	elt.parentNode.replaceChild(_element,elt);
@@ -194,7 +202,6 @@ function ReplaceNode(elt, tagName) {
 	_element.click();
 	
 }
-
 
 
 
@@ -212,22 +219,20 @@ function Align(elt, align) {
 
 function injectHTML(e) {
 	
-var _element = document.createElement("div");
-_element.Id = Date.now();
-_element.setAttribute("data-VH2017-hndk",VH2017.handlerKey);
-_element.innerHTML = e.currentTarget.innerHTML;
-
-VH2017.currentTarget.appendChild(_element);
+VH2017.currentTarget.innerHTML = e.currentTarget.innerHTML;
 
 var _elements = VH2017.currentTarget.querySelectorAll('*');
 	for (var i = 0 ; i < _elements.length ; i++) {
 		_elements[i].addEventListener('click', ElementClicked, false);
 		_elements[i].addEventListener('keydown', ReturnPressed, false);
 		_elements[i].style.border = "1px dashed gray";
-		_elements[i].setAttribute("data-VH2017-hndk",VH2017.handlerKey);
-		
-		//can't explain why but here it not needed to set it !, if set it switch to the IE design mode ?
-		//_elements[i].setAttribute("contentEditable","true");
+		_elements[i].setAttribute("contentEditable","true");
+		_elements[i].setAttribute("data-VH2017-hndk", "B" + Date.now() + Math.floor(Math.random() * 101));
+		_elements[i].id = "A" + Date.now() + Math.floor(Math.random() * 101);
 	}
 	
 }
+
+
+
+
