@@ -105,7 +105,7 @@ function ElementClicked(e) {
   e.stopPropagation();
   e.preventDefault();
    
-  /* look for and attahc un handed child nodes */
+  /* look for and attach unhandled child nodes */
   for (var i = 0 ; i < e.currentTarget.childNodes.length ; i++) {
 	  if (e.currentTarget.childNodes[i].nodeType != 3 && 		 
 		  e.currentTarget.childNodes[i].getAttribute('data-VH2017-hndk') === null){ 
@@ -206,5 +206,28 @@ function Align(elt, align) {
 	
 	elt.focus();
 	elt.click();
+	
+}
+
+
+function injectHTML(e) {
+	
+var _element = document.createElement("div");
+_element.Id = Date.now();
+_element.setAttribute("data-VH2017-hndk",VH2017.handlerKey);
+_element.innerHTML = e.currentTarget.innerHTML;
+
+VH2017.currentTarget.appendChild(_element);
+
+var _elements = VH2017.currentTarget.querySelectorAll('*');
+	for (var i = 0 ; i < _elements.length ; i++) {
+		_elements[i].addEventListener('click', ElementClicked, false);
+		_elements[i].addEventListener('keydown', ReturnPressed, false);
+		_elements[i].style.border = "1px dashed gray";
+		_elements[i].setAttribute("data-VH2017-hndk",VH2017.handlerKey);
+		
+		//can't explain why but here it not needed to set it !, if set it switch to the IE design mode ?
+		//_elements[i].setAttribute("contentEditable","true");
+	}
 	
 }
