@@ -16,7 +16,7 @@ div article:hover { background-color:#999999; }
  wearing shorts</a></p>
 </article>
 
-<article itemscope itemtype="https://schema.org/BlogPosting">
+<article itemscope itemtype="https://schema.org/BlogPosting" onclick="injectHTML(event);">
   <header>
     <h2 itemprop="headline">The Very First Rule of Life</h2>
     <p><time itemprop="datePublished" datetime="2016-02-28">3 days ago</time></p>
@@ -29,7 +29,7 @@ div article:hover { background-color:#999999; }
   </footer>
 </article>
 
-<article itemscope itemtype="https://schema.org/BlogPosting">  <header>
+<article itemscope itemtype="https://schema.org/BlogPosting" onclick="injectHTML(event);">  <header>
     <h2 itemprop="headline">The Very First Rule of Life</h2>
     <p><time itemprop="datePublished" datetime="2009-10-09">3 days ago</time></p>
   </header>
@@ -56,7 +56,7 @@ div article:hover { background-color:#999999; }
   </section>
 </article>
 
-<article>
+<article onclick="injectHTML(event);">
   <header>
     <h2>Apples</h2>
     <p>Tasty, delicious fruit!</p>
@@ -74,7 +74,7 @@ div article:hover { background-color:#999999; }
   </section>
 </article>
 
-<article class="book">
+<article class="book" onclick="injectHTML(event);">
   <header>
     <h2>My Book</h2>
     <p>A sample with not much content</p>
@@ -107,7 +107,7 @@ div article:hover { background-color:#999999; }
   </section>
 </article>
 
-<article>
+<article onclick="injectHTML(event);">
     <header>
       <h2>Demos in Exampland</h2>
       <p>Written by A. N. Other.</p>
@@ -135,7 +135,7 @@ div article:hover { background-color:#999999; }
     </footer>
 </article>
 
-<article property="schema:blogPosts" typeof="schema:BlogPosting">
+<article property="schema:blogPosts" typeof="schema:BlogPosting" onclick="injectHTML(event);">
       <header>
         <h2 property="schema:headline">My Day at the Beach</h2>
       </header>
@@ -148,7 +148,7 @@ div article:hover { background-color:#999999; }
       </footer>
 </article>
 
-<article>
+<article onclick="injectHTML(event);">
     <!-- this is a blog post -->
     <h2>My last post</h2>
     <p>This is my last post.</p>
@@ -174,7 +174,7 @@ div article:hover { background-color:#999999; }
     </footer>
 </article>
 
-<article>
+<article onclick="injectHTML(event);">
   <header>
     <h1>Flexbox: The definitive guide</h1>
     <aside>
