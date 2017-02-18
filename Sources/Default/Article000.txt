@@ -5,7 +5,7 @@ div#Starters article:hover { background-color:#999999; }
 
 <button type="button"
        style="position: absolute; top: 0px; margin-left: 30px; display: inline-block; cursor: pointer; width: 23px; height: 23px;" 
-         onclick="document.getElementById('VH2017-Starters').parentNode.removeChild(document.getElementById('VH2017-Starters'));" 
+         onclick="document.getElementById('VH2017-Starters').parentNode.removeChild(document.getElementById('VH2017-Starters')); VH2017.RemoveStarters();" 
          title="Close Starters Panel">x</button>
          
 <div onclick="injectHTML(event);">
