@@ -1,3 +1,5 @@
+<div id="VH2017-Starters" class="chapter summary">
+
 <article>
   <h1><a href="https://bacon.example.com/?blog=109431">Bacon on a crowbar</a></h1>
   <article>
@@ -7,15 +9,15 @@
     <article>
       <header><strong>greg</strong> 8 points 1 hour ago</header>
       <blockquote><p>I bet a narwhal would love that.</p></blockquote>
-      <p>Dude narwhals don’t eat bacon.</p>
+      <p>Dude narwhals donâ€™t eat bacon.</p>
       <footer><a href="?pid=29579">permalink</a></footer>
       <article>
         <header><strong>t3yw</strong> 15 points 1 hour ago</header>
         <blockquote>
           <blockquote><p>I bet a narwhal would love that.</p></blockquote>
-          <p>Dude narwhals don’t eat bacon.</p>
+          <p>Dude narwhals donâ€™t eat bacon.</p>
         </blockquote>
-        <p>Next thing you’ll be saying they don’t get capes and wizard
+        <p>Next thing youâ€™ll be saying they donâ€™t get capes and wizard
         hats either!</p>
         <footer><a href="?pid=29580">permalink</a></footer>
         <article>
@@ -28,7 +30,7 @@
     <article>
       <header><strong>fred</strong> 1 points 23 minutes ago</header>
       <blockquote><p>I bet a narwhal would love that.</p></blockquote>
-      <p>I bet they’d love to peel a banana too.</p>
+      <p>I bet theyâ€™d love to peel a banana too.</p>
       <footer><a href="?pid=29582">permalink</a></footer>
     </article>
   </article>
@@ -41,7 +43,7 @@
     <figcaption>Barack Obama and Harry Reid. White House press photograph.</figcaption>
   </figure>
   <p>Negotiations in Congress to end the fiscal impasse sputtered on Tuesday, leaving both chambers
-  grasping for a way to reopen the government and raise the country’s borrowing authority with a
+  grasping for a way to reopen the government and raise the countryâ€™s borrowing authority with a
   Thursday deadline drawing near.</p>
   ...
 </article>
@@ -65,7 +67,7 @@
 
 <article lang="en-US">
   <h2>My use of language and my cats</h2>
-  <p>My cat’s behavior hasn’t changed much since her absence, except
+  <p>My catâ€™s behavior hasnâ€™t changed much since her absence, except
   that she plays her new physique to the neighbors regularly, in an
   attempt to get pets.</p>
   <div lang="en-GB">
@@ -74,8 +76,8 @@
   he apparently visited our neighbours. I wonder if he recognizes that
   their flat is a mirror image of ours.</p>
   <p>Hm, I just noticed that in the last paragraph I used British
-  English. But I’m supposed to write in American English. So I
-  shouldn’t say "pavement" or "flat" or "color"...</p>
+  English. But Iâ€™m supposed to write in American English. So I
+  shouldnâ€™t say "pavement" or "flat" or "color"...</p>
   </div>
   <p>I should say "sidewalk" and "apartment" and "color"!</p>
 </article>
@@ -83,11 +85,11 @@
 <article id="comment-1">
   Comment by <cite><a href="https://oli.jp">Oli Studholme</a></cite>
   <time datetime="2013-08-19T16:01">August 19th, 2013 at 4:01 pm</time>
-  <p>Unfortunately I don’t think adding names back into the definition of <code>cite</code>
+  <p>Unfortunately I donâ€™t think adding names back into the definition of <code>cite</code>
   solves the problem: of the 12 blockquote examples in
   <a href="https://oli.jp/example/blockquote-metadata/">Examples of block quote metadata</a>,
-  there’s not even one that’s <em>just</em> a person’s name.</p>
-  <p>A subset of the problem, maybe…</p>
+  thereâ€™s not even one thatâ€™s <em>just</em> a personâ€™s name.</p>
+  <p>A subset of the problem, maybeâ€¦</p>
 </article>
 
 <article>
@@ -124,18 +126,18 @@
   <h1>She knew</h1>
   <p>Did you notice the subtle joke in the joke on panel 4?</p>
   <blockquote>
-  <p class="bubble">I didn’t <em>want</em> to believe. <mark>Of course
+  <p class="bubble">I didnâ€™t <em>want</em> to believe. <mark>Of course
   on some level I realized it was a known-plaintext attack.</mark> But I
-  couldn’t admit it until I saw for myself.</p>
+  couldnâ€™t admit it until I saw for myself.</p>
   </blockquote>
-  <p>(Emphasis mine.) I thought that was great. It’s so pedantic, yet it
+  <p>(Emphasis mine.) I thought that was great. Itâ€™s so pedantic, yet it
   explains everything neatly.</p>
 </article>
 
 <article>
   <header>
   <p><img src="/usericons/1627591962735"> <b>Fred Flintstone</b></p>
-  <p><a href="/posts/3095182851" rel=bookmark>12:44</a> — <a href="#acl-3095182851">Private Post</a></p>
+  <p><a href="/posts/3095182851" rel=bookmark>12:44</a> â€” <a href="#acl-3095182851">Private Post</a></p>
   </header>
   <main>
   <p>Check out my new ride!</p>
@@ -165,3 +167,5 @@
     </figure>
     <p>The number 802 Gem 4/4 electro-diesel has a marmot and was rebuilt in 2003.</p>
 </article>
+
+</div>
