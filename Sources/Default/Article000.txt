@@ -2,7 +2,7 @@
 div article:hover { background-color:#999999; }
 </style>
 
-<article>
+<article onclick="injectHTML();">
  <header>
   <h2><a href="https://herbert.io">Short note on wearing shorts</a></h2>
    <p>Posted on Wednesday, 10 February 2016 by Patrick Lauke.
