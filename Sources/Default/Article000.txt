@@ -2,7 +2,8 @@
 div article:hover { background-color:#999999; }
 </style>
 
-<article onclick="injectHTML(event);">
+<div onclick="injectHTML(event);">
+<article>
  <header>
   <h2><a href="https://herbert.io">Short note on wearing shorts</a></h2>
    <p>Posted on Wednesday, 10 February 2016 by Patrick Lauke.
@@ -15,8 +16,10 @@ div article:hover { background-color:#999999; }
  <p><a href="https://herbert.io/short-note/">Continue reading: Short note on
  wearing shorts</a></p>
 </article>
+</div>
 
-<article itemscope itemtype="https://schema.org/BlogPosting" onclick="injectHTML(event);">
+<div onclick="injectHTML(event);">
+<article itemscope itemtype="https://schema.org/BlogPosting">
   <header>
     <h2 itemprop="headline">The Very First Rule of Life</h2>
     <p><time itemprop="datePublished" datetime="2016-02-28">3 days ago</time></p>
@@ -28,8 +31,11 @@ div article:hover { background-color:#999999; }
     <a itemprop="discussionUrl" href="?comments=1">Show comments...</a>
   </footer>
 </article>
+</div>
 
-<article itemscope itemtype="https://schema.org/BlogPosting" onclick="injectHTML(event);">  <header>
+<div onclick="injectHTML(event);">
+<article itemscope itemtype="https://schema.org/BlogPosting">
+  <header>
     <h2 itemprop="headline">The Very First Rule of Life</h2>
     <p><time itemprop="datePublished" datetime="2009-10-09">3 days ago</time></p>
   </header>
@@ -55,8 +61,10 @@ div article:hover { background-color:#999999; }
    </ol>
   </section>
 </article>
+</div>
 
-<article onclick="injectHTML(event);">
+<div onclick="injectHTML(event);">
+<article>
   <header>
     <h2>Apples</h2>
     <p>Tasty, delicious fruit!</p>
@@ -73,8 +81,10 @@ div article:hover { background-color:#999999; }
     apple pies.</p>
   </section>
 </article>
+</div>
 
-<article class="book" onclick="injectHTML(event);">
+<div onclick="injectHTML(event);">
+<article class="book">
   <header>
     <h2>My Book</h2>
     <p>A sample with not much content</p>
@@ -106,8 +116,10 @@ div article:hover { background-color:#999999; }
     sections, so long as they are used to indicate actual sections.</p>
   </section>
 </article>
+</div>
 
-<article onclick="injectHTML(event);">
+<div onclick="injectHTML(event);">
+<article>
     <header>
       <h2>Demos in Exampland</h2>
       <p>Written by A. N. Other.</p>
@@ -134,8 +146,10 @@ div article:hover { background-color:#999999; }
       <p><a href="?edit">Edit</a> | <a href="?delete">Delete</a> | <a href="?Rename">Rename</a></p>
     </footer>
 </article>
+</div>
 
-<article property="schema:blogPosts" typeof="schema:BlogPosting" onclick="injectHTML(event);">
+<div onclick="injectHTML(event);">
+<article property="schema:blogPosts" typeof="schema:BlogPosting">
       <header>
         <h2 property="schema:headline">My Day at the Beach</h2>
       </header>
@@ -147,8 +161,10 @@ div article:hover { background-color:#999999; }
         <p>Posted <time property="schema:datePublished" datetime="2009-10-10">Thursday</time>.</p>
       </footer>
 </article>
+</div>
 
-<article onclick="injectHTML(event);">
+<div onclick="injectHTML(event);">
+<article>
     <!-- this is a blog post -->
     <h2>My last post</h2>
     <p>This is my last post.</p>
@@ -173,8 +189,10 @@ div article:hover { background-color:#999999; }
       <p><a href="/first-post" rel=bookmark>Permalink</a>
     </footer>
 </article>
+</div>
 
-<article onclick="injectHTML(event);">
+<div onclick="injectHTML(event);">
+<article>
   <header>
     <h1>Flexbox: The definitive guide</h1>
     <aside>
@@ -188,5 +206,6 @@ div article:hover { background-color:#999999; }
   <p><ins>The guide about Flexbox was supposed to be here, but it
     turned out Wes wasn’t a Flexbox expert either.</ins></p>
 </article>
+</div>
 
 
