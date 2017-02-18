@@ -1,4 +1,4 @@
-<div id="VH2017-Starters">
+<div id="VH2017-Starters" class="VH2017 basic articles sample code">
 <style>
 div#VH2017-Starters article:hover { background-color:#999999; }
 </style>
