@@ -1,38 +1,89 @@
 window.addEventListener('load', InitializeUserAgent, true);
-window.addEventListener('load', InitializeDocument, true);
-window.addEventListener('load', InitializeContent, true);
 
 VH2017 = {};
+VH2017.MainPanelUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/Sources/testmain.html";
+VH2017.PreviewPanelUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/Sources/Default/Article000.txt";
 VH2017.document={};
 VH2017.document.body={};
 VH2017.document.body.contentEditable={};
 VH2017.document.body.designMode={};
+VH2017.designerKey = Date.now();
+VH2017.currentTarget = null;
+VH2017.RemovePanel = function() { (document.getElementById('VH2017-main') ? document.body.removeChild(document.getElementById('VH2017-main')) : false ); };
+VH2017.RemoveStarters = function() { (document.getElementById('VH2017-starters') ? document.body.removeChild(document.getElementById('VH2017-starters')) : false ); };
+VH2017.RemovePanels = function() { this.RemovePanel(); this.RemoveStarters(); }
+VH2017.Clear = function() { 
+	document.removeEventListener('click', BodyClicked, false);
+	this.RemovePanels();
+    var _elements = document.querySelectorAll('*');
+	for (var i = 0 ; i < _elements.length ; i++) {
+		_elements[i].removeEventListener('click', ElementClicked, false);
+		_elements[i].removeEventListener('keydown', ReturnPressed, false);
+		_elements[i].style.border = "";
+		_elements[i].removeAttribute("data-VH2017-hndk");
+		_elements[i].removeAttribute("contentEditable");
+	}	
+};
 
-function InitializeUserAgent(evt) {
+function InitializeUserAgent(e) {
 	
+	InitializeDocument();
 }
 
-function InitializeDocument(evt) {
+function InitializeDocument() {
 	VH2017.document.body.contentEditable.InitalValue = document.body.contentEditable;
 	VH2017.document.body.designMode.InitialValue = document.designMode;
 	
-	/* if the page is set to design mode, VH don't go further */
-	if (VH2017.document.body.designMode.InitialValue.toLowerCase === "Inherit") return;
-	/* 
-	this mode allow so much that we will use it to open a blank sheet, user will be able to work 
-	in that mode and get the code injected to the VH page
+	/* without taking dimension specs I don't trigger click event from body
+	document.body.addEventListener('click', BodyClicked, false);
+	so I set-it on document
 	*/
+	document.addEventListener('click', BodyClicked, false);
 	
-	/* contentEditable processing : in investigation */
+	if (VH2017.document.body.designMode.InitialValue.toLowerCase === "Inherit") return;
+	InitializeContent();
+}
+
+function InitializeContent() {
+	
+	var _autoBlank=false;
+	if (document.body.childNodes.length === 1) {
+		var _element = document.createElement("div");
+		_element.id = "M" + Date.now() + Math.floor(Math.random() * 101);
+		VH2017.currentTarget = document.body.appendChild(_element);
+		_autoBlank = true;
+	}
+	
+    var _elements = document.body.querySelectorAll('*');
+	for (var i = 0 ; i < _elements.length ; i++) {
+		_elements[i].addEventListener('click', ElementClicked, false);
+		_elements[i].addEventListener('keydown', ReturnPressed, false);
+		_elements[i].style.border = "1px dashed gray";
+		_elements[i].setAttribute("data-VH2017-hndk", "L" + Date.now() + Math.floor(Math.random() * 101));
+		_elements[i].contentEditable = true;
+	}
+	
+	if (_autoBlank) InitializeDesigner();
+	VH2017.currentTarget.focus();
+}
+
+function InitializeDesigner(){	
+	
+	VH2017.designerKey = Date.now();
 	
 	var xReq = new XMLHttpRequest();
-	xReq.open("GET", "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/Sources/testmain.html", true); 
+	xReq.open("GET", VH2017.MainPanelUrl, true); 
 	xReq.timeout = 2000;
-	xReq.ontimeout = function () {   } 
+	xReq.ontimeout = function () { };
 	xReq.onreadystatechange = function (e) {
 		if (xReq.readyState == 4) {         
 			if (xReq.status = "200") { 
-				document.body.innerHTML += xReq.response;
+			    var _element = document.createElement("div");
+				_element.id = "VH2017-main";
+				_element.setAttribute("data-VH2017-dsgk",VH2017.designerKey);
+				_element.innerHTML = xReq.response;
+				document.body.insertBefore(_element, document.body.firstChild);
+				InitializeDesigner_Step1();
 				} else {
 				
 				}
@@ -41,15 +92,135 @@ function InitializeDocument(evt) {
 	xReq.send(null);
 }
 
-function InitializeContent(evt) {
-    _elements = document.querySelectorAll('*');
-	for (var i = 0 ; i < _elements.length ; i++) {
-		_elements[i].addEventListener('click', ElementClicked, false);
-	}
+function InitializeDesigner_Step1() {
+	var xReq = new XMLHttpRequest();
+	xReq.open("GET", VH2017.PreviewPanelUrl, true); 
+	xReq.timeout = 2000;
+	xReq.ontimeout = function () { };
+	xReq.onreadystatechange = function (e) {
+		if (xReq.readyState == 4) {         
+			if (xReq.status = "200") { 
+			    var _element = document.createElement("div");
+				_element.id = "VH2017-starters";
+				_element.setAttribute("data-VH2017-dsgk",VH2017.designerKey);
+				_element.style.position="fixed";
+				_element.style.right="0";
+				_element.style.width="320px";				
+				_element.style.height="480px";
+				_element.style.overflowX="scroll";
+				_element.innerHTML = xReq.response;
+				document.body.insertBefore(_element, document.body.firstChild);
+				
+				
+		VH2017.currentTarget.focus();
+				} else {
+				
+				}
+			}
+		}
+	xReq.send(null);
 }
 
+
 function ElementClicked(e) {
+	
   e.stopPropagation();
   e.preventDefault();
-  // a handle on current element is available in e.currentTarget
+   
+  VH2017.currentTarget = e.currentTarget;
+  
 }
+
+
+function ReturnPressed(e) {
+	
+	if (e.which === 13) {
+		e.preventDefault();
+	}
+		
+}
+
+
+function BodyClicked(e) {
+	
+	e.stopPropagation();
+	e.preventDefault();
+	
+	var _aux = document.createElement("div");
+	
+	_aux.addEventListener('click', ElementClicked, false);
+	_aux.addEventListener('keydown', ReturnPressed, false);
+	_aux.style.border = "1px dashed gray";
+	_aux.setAttribute("data-VH2017-hndk", "F" + Date.now() + Math.floor(Math.random() * 101));
+	_aux.contentEditable = true;
+	_aux.id = "E" + Date.now() + Math.floor(Math.random() * 101);
+  
+    VH2017.currentTraget = document.body.appendChild(_aux);
+	VH2017.currentTraget.focus();
+	
+}
+
+
+function ReplaceNode(elt, tagName) {
+	
+	event.cancelBubble=true;
+	
+	if (elt == null) return;
+	
+	_element = document.createElement(tagName);
+	_element.innerHTML = elt.innerHTML;
+	_element.contentEditable = true;
+	
+	for(var i = 0 ; i < elt.classList.length ; i++) {
+	_element.classList.add(elt.classList[i]);
+	}
+	
+	_element.style.textAlign = elt.style.textAlign;
+	_element.addEventListener('click', ElementClicked, false);
+	_element.addEventListener('keydown', ReturnPressed, false);
+	_element.setAttribute("data-VH2017-hndk", "C" + Date.now() + Math.floor(Math.random() * 101));
+	_element.id = "D" + Date.now() + Math.floor(Math.random() * 101);
+	_element.style.border = "1px dashed gray";
+				
+	elt.parentNode.replaceChild(_element,elt);
+	
+	_element.focus();
+	_element.click();
+	
+}
+
+
+
+function Align(elt, align) {	
+
+	event.cancelBubble=true;
+	
+	if (elt == null) return;		
+	elt.style.textAlign = align;	
+	elt.focus();
+	elt.click();	
+}
+
+
+function injectHTML(e) {
+	
+	e.stopPropagation();
+	e.preventDefault();
+	
+	VH2017.currentTarget.innerHTML = e.currentTarget.innerHTML;
+
+	var _elements = VH2017.currentTarget.querySelectorAll('*');
+	for (var i = 0 ; i < _elements.length ; i++) {
+		_elements[i].addEventListener('click', ElementClicked, false);
+		_elements[i].addEventListener('keydown', ReturnPressed, false);
+		_elements[i].style.border = "1px dashed gray";
+		_elements[i].setAttribute("contentEditable","true");
+		_elements[i].setAttribute("data-VH2017-hndk", "B" + Date.now() + Math.floor(Math.random() * 101));
+		_elements[i].id = "A" + Date.now() + Math.floor(Math.random() * 101);
+	}
+	
+}
+
+
+
+
