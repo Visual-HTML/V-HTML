@@ -89,13 +89,13 @@ function InitializeDesigner(){
 			    var _element = document.createElement("div");
 				_element.id = "VH2017-main";
 				_element.contentEditable = false;
-				_element.setAttribute("data-VH2017-dsgk");
+				_element.setAttribute("data-VH2017-dsgk","");
 				_element.innerHTML = xReq.response;
 				
 				var _elements = _element.querySelectorAll('*');
 				for (var i = 0; i < _elements.length ; i++) {
 					_elements[i].contentEditable = false;
-					_elements[i].setAttribute("data-VH2017-dsgk");
+					_elements[i].setAttribute("data-VH2017-dsgk","");
 				}
 				
 				document.body.insertBefore(_element, document.body.firstChild);
@@ -119,7 +119,7 @@ function InitializeDesigner_Step1() {
 			    var _element = document.createElement("div");
 				_element.id = "VH2017-starters";
 				_element.contentEditable = false;
-				_element.setAttribute("data-VH2017-dsgk");
+				_element.setAttribute("data-VH2017-dsgk","");
 				_element.style.position="fixed";
 				_element.style.right="0";
 				_element.style.top="0";
@@ -132,7 +132,7 @@ function InitializeDesigner_Step1() {
 				var _elements = _element.querySelectorAll('*');
 				for (var i = 0; i < _elements.length ; i++) {
 					_elements[i].contentEditable = false;
-					_elements[i].setAttribute("data-VH2017-dsgk");
+					_elements[i].setAttribute("data-VH2017-dsgk","");
 				}
 				
 				document.body.insertBefore(_element, document.body.firstChild);
@@ -176,7 +176,7 @@ function ReturnKeyDown(e) {
 			_elements[i].addEventListener('keydown', ReturnKeyDown, false);
 			_elements[i].addEventListener('focusin', ElementGetFocus, false);
 			_elements[i].addEventListener('focusout', ElementLoseFocus, false);
-			_elements[i].setAttribute("data-VH2017-hndk");
+			_elements[i].setAttribute("data-VH2017-hndk","");
 		  }
 		}
 		
@@ -215,7 +215,7 @@ function ElementLoseFocus(e) {
 			_elements[i].addEventListener('keydown', ReturnKeyDown, false);
 			_elements[i].addEventListener('focusin', ElementGetFocus, false);
 			_elements[i].addEventListener('focusout', ElementLoseFocus, false);
-			_elements[i].setAttribute("data-VH2017-hndk");
+			_elements[i].setAttribute("data-VH2017-hndk","");
 		  }
 		}
 		
@@ -249,7 +249,7 @@ function DocumentClicked(e) {
 			_elements[i].addEventListener('keydown', ReturnKeyDown, false);
 			_elements[i].addEventListener('focusin', ElementGetFocus, false);
 			_elements[i].addEventListener('focusout', ElementLoseFocus, false);
-			_elements[i].setAttribute("data-VH2017-hndk");
+			_elements[i].setAttribute("data-VH2017-hndk","");
 		  }
 		}
 	
@@ -281,7 +281,7 @@ function ReplaceNode(elt, tagName) {
 	_element.addEventListener('click', ElementClicked, false);
 	_element.addEventListener('focusin', ElementGetFocus, false);
 	_element.addEventListener('focusout', ElementLoseFocus, false);
-	_element.setAttribute("data-VH2017-hndk");
+	_element.setAttribute("data-VH2017-hndk","");
 				
 	elt.parentNode.replaceChild(_element,elt);
 	
@@ -330,7 +330,7 @@ function injectHTML(e) {
 			_elements[i].addEventListener('keydown', ReturnKeyDown, false);
 			_elements[i].addEventListener('focusin', ElementGetFocus, false);
 			_elements[i].addEventListener('focusout', ElementLoseFocus, false);
-			_elements[i].setAttribute("data-VH2017-hndk");
+			_elements[i].setAttribute("data-VH2017-hndk","");
 		  }
 		}
 	
