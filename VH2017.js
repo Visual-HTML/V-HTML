@@ -35,31 +35,61 @@ function InitializeDocument() {
 	VH2017.document.body.contentEditable.InitalValue = document.body.contentEditable;
 	VH2017.document.body.designMode.InitialValue = document.designMode;
 		
-	document.body.addEventListener('keydown', DocumentKeyDown, false);	
-	document.body.addEventListener('click', DocumentClick, false);
-	
-	
-	document.body.contentEditable = true;
-	
-	VH2017.currentTarget = document.body;
-	VH2017.currentTarget.focus();
+	document.addEventListener('keydown', DocumentKeyDown, false);	
+	document.body.addEventListener('click', DocumentClick, false);	
 
+    if (document.body.childElementCount === 0) {
+		var _res = document.body.appendChild(document.createElement("p"));
+		VH2017.currentTarget = _res;
+	} else {
+		 VH2017.currentTarget = document.body.firstChild;
+	}
+	 
 	InitializeContent();
 	
 }
 
 
 
-function InitializeContent() {	WrapElements(); }
+function InitializeContent() {	
+
+	WrapElements();
+
+	VH2017.currentTarget.focus();
+	VH2017.currentTarget.click();
+
+}
+
+
+
+function ElementKeyDown(e) { 
+         
+	console.log( e.type + " " + e.currentTarget.nodeName + " " +
+		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
+	
+   if (e.which === 13) {	   
+	   	e.preventDefault();
+		e.stopPropagation();
+
+		var _elt = document.createElement("p");			
+		var _res = e.currentTarget.parentNode.insertBefore(_elt, e.currentTarget.nextElementSibling);
+		WrapElements(_res);
+   }
+   
+}
 
 
 
 function ElementClick(e) {
 	
+	console.log( e.type + " " + e.currentTarget.nodeName + " " +
+		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
+	
     e.stopPropagation();
+	e.preventDefault();
 	
 	VH2017.currentTarget = e.currentTarget;
-	VH2017.currentTarget.contentEditable = true;
+	VH2017.currentTarget.contentEditable = true;	
 	VH2017.currentTarget.focus();
 	
 	VH2017.ElementClick(e);
@@ -70,6 +100,9 @@ function ElementClick(e) {
 
 function ElementFocusOut(e) {
 	
+	console.log( e.type + " " + e.currentTarget.nodeName + " " +
+		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
+	
 	e.currentTarget.removeAttribute("contentEditable");
 
 }
@@ -78,13 +111,18 @@ function ElementFocusOut(e) {
 
 function DocumentClick(e) {
 	
-	VH2017.currentTarget = e.currentTarget;
-	VH2017.currentTarget.focus();
+	console.log( e.type + " " + e.currentTarget.nodeName + " " +
+		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
+	
 }
 
 
 
 function DocumentKeyDown(e) { 
+	
+	console.log( e.type + " " + e.currentTarget.nodeName + " " +
+		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
+	
    if (e.which === 13) {
 	   
 	   if (document.body.hasAttribute("contentEditable")) {
@@ -93,8 +131,8 @@ function DocumentKeyDown(e) {
 		} else {
 			e.preventDefault();
 			
-			var _element = document.createElement("p");
-			WrapElements(document.body.appendChild(_element));
+			var _res = document.body.appendChild(document.createElement("p"));
+			WrapElements(_res);
 		}
    }
 }
@@ -104,31 +142,36 @@ function DocumentKeyDown(e) {
 function WrapElements(elt) {
 	
 	if (typeof(elt) === "undefined") {
+			
+		// look for and attach unhandled elements
+		var _elements = document.body.querySelectorAll('body *:not([data-VH2017-hndk])');
 		
-	// look for and attach unhandled elements
-	var _elements = document.body.querySelectorAll('body *:not([data-VH2017-hndk])');
-	
-	for (var i = 0 ; i < _elements.length ; i++) {
-	  if ( _elements[i].nodeType === 1 
-					 && !_elements[i].hasAttribute("data-VH2017-dsgk")
-					 && !_elements[i].hasAttribute('data-VH2017-hndk') ) { 
-		_elements[i].addEventListener('focusout', ElementFocusOut, false); 
-		_elements[i].addEventListener('click', ElementClick, false);
-		_elements[i].setAttribute("data-VH2017-hndk","");
-		VH2017.ElementWrap(_elements[i]);
-	  }
-	  document.body.removeAttribute("contentEditable");
-	}
-	
+		for (var i = 0 ; i < _elements.length ; i++) {
+		  if ( _elements[i].nodeType === 1 
+						 && !_elements[i].hasAttribute("data-VH2017-dsgk")
+						 && !_elements[i].hasAttribute('data-VH2017-hndk') ) { 
+			_elements[i].addEventListener('keydown', ElementKeyDown, false);
+			_elements[i].addEventListener('click', ElementClick, false);
+			_elements[i].addEventListener('focusout', ElementFocusOut, false); 
+			_elements[i].setAttribute("data-VH2017-hndk","");
+			VH2017.ElementWrap(_elements[i]);
+		  }
+		}
 	
 	} else {
+		
+		elt.addEventListener('keydown', ElementKeyDown, false);
 		elt.addEventListener('click', ElementClick, false);
 		elt.addEventListener('focusout', ElementFocusOut, false); 
 		elt.setAttribute("data-VH2017-hndk","");
+	
+		VH2017.currentTarget = elt;
 		VH2017.ElementWrap(elt);
 		elt.contentEditable = true;
-		elt.focus();
+		VH2017.currentTarget.focus();
+		
 	}
+	
 }
 
 
