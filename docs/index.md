@@ -14,7 +14,12 @@
              
 [A4 page 1](VH2017-A4-1.html)
              The A4 page in portrait, with some content
-             
+
+-----------------------------------------------
+
+[Designer Content](VH2017-DC-000.html)
+             Add designer content within a page
+
 -----------------------------------------------
 
 Second level
