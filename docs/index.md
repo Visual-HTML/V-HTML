@@ -3,14 +3,18 @@
  > First level
 
 -----------------------------------------------
+
 [Blank page](VH2017.html)
              This use a basic document structure
+             
 -----------------------------------------------
+
 [A4 page](VH2017-A4.html)
              This use a page with styling for an A4 page in portrait
              
 [A4 page 1](VH2017-A4-1.html)
              The A4 page in portrait, with some content
+             
 -----------------------------------------------
 
 Second level
@@ -20,7 +24,6 @@ to define and to add: return in the middle of text need to insert a br
 backspace on empty element must remove it, copy/paste, drag&drop ?...
 quite everything I have lost avoiding body contentEditable usage.
 ++++++++(and more: add typing support as in Word a star/hypen+space mean ul/li ? number+dot mean ol/li....
-
 
 -----------------------------------------------
 
