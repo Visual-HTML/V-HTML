@@ -19,6 +19,7 @@
 
 [Designer Content](VH2017-DC-000.html)
              Add designer content within a page
+             [Variant 1](VH2017-DC-001.html)
 
 -----------------------------------------------
 
