@@ -9,14 +9,22 @@ VH2017.document.body.contentEditable={};
 VH2017.document.body.designMode={};
 VH2017.currentTarget = null;
 VH2017.Clear = function() { 
-	document.body.removeAttribute("contentEditable");
+
 	document.removeEventListener('keydown', DocumentKeyDown, false);	
-	document.removeEventListener('click', DocumentClick, false);
+	document.body.removeEventListener('click', DocumentClick, false);	
 	
-    var _elements = document.querySelectorAll('*');
+    var _elements = document.querySelectorAll('body *[data-VH2017-hndk]');
 	for (var i = 0 ; i < _elements.length ; i++) {
+		_elements[i].removeEventListener('keydown', ElementKeyDown, false);
 		_elements[i].removeEventListener('click', ElementClick, false);
+		_elements[i].removeEventListener('focusout', ElementFocusOut, false); 
 		_elements[i].removeAttribute("data-VH2017-hndk");
+		_elements[i].removeAttribute("contentEditable");
+	}
+	
+	_elements = document.body.querySelectorAll("body *[contentEditable='false']");
+	for (var i = 0 ; i < _elements.length ; i++) {
+		try { _elements[i].remove(); } catch(xcp) { _elements[i].removeNode(); } finally { console.log("cross-browser"); };
 	}
 	
 };
@@ -35,16 +43,23 @@ function InitializeDocument() {
 	VH2017.document.body.contentEditable.InitalValue = document.body.contentEditable;
 	VH2017.document.body.designMode.InitialValue = document.designMode;
 		
+	document.body.removeAttribute("contentEditable");
+	document.designMode = "off";
+		
 	document.addEventListener('keydown', DocumentKeyDown, false);	
 	document.body.addEventListener('click', DocumentClick, false);	
 
     if (document.body.childElementCount === 0) {
 		var _res = document.body.appendChild(document.createElement("p"));
 		VH2017.currentTarget = _res;
-	} else {
-		 VH2017.currentTarget = document.body.firstChild;
 	}
-	 
+		
+	var  _element = document.createElement("style");
+	_element.title = "VH2017- Designer Styles";
+	_element.id = "VH2017-Designer-Styles";
+	_element.innerHTML = "*:not(hr)[data-VH2017-hndk] { min-height: 20px; border: 1px dotted gray; }";	
+	document.head.appendChild(_element);
+		 
 	InitializeContent();
 	
 }
@@ -55,6 +70,7 @@ function InitializeContent() {
 
 	WrapElements();
 
+	VH2017.currentTarget = document.body.querySelector(':nth-child(1)');
 	VH2017.currentTarget.focus();
 	VH2017.currentTarget.click();
 
@@ -125,15 +141,15 @@ function DocumentKeyDown(e) {
 	
    if (e.which === 13) {
 	   
-	   if (document.body.hasAttribute("contentEditable")) {
-	       WrapElements(); 
+	 // if (document.body.hasAttribute("contentEditable")) { removed because of new initialisation 
+	    //   WrapElements(); 
 	
-		} else {
+		//} else {
 			e.preventDefault();
 			
 			var _res = document.body.appendChild(document.createElement("p"));
 			WrapElements(_res);
-		}
+		//}
    }
 }
 
@@ -144,7 +160,7 @@ function WrapElements(elt) {
 	if (typeof(elt) === "undefined") {
 			
 		// look for and attach unhandled elements
-		var _elements = document.body.querySelectorAll('body *:not([data-VH2017-hndk])');
+		var _elements = document.body.querySelectorAll("body *:not([data-VH2017-hndk]):not([contentEditable='false'])");
 		
 		for (var i = 0 ; i < _elements.length ; i++) {
 		  if ( _elements[i].nodeType === 1 
@@ -173,4 +189,5 @@ function WrapElements(elt) {
 	}
 	
 }
+
 
