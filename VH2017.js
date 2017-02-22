@@ -58,7 +58,10 @@ function InitializeDocument() {
 	_element.title = "VH2017- Designer Styles";
 	_element.id = "VH2017-Designer-Styles";
 	_element.innerHTML = "*:not(hr)[data-VH2017-hndk] { min-height: 20px; border: 1px dotted gray; }";	
-	document.head.appendChild(_element);
+	
+	var _aux = document.head.querySelectorAll('script');
+	var _aux1 = document.head.querySelector('script[src="VH2017.js"]');
+	 _aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
 
 	InitializeContent();
 	
