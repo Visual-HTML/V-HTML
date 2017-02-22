@@ -6,6 +6,7 @@
 
 [Blank page](VH2017.html)
              This use a basic document structure
+             [Basic html code](VH2017-000.html)
              
 -----------------------------------------------
 
