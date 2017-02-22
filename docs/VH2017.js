@@ -72,8 +72,9 @@ function InitializeDocument() {
 function InitializeContent() {	
 
 	WrapElements();
-
-	VH2017.currentTarget = document.body.querySelector(':nth-child(1)');
+	
+    // first child not for designer purpose 
+	VH2017.currentTarget = document.body.querySelector(":nth-child(1):not([contentEditable='false'])");
 	VH2017.currentTarget.focus();
 	VH2017.currentTarget.click();
 
