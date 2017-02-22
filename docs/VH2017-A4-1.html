@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>A4 sampl with content</title>
+<script src="VH2017.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.A4 {
+width: 8.27in;
+height: 11.69in;
+margin-left: auto;
+margin-right: auto; 
+border: 1px dotted lightgray;
+box-sizing: border-box;
+padding: 1in; 
+ }
+ 
+ 
+@media print {
+.A4 {
+width: 100%;
+height: 100%;
+border: 1px dotted lightgray;
+ background: red;
+ }
+ }
+</style>
+</head><body class="A4">
+
+<header>
+  <h1>HTML 5.1 Nightly</h1>
+  <p>A vocabulary and associated APIs for HTML and XHTML</p>
+  <p>Editor’s Draft 9 May 2013</p>
+</header>
+
+<p style="text-align: justify;">
+In the following example the title and subtitles of a web page are grouped 
+using a header element. As the author does not want the subtitles to be 
+included the table of contents and they are not intended to signify the start 
+of a new section, they are marked up using p elements. A sample CSS styled 
+rendering of the title and subtitles is provided below the code example.
+<input contentEditable="false" value="Clear" type="button" onClick="VH2017.Clear();">
+</p>
+
+<blockquote>
+Editor to build should be able to author such a page code.
+</blockquote>
+
+
+
+
+
+
+
+</body></html>
+
