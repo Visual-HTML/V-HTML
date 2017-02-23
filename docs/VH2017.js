@@ -57,6 +57,7 @@ function InitializeDocument() {
     if (document.body.childElementCount === 0) {
 		var _res = document.body.appendChild(document.createElement("p"));
 		VH2017.currentTarget = _res;
+		WrapElements(_res);
 	}
 		
 	var  _element = document.createElement("style");
