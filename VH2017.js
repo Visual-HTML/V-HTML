@@ -17,15 +17,20 @@ VH2017.Clear = function() {
 	for (var i = 0 ; i < _elements.length ; i++) {
 		_elements[i].removeEventListener('keydown', ElementKeyDown, false);
 		_elements[i].removeEventListener('click', ElementClick, false);
-		_elements[i].removeEventListener('focusout', ElementFocusOut, false); 
 		_elements[i].removeAttribute("data-VH2017-hndk");
 		_elements[i].removeAttribute("contentEditable");
 	}
 	
 	_elements = document.body.querySelectorAll("body *[contentEditable='false']");
 	for (var i = 0 ; i < _elements.length ; i++) {
-		try { _elements[i].remove(); } catch(xcp) { _elements[i].removeNode(); } finally { console.log("cross-browser"); };
+		try { _elements[i].remove(true);  console.log("used:.remove(true)"); } 
+		catch(xcp) { _elements[i].removeNode(true); console.log("used:.removeNode(true)"); } 
+		finally { console.log("cross-browser"); };
 	}
+	
+	try { document.head.querySelector('#VH2017-Designer-Styles').remove(true); console.log("used:.remove(true)"); } 
+	catch(xcp) { document.head.querySelector('#VH2017-Designer-Styles').removeNode(true); console.log("used:.removeNode(true)"); } 
+	finally { console.log("cross-browser"); };
 	
 };
 VH2017.ElementClick = function(evt) { };
@@ -52,6 +57,7 @@ function InitializeDocument() {
     if (document.body.childElementCount === 0) {
 		var _res = document.body.appendChild(document.createElement("p"));
 		VH2017.currentTarget = _res;
+		WrapElements(_res);
 	}
 		
 	var  _element = document.createElement("style");
@@ -72,8 +78,9 @@ function InitializeDocument() {
 function InitializeContent() {	
 
 	WrapElements();
-
-	VH2017.currentTarget = document.body.querySelector(':nth-child(1)');
+	
+    // first child not for designer purpose 
+	VH2017.currentTarget = document.body.querySelector(":nth-child(1):not([contentEditable='false'])");
 	VH2017.currentTarget.focus();
 	VH2017.currentTarget.click();
 
@@ -108,21 +115,8 @@ function ElementClick(e) {
 	e.preventDefault();
 	
 	VH2017.currentTarget = e.currentTarget;
-	VH2017.currentTarget.contentEditable = true;	
-	VH2017.currentTarget.focus();
 	
 	VH2017.ElementClick(e);
-
-}
-
-
-
-function ElementFocusOut(e) {
-	
-	console.log( e.type + " " + e.currentTarget.nodeName + " " +
-		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
-	
-	e.currentTarget.removeAttribute("contentEditable");
 
 }
 
@@ -143,16 +137,10 @@ function DocumentKeyDown(e) {
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 	
    if (e.which === 13) {
-	   
-	 // if (document.body.hasAttribute("contentEditable")) { removed because of new initialisation 
-	    //   WrapElements(); 
-	
-		//} else {
 			e.preventDefault();
 			
 			var _res = document.body.appendChild(document.createElement("p"));
 			WrapElements(_res);
-		//}
    }
 }
 
@@ -171,8 +159,9 @@ function WrapElements(elt) {
 						 && !_elements[i].hasAttribute('data-VH2017-hndk') ) { 
 			_elements[i].addEventListener('keydown', ElementKeyDown, false);
 			_elements[i].addEventListener('click', ElementClick, false);
-			_elements[i].addEventListener('focusout', ElementFocusOut, false); 
 			_elements[i].setAttribute("data-VH2017-hndk","");
+			if ((_elements[i].childNodes.length === 1 && _elements[i].childNodes[0].nodeName === "#text")
+					|| (_elements[i].childNodes.length > 1 && _elements[i].childNodes[0].textContent != "\n  ") ) _elements[i].contentEditable=true;
 			VH2017.ElementWrap(_elements[i]);
 		  }
 		}
@@ -181,7 +170,6 @@ function WrapElements(elt) {
 		
 		elt.addEventListener('keydown', ElementKeyDown, false);
 		elt.addEventListener('click', ElementClick, false);
-		elt.addEventListener('focusout', ElementFocusOut, false); 
 		elt.setAttribute("data-VH2017-hndk","");
 	
 		VH2017.currentTarget = elt;
@@ -192,5 +180,4 @@ function WrapElements(elt) {
 	}
 	
 }
-
 
