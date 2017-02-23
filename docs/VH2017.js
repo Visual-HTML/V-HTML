@@ -13,7 +13,7 @@ VH2017.Clear = function() {
 	document.removeEventListener('keydown', DocumentKeyDown, false);	
 	document.body.removeEventListener('click', DocumentClick, false);	
 	
-    var _elements = document.querySelectorAll('body *[data-VH2017-hndk]');
+    	var _elements = document.querySelectorAll('body *[data-VH2017-hndk]');
 	for (var i = 0 ; i < _elements.length ; i++) {
 		_elements[i].removeEventListener('keydown', ElementKeyDown, false);
 		_elements[i].removeEventListener('click', ElementClick, false);
@@ -54,7 +54,7 @@ function InitializeDocument() {
 	document.addEventListener('keydown', DocumentKeyDown, false);	
 	document.body.addEventListener('click', DocumentClick, false);	
 
-    if (document.body.childElementCount === 0) {
+    	if (document.body.childElementCount === 0) {
 		var _res = document.body.appendChild(document.createElement("p"));
 		VH2017.currentTarget = _res;
 		WrapElements(_res);
@@ -80,7 +80,7 @@ function InitializeContent() {
 	WrapElements();
 	
     // first child not for designer purpose 
-	VH2017.currentTarget = document.body.querySelector(":nth-child(1):not([contentEditable='false'])");
+	VH2017.currentTarget = document.body.querySelector(":nth-child(1):not([contentEditable='false']):not([contentEditable='inherit'])");
 	VH2017.currentTarget.focus();
 	VH2017.currentTarget.click();
 
