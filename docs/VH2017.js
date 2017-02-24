@@ -154,21 +154,27 @@ function ElementKeyUp(e) {
 	   	e.preventDefault();
 		e.stopPropagation();
 
-		var _pos= e.currentTarget.innerHTML.indexOf(document.getSelection().focusNode.data);
-		_pos = ( typeOf(document.getSelection().focusNode.data) === "undefined" ? e.currentTarget.innerHTML.indexOf(e.currentTarget.textContent) : _pos );
-		_pos = (_pos === -1 ? 0 : _pos);
-		// using getSelection may need index re-compute: result in _pos
-		// document.getSelection().focusOffset only give me the cursor position within a node
-		
 		var _elt = document.createElement("br"); 
 		_elt.id = Date.now();
-		
-		e.currentTarget.innerHTML = 
-			e.currentTarget.innerHTML.substring(0, _pos + document.getSelection().focusOffset)
-			+ _elt.outerHTML
-			+ e.currentTarget.innerHTML.substring(_pos + document.getSelection().focusOffset, e.currentTarget.innerHTML.length);
+
+                if ( typeof(document.getSelection().focusNode.data) !== "undefined") {
+			var _pos= e.currentTarget.innerHTML.indexOf(document.getSelection().focusNode.data);
+			_pos = (_pos === -1 ? 0 : _pos);
+			// using getSelection may need index re-compute: result in _pos
+			// document.getSelection().focusOffset only give me the cursor position within a node
 			
+			e.currentTarget.innerHTML = 
+				e.currentTarget.innerHTML.substring(0, _pos + document.getSelection().focusOffset)
+				+ _elt.outerHTML
+				+ e.currentTarget.innerHTML.substring(_pos + document.getSelection().focusOffset, e.currentTarget.innerHTML.length);
+		} else {
+			console.log("cross-browser code used");
+			var _tmp = _elt.outerHTML.replace(">"," />")
+			e.currentTarget.innerHTML += _tmp;			
+		}
+		
 		WrapElementById(_elt.id); // This process with its id
+		e.currentTarget.focus();
 	}
    
 }
