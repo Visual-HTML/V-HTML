@@ -124,6 +124,40 @@ function ElementKeyDown(e) {
 	// This is a code related to shift+enter handling 
 	   	e.preventDefault();
 		e.stopPropagation();
+		
+		
+		// shift+enter must insert a br element at the current cursor position 
+		// https://www.w3.org/TR/html/single-page.html#the-br-element
+	   	e.preventDefault();
+		e.stopPropagation();
+
+		var _elt = document.createElement("br"); 
+		_elt.id = Date.now();
+
+                if ( typeof(document.getSelection().focusNode.data) !== "undefined") {
+			var _pos= e.currentTarget.innerHTML.indexOf(document.getSelection().focusNode.data);
+			_pos = (_pos === -1 ? 0 : _pos);
+			// using getSelection may need index re-compute: result in _pos
+			// document.getSelection().focusOffset only give me the cursor position within a node
+			
+			e.currentTarget.innerHTML = 
+				e.currentTarget.innerHTML.substring(0, _pos + document.getSelection().focusOffset)
+				+ _elt.outerHTML
+				+ e.currentTarget.innerHTML.substring(_pos + document.getSelection().focusOffset, e.currentTarget.innerHTML.length);
+		} else {
+			console.log("cross-browser code used");
+			var _tmp = _elt.outerHTML.replace(">"," />")
+			e.currentTarget.innerHTML += _tmp;			
+		}
+		
+		WrapElementById(_elt.id); // This process with its id
+		//e.currentTarget.focus();
+		
+		
+		
+		
+		
+		
 	}
 		
 	if (e.which === 13 && !e.shiftKey) {
@@ -174,7 +208,7 @@ function ElementKeyUp(e) {
 		}
 		
 		WrapElementById(_elt.id); // This process with its id
-		e.currentTarget.focus();
+		//e.currentTarget.focus();
 	}
    
 }
@@ -234,7 +268,7 @@ function WrapElements(elt) {
 						 && !_elements[i].hasAttribute("data-VH2017-dsgk")
 						 && !_elements[i].hasAttribute('data-VH2017-hndk') ) { 
 			_elements[i].addEventListener('keydown', ElementKeyDown, false);
-			_elements[i].addEventListener('keyup', ElementKeyUp, false);
+			//_elements[i].addEventListener('keyup', ElementKeyUp, false);
 			_elements[i].addEventListener('click', ElementClick, false);
 			_elements[i].setAttribute("data-VH2017-hndk","");
 			
@@ -251,7 +285,7 @@ function WrapElements(elt) {
 	} else {
 		// This is the wrapper code
 		elt.addEventListener('keydown', ElementKeyDown, false);
-		elt.addEventListener('keyup', ElementKeyUp, false);
+		//elt.addEventListener('keyup', ElementKeyUp, false);
 		elt.addEventListener('click', ElementClick, false);
 		elt.setAttribute("data-VH2017-hndk","");
 		
@@ -273,7 +307,7 @@ function WrapElementById(id) {
 	var elt = document.getElementById(id);
 	// This is the wrapper code
 	elt.addEventListener('keydown', ElementKeyDown, false);
-	elt.addEventListener('keyup', ElementKeyUp, false);
+	//elt.addEventListener('keyup', ElementKeyUp, false);
 	elt.addEventListener('click', ElementClick, false);
 	elt.setAttribute("data-VH2017-hndk","");
 	//////////// note: these are the invariant instructions, these can become a function.
