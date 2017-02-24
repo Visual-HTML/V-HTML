@@ -156,6 +156,7 @@ function ElementKeyUp(e) {
 
 		var _pos= e.currentTarget.innerHTML.indexOf(document.getSelection().focusNode.data);
 		_pos = (_pos === -1 ? 0 : _pos);
+		_pos = ( typeOf(document.getSelection().focusNode.data) === "undefined" ? e.currentTarget.innerHTML.length : _pos );
 		// using getSelection may need index re-compute: result in _pos
 		// document.getSelection().focusOffset only give me the cursor position within a node
 		
@@ -278,7 +279,7 @@ function WrapElementById(id) {
 	
 	VH2017.currentTarget = elt;
 	//this is what is done, call removed : VH2017.ElementWrap(elt);  // Inform using handler
-	//VH2017.currentTarget.focus();
+	VH2017.currentTarget.focus();
 	
 }
 
