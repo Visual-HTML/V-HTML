@@ -2,6 +2,7 @@
 window.addEventListener('load', InitializeUserAgent, true);
 
 
+
 // isolate editors code within VH2017, which become is an Object in window
 VH2017 = {};
 VH2017.document={};
@@ -58,7 +59,6 @@ function InitializeUserAgent(e) {
 	// jQuery remain the best solution to solve user-agent specific code but I'm trying to avoid using it at start
 	// Custom Controls and starters can use it but at the editor level I wish to implement a kind of dynamic loading
 	
-	
 	InitializeDocument();
 	
 }
@@ -100,13 +100,18 @@ function InitializeDocument() {
 
 function InitializeContent() {	
 
+	// Begin with a procces that wrap existing content
 	WrapElements();
 	
-    	// first child not for designer purpose 
+    	// first child not for designer purpose get focused
 	VH2017.currentTarget = document.body.querySelector(":nth-child(1)[contentEditable='true']");
 	VH2017.currentTarget.focus();
-	try { VH2017.currentTarget.click(); }
-	catch(xcp) { console.log("catch exception : .click() on "+VH2017.currentTarget.nodeName);  }
+	try { 
+	// some browser need to trigger a click after .focus()
+	VH2017.currentTarget.click(); }
+	catch(xcp) { 
+	// while some other will not even provide the function
+	console.log("catch exception : .click() on "+VH2017.currentTarget.nodeName);  }
 	finally { };
 
 }
@@ -117,8 +122,7 @@ function ElementKeyDown(e) {
          
 	console.log( e.type + " " + e.currentTarget.nodeName + " " +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
-	     
-	    	
+
 	if (e.which === 13 && e.shiftKey) {	
 	// this allow to prevent defaults for what I override, and not for a backspace , delete...
 	// This is a code related to shift+enter handling
@@ -157,8 +161,10 @@ function ElementKeyDown(e) {
 	   	e.preventDefault();
 		e.stopPropagation();
 
+		// Add content pressing enter
 		var _elt = document.createElement("p");			
 		var _res = e.currentTarget.parentNode.insertBefore(_elt, e.currentTarget.nextElementSibling);
+		// and wrap it
 		WrapElements(_res);
 	}
 	   
@@ -267,6 +273,7 @@ function WrapElementById(id) {
 
 
 
+// Wrapper code initialize element with required events and attributes
 function WrapperCode(elt) {
 	elt.addEventListener('keydown', ElementKeyDown, false);
 	elt.addEventListener('click', ElementClick, false);
