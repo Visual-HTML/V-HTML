@@ -121,16 +121,13 @@ function ElementKeyDown(e) {
 	    	
 	if (e.which === 13 && e.shiftKey) {	
 	// this allow to prevent defaults for what I override, and not for a backspace , delete...
-	// This is a code related to shift+enter handling 
+	// This is a code related to shift+enter handling
 	   	e.preventDefault();
 		e.stopPropagation();
-		
+ 
 		
 		// shift+enter must insert a br element at the current cursor position 
 		// https://www.w3.org/TR/html/single-page.html#the-br-element
-	   	e.preventDefault();
-		e.stopPropagation();
-
 		var _elt = document.createElement("br"); 
 		_elt.id = Date.now();
 
@@ -152,11 +149,6 @@ function ElementKeyDown(e) {
 		
 		WrapElementById(_elt.id); // This process with its id
 		//e.currentTarget.focus();
-		
-		
-		
-		
-		
 		
 	}
 		
@@ -170,47 +162,6 @@ function ElementKeyDown(e) {
 		WrapElements(_res);
 	}
 	   
-}
-
-
-
-function ElementKeyUp(e) { 
-         
-	console.log( e.type + " " + e.currentTarget.nodeName + " " +
-		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
-	   
-	/*e.preventDefault();
-	e.stopPropagation();*/
-		
-	if (e.which === 13 && e.shiftKey) {	
-		// shift+enter must insert a br element at the current cursor position 
-		// https://www.w3.org/TR/html/single-page.html#the-br-element
-	   	e.preventDefault();
-		e.stopPropagation();
-
-		var _elt = document.createElement("br"); 
-		_elt.id = Date.now();
-
-                if ( typeof(document.getSelection().focusNode.data) !== "undefined") {
-			var _pos= e.currentTarget.innerHTML.indexOf(document.getSelection().focusNode.data);
-			_pos = (_pos === -1 ? 0 : _pos);
-			// using getSelection may need index re-compute: result in _pos
-			// document.getSelection().focusOffset only give me the cursor position within a node
-			
-			e.currentTarget.innerHTML = 
-				e.currentTarget.innerHTML.substring(0, _pos + document.getSelection().focusOffset)
-				+ _elt.outerHTML
-				+ e.currentTarget.innerHTML.substring(_pos + document.getSelection().focusOffset, e.currentTarget.innerHTML.length);
-		} else {
-			console.log("cross-browser code used");
-			var _tmp = _elt.outerHTML.replace(">"," />")
-			e.currentTarget.innerHTML += _tmp;			
-		}
-		
-		WrapElementById(_elt.id); // This process with its id
-		//e.currentTarget.focus();
-	}
-   
 }
 
 
@@ -264,30 +215,25 @@ function WrapElements(elt) {
 		var _elements = document.body.querySelectorAll("body *:not([data-VH2017-hndk]):not([contentEditable='false'])");
 		
 		for (var i = 0 ; i < _elements.length ; i++) {
-		  if ( _elements[i].nodeType === 1 
+			if ( _elements[i].nodeType === 1 
 						 && !_elements[i].hasAttribute("data-VH2017-dsgk")
 						 && !_elements[i].hasAttribute('data-VH2017-hndk') ) { 
-			_elements[i].addEventListener('keydown', ElementKeyDown, false);
-			//_elements[i].addEventListener('keyup', ElementKeyUp, false);
-			_elements[i].addEventListener('click', ElementClick, false);
-			_elements[i].setAttribute("data-VH2017-hndk","");
-			
-			// This try to set contentEditable only on elements that user see as to edit (//TODO: in dev, need re-work)
-			if ((_elements[i].childNodes.length === 1 && _elements[i].childNodes[0].nodeName === "#text")
- 					|| (_elements[i].childNodes.length > 1 && _elements[i].childNodes[0].textContent != "\n  ") ) 
-				_elements[i].contentEditable = true;
+					
+				WrapperCode(_elements[i]);
 				
-			// Send info to handler	
-			VH2017.ElementWrap(_elements[i]);
-		  }
+				// This try to set contentEditable only on elements that user see as to edit (//TODO: in dev, need re-work)
+				if ((_elements[i].childNodes.length === 1 && _elements[i].childNodes[0].nodeName === "#text")
+						|| (_elements[i].childNodes.length > 1 && _elements[i].childNodes[0].textContent != "\n  ") ) 
+					_elements[i].contentEditable = true;
+					
+				// Send info to handler	
+				VH2017.ElementWrap(_elements[i]);
+				}
 		}
 	
 	} else {
-		// This is the wrapper code
-		elt.addEventListener('keydown', ElementKeyDown, false);
-		//elt.addEventListener('keyup', ElementKeyUp, false);
-		elt.addEventListener('click', ElementClick, false);
-		elt.setAttribute("data-VH2017-hndk","");
+		
+		WrapperCode(elt);
 		
 		// This is already a designer option, a designer can choose to provide editing on text otherwise than this function 
 		elt.contentEditable = true;
@@ -305,12 +251,8 @@ function WrapElements(elt) {
 function WrapElementById(id) {
 	// This is the wrapper code for an identified element
 	var elt = document.getElementById(id);
-	// This is the wrapper code
-	elt.addEventListener('keydown', ElementKeyDown, false);
-	//elt.addEventListener('keyup', ElementKeyUp, false);
-	elt.addEventListener('click', ElementClick, false);
-	elt.setAttribute("data-VH2017-hndk","");
-	//////////// note: these are the invariant instructions, these can become a function.
+	
+	WrapperCode(elt);
 	
 	// This is already a designer option, a designer can choose to provide editing on text otherwise than this function 
 	//elt.contentEditable = true;
@@ -323,5 +265,12 @@ function WrapElementById(id) {
 	
 }
 
+
+
+function WrapperCode(elt) {
+	elt.addEventListener('keydown', ElementKeyDown, false);
+	elt.addEventListener('click', ElementClick, false);
+	elt.setAttribute("data-VH2017-hndk","");
+}
 
 
