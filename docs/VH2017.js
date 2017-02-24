@@ -155,6 +155,7 @@ function ElementKeyUp(e) {
 		e.stopPropagation();
 
 		var _pos= e.currentTarget.innerHTML.indexOf(document.getSelection().focusNode.data);
+		_pos = (_pos === -1 ? 0 : _pos);
 		// using getSelection may need index re-compute: result in _pos
 		// document.getSelection().focusOffset only give me the cursor position within a node
 		
