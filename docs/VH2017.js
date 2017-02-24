@@ -278,7 +278,7 @@ function WrapElementById(id) {
 	
 	VH2017.currentTarget = elt;
 	//this is what is done, call removed : VH2017.ElementWrap(elt);  // Inform using handler
-	VH2017.currentTarget.focus();
+	//VH2017.currentTarget.focus();
 	
 }
 
