@@ -24,6 +24,25 @@
 
 -----------------------------------------------
 
+> Editing - https://www.w3.org/TR/html51/single-page.html#user-interaction-editing - https://www.w3.org/TR/html5/single-page.html#editing-0
+ 
+ 
+[designMode](designMode.html)
+             This show how your browser behave in this mode.
+             
+   https://www.w3.org/TR/html5/single-page.html#making-entire-documents-editable:-the-designmode-idl-attribute
+   https://www.w3.org/TR/html51/single-page.html#making-entire-documents-editable-the-designmode-idl-attribute
+
+
+[contentEditable]()
+             This show how your browser behave with body set as contentEditable.
+             
+   https://www.w3.org/TR/html5/single-page.html#contenteditable
+   https://www.w3.org/TR/html51/single-page.html#making-document-regions-editable-the-contenteditable-content-attribute
+
+
+-----------------------------------------------
+
 Second level
 
 (to define... current editing mode is rather raw, focused at "line" level, 
