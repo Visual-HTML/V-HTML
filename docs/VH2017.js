@@ -115,7 +115,7 @@ function InitializeContent() {
 	WrapElements();
 	
     	// first child not for designer purpose get focused
-	VH2017.currentTarget = document.body.querySelector(":nth-child(1)[contentEditable='true']");
+	VH2017.currentTarget = document.body.querySelector(":not(br)[contentEditable='true']");
 	VH2017.currentTarget.focus();
 	try { 
 	// some browser need to trigger a click after .focus()
