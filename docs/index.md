@@ -57,4 +57,4 @@ I'm rather in poc phase, looking to dress the base, this POC phase is itself at 
 
 -----------------------------------------------
 
-Hosted by GitHub Pages
+Hosted on GitHub Pages | Site https://visual-html.github.io/V-HTML/ | GitHub Pages is designed to host your personal, organization, or project pages from a GitHub repository.
