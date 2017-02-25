@@ -17,10 +17,7 @@ VH2017.Clear = function() {
 	
     	var _elements = document.querySelectorAll('body *[data-VH2017-hndk]');
 	for (var i = 0 ; i < _elements.length ; i++) {
-		_elements[i].removeEventListener('keydown', ElementKeyDown, false);
-		_elements[i].removeEventListener('keyup', ElementKeyUp, false);
-		_elements[i].removeEventListener('click', ElementClick, false);
-		_elements[i].removeAttribute("data-VH2017-hndk");
+		this.UnWrapElement(_elements[i]);
 		_elements[i].removeAttribute("contentEditable");
 	}
 	
@@ -50,6 +47,20 @@ VH2017.Clear = function() {
 	finally { console.log("cross-browser"); };
 	
 };
+VH2017.WrapElement = function(elt) {
+	// Initialize element with required events and attributes
+	elt.addEventListener('keydown', ElementKeyDown, false);
+	elt.addEventListener('click', ElementClick, false);
+	elt.setAttribute("data-VH2017-hndk","");
+}
+VH2017.UnWrapElement = function(elt) {
+	// Remove from HTMLElement required events and attributes
+	elt.removeEventListener('keydown', ElementKeyDown, false);
+	elt.removeEventListener('click', ElementClick, false);
+	elt.removeAttribute("data-VH2017-hndk","");
+}
+
+
 VH2017.ElementClick = function(evt) { };
 VH2017.ElementWrap = function(elt) { };
 
@@ -104,7 +115,7 @@ function InitializeContent() {
 	WrapElements();
 	
     	// first child not for designer purpose get focused
-	VH2017.currentTarget = document.body.querySelector(":nth-child(1)[contentEditable='true']");
+	VH2017.currentTarget = document.body.querySelector(":not(br)[contentEditable='true']");
 	VH2017.currentTarget.focus();
 	try { 
 	// some browser need to trigger a click after .focus()
@@ -225,7 +236,7 @@ function WrapElements(elt) {
 						 && !_elements[i].hasAttribute("data-VH2017-dsgk")
 						 && !_elements[i].hasAttribute('data-VH2017-hndk') ) { 
 					
-				WrapperCode(_elements[i]);
+				VH2017.WrapElement(_elements[i]);
 				
 				// This try to set contentEditable only on elements that user see as to edit (//TODO: in dev, need re-work)
 				if ((_elements[i].childNodes.length === 1 && _elements[i].childNodes[0].nodeName === "#text")
@@ -239,7 +250,7 @@ function WrapElements(elt) {
 	
 	} else {
 		
-		WrapperCode(elt);
+		VH2017.WrapElement(elt);
 		
 		// This is already a designer option, a designer can choose to provide editing on text otherwise than this function 
 		elt.contentEditable = true;
@@ -258,7 +269,7 @@ function WrapElementById(id) {
 	// This is the wrapper code for an identified element
 	var elt = document.getElementById(id);
 	
-	WrapperCode(elt);
+	VH2017.WrapElement(elt);
 	
 	// This is already a designer option, a designer can choose to provide editing on text otherwise than this function 
 	//elt.contentEditable = true;
@@ -270,14 +281,4 @@ function WrapElementById(id) {
 	VH2017.currentTarget.focus();
 	
 }
-
-
-
-// Wrapper code initialize element with required events and attributes
-function WrapperCode(elt) {
-	elt.addEventListener('keydown', ElementKeyDown, false);
-	elt.addEventListener('click', ElementClick, false);
-	elt.setAttribute("data-VH2017-hndk","");
-}
-
 
