@@ -43,7 +43,6 @@
    https://www.w3.org/TR/html5/single-page.html#contenteditable
    https://www.w3.org/TR/html51/single-page.html#making-document-regions-editable-the-contenteditable-content-attribute
 
-
 -----------------------------------------------
 
 last code reference remain in master repo, this provide basic online testsing
@@ -52,3 +51,7 @@ last code reference remain in master repo, this provide basic online testsing
 Read me:
 
 I'm rather in poc phase, looking to dress the base, this POC phase is itself at second pass, where I conluded that I couldn't rely on designMode and contentEditable on the body tag, that my editor code was already flooded by designer code, ...
+
+-----------------------------------------------
+
+[201702-HTMLEditor.html](201702-HTMLEditor.html) - [20170212-IE-designMode.html](20170212-IE-designMode.html) - [20170213-IE-contentEditable.html](20170213-IE-contentEditable.html) - [20170213-body-contentEditable.html](20170213-body-contentEditable.html) - [20170216.html](20170216.html) - [Bootstrap Cover Sample](Bootstrap000.html) - [Test000.html](Test000.html) - [VH2017-000.html](VH2017-000.html) - [VH2017-A4-1.html](VH2017-A4-1.html) - [VH2017-A4.html](VH2017-A4.html) - [VH2017-DC-000.html](VH2017-DC-000.html) - [VH2017-DC-001.html](VH2017-DC-001.html) - [contentEditable.html](contentEditable.html) - [designMode.html](designMode.html) - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() - []() 
