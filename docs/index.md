@@ -34,7 +34,7 @@
    https://www.w3.org/TR/html51/single-page.html#making-entire-documents-editable-the-designmode-idl-attribute
 
 
-[contentEditable]()
+[contentEditable](contentEditable.html)
              This show how your browser behave with body set as contentEditable.
              
    https://www.w3.org/TR/html5/single-page.html#contenteditable
