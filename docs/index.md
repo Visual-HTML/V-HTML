@@ -43,19 +43,9 @@
 
 -----------------------------------------------
 
-Second level
-
-(to define... current editing mode is rather raw, focused at "line" level, 
-to define and to add: return in the middle of text need to insert a br
-backspace on empty element must remove it, copy/paste, drag&drop ?...
-quite everything I have lost avoiding body contentEditable usage.
-++++++++(and more: add typing support as in Word a star/hypen+space mean ul/li ? number+dot mean ol/li....
-
------------------------------------------------
-
-last code reference remain in master repo, this provide online testsing basics
+last code reference remain in master repo, this provide basic online testsing
 
 -----------------------------------------------
 Read me:
 
-I'm rather in poc phase, looking to dress the base, this POC phase is it self at second pass, where I conluded that I couldn't rely on designMode and contentEditable on the body tag.
+I'm rather in poc phase, looking to dress the base, this POC phase is itself at second pass, where I conluded that I couldn't rely on designMode and contentEditable on the body tag, that my editor code was already flooded by designer code, ...
