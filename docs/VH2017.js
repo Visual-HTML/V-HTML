@@ -87,12 +87,16 @@ function InitializeDocument() {
 	document.addEventListener('keydown', DocumentKeyDown, false);	
 	document.body.addEventListener('click', DocumentClick, false);	
 
+	// This is a designer code: So editor must issue a call to a handler where designer can choose what to do initializing a document
     	if (document.body.childElementCount === 0) {
+		// ! if document hold only designer code it is to consider as empty... this test can be a service of the editor because it's his business
 		var _res = document.body.appendChild(document.createElement("p"));
 		VH2017.currentTarget = _res;
 		WrapElements(_res);
 	}
 
+	// Styles also are designer dependent, what editor can do is to add the designer's styles just after the script node
+	// Here a function such as VH2017.head.AddDesignerStyles(code)---why do I need to manage this, to clean the code, to provide basic enable/disable...
 	// Add designer' styles
 	var  _element = document.createElement("style");
 	_element.title = "VH2017- Designer Styles";
@@ -115,13 +119,13 @@ function InitializeContent() {
 	WrapElements();
 	
     	// first child not for designer purpose get focused
-	VH2017.currentTarget = document.body.querySelector(":not(br)[contentEditable='true']");
+	VH2017.currentTarget = document.body.querySelector("[contentEditable='true']");
 	VH2017.currentTarget.focus();
 	try { 
 	// some browser need to trigger a click after .focus()
 	VH2017.currentTarget.click(); }
 	catch(xcp) { 
-	// while some other will not even provide the function
+	// while some other will not even provide the function ? it's maybe an element without click ? to check!
 	console.log("catch exception : .click() on "+VH2017.currentTarget.nodeName);  }
 	finally { };
 
@@ -133,6 +137,8 @@ function ElementKeyDown(e) {
          
 	console.log( e.type + " " + e.currentTarget.nodeName + " " +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
+
+	// All the following seem to be designer code!
 
 	if (e.which === 13 && e.shiftKey) {	
 	// this allow to prevent defaults for what I override, and not for a backspace , delete...
@@ -212,6 +218,7 @@ function DocumentKeyDown(e) {
 	console.log( e.type + " " + e.currentTarget.nodeName + " " +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 	
+	// This is designer code!
 	if (e.which === 13) {
 		// Enter on document add a new paragraph
 		e.preventDefault();
@@ -266,20 +273,25 @@ function WrapElements(elt) {
 
 
 function WrapElementById(id) {
-	// This is the wrapper code for an identified element
+	// This is the wrapper code for a temporarily identified element, 
+	// created by code generator these elements get an id only
+	// to enable this code to do a getElementById...
 	var elt = document.getElementById(id);
-	
-	VH2017.WrapElement(elt);
 	
 	// This is already a designer option, a designer can choose to provide editing on text otherwise than this function 
 	//elt.contentEditable = true;
 	
+	// id can be removed
 	elt.removeAttribute('id');
 	
+	VH2017.WrapElement(elt);
 	VH2017.currentTarget = elt;
 	//this is what is done, call removed : VH2017.ElementWrap(elt);  // Inform using handler
 	VH2017.currentTarget.focus();
 	
+	// This function is used (and was created by a need of, rather, a designer code, so the editor provide
+	// this service while a designer, starter or custom control canmanage this (wrap a new injected element) its own way...
+				  
 }
 
 
