@@ -15,6 +15,10 @@ VH2017._TmpElt = null;
 VH2017.LoadDesignerScript = function() {
 	// First version, its a script fragment, poc'n designer
 	
+	/*
+	// This work on IE10 but completely make the process fail on Safari, Chrome.... I don't agree with their view on the
+	// response time subject reducing the capacities and flexibilities of xmlhttprequest (the problem reside more where the requested resources are...)
+	// ... but I need to make it work cross-browsers 
 	var xReq = new XMLHttpRequest();
 	xReq.open("GET", this.DesignerUrl, false); 
 	xReq.timeout = 2000;
@@ -35,6 +39,20 @@ VH2017.LoadDesignerScript = function() {
 		}
 	}
 	xReq.send(null);
+	*/
+	
+	 var xReq = new XMLHttpRequest();
+	 xReq.open("GET", this.DesignerUrl, false);
+	 xReq.send(null);
+	 var  _element = document.createElement("head");
+	_element.innerHTML = xReq.response;
+	VH2017._TmpElt = _element;
+	var _scr = _element.getElementsByTagName("script")[0];
+	var _elt2 = document.createElement("script");
+	_elt2.innerHTML =  _scr.childNodes[0].textContent;
+	 document.head.appendChild(_elt2);
+	
+	
 };
 VH2017.LoadDesignerCSS = function() {
 	// First version, its a css fragment, poc'n designer
