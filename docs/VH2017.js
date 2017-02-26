@@ -10,6 +10,57 @@ VH2017.document.body={};
 VH2017.document.body.contentEditable={};
 VH2017.document.body.designMode={};
 VH2017.currentTarget = null;
+VH2017.DesignerUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html";
+VH2017._TmpElt = null;
+VH2017.LoadDesignerScript = function() {
+	// First version, its a script fragment, poc'n designer
+	
+	var xReq = new XMLHttpRequest();
+	xReq.open("GET", this.DesignerUrl, false); 
+	xReq.timeout = 2000;
+	xReq.ontimeout = function () {   } 
+	xReq.onreadystatechange = function (e) {
+		if (xReq.readyState == 4) {         
+			if (xReq.status = "200") {
+				var  _element = document.createElement("head");
+				_element.innerHTML = xReq.response;
+				VH2017._TmpElt = _element;
+				var _scr = _element.getElementsByTagName("script")[0];
+				var _elt2 = document.createElement("script");
+				_elt2.innerHTML =  _scr.childNodes[0].textContent;
+				 document.head.appendChild(_elt2);
+			} else {
+				
+			}
+		}
+	}
+	xReq.send(null);
+};
+VH2017.LoadDesignerCSS = function() {
+	// First version, its a css fragment, poc'n designer
+		
+	// Styles also are designer dependent, what editor can do is to add the designer's styles just after the script node
+	// Here a function such as VH2017.head.AddDesignerStyles(code)---why do I need to manage this, to clean the code, to provide basic enable/disable...
+	// Add designer' styles
+	var  _element = document.createElement("style");
+	_element.title = "VH2017- Designer Styles";
+	_element.id = "VH2017-Designer-Styles";
+	_element.innerHTML += "*:not(hr)[data-VH2017-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
+	// Designer styles are added just after this script link
+	var _aux = document.head.querySelectorAll('script');
+	var _aux1 = document.head.querySelector('script[src="VH2017.js"]');
+	 _aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
+	 
+	 var _overridestyle = document.getElementById("VH2017-Designer-Styles");
+	 if ( this._TmpElt.getElementsByTagName('style').length > 0)
+	       _overridestyle.innerHTML = this._TmpElt.getElementsByTagName('style')[0].innerHTML;
+									     
+
+};
+VH2017.LoadDesignerHTML = function() {
+	// First version, I had not html in my current code, poc'n designer
+
+};
 VH2017.Clear = function() {
 	
 	document.removeEventListener('keydown', DocumentKeyDown, false);	
@@ -70,6 +121,21 @@ function InitializeUserAgent(e) {
 	// jQuery remain the best solution to solve user-agent specific code but I'm trying to avoid using it at start
 	// Custom Controls and starters can use it but at the editor level I wish to implement a kind of dynamic loading
 	
+	
+	VH2017.document.body.contentEditable.InitalValue = document.body.contentEditable;
+	VH2017.document.body.designMode.InitialValue = document.designMode;
+
+	document.body.removeAttribute("contentEditable");
+	document.designMode = "off";
+	// by time to time (when cache is updated?) I get an error adding events on document : document undefined ?
+
+
+	VH2017.LoadDesignerScript();
+	
+ 
+ 	VH2017.LoadDesignerCSS();
+	
+
 	InitializeDocument();
 	
 }
@@ -78,34 +144,12 @@ function InitializeUserAgent(e) {
 
 function InitializeDocument() {
 	
-	VH2017.document.body.contentEditable.InitalValue = document.body.contentEditable;
-	VH2017.document.body.designMode.InitialValue = document.designMode;
-
-	document.body.removeAttribute("contentEditable");
-	document.designMode = "off";
-
 	document.addEventListener('keydown', DocumentKeyDown, false);	
 	document.body.addEventListener('click', DocumentClick, false);	
 
-	// This is a designer code: So editor must issue a call to a handler where designer can choose what to do initializing a document
-    	if (document.body.childElementCount === 0) {
-		// ! if document hold only designer code it is to consider as empty... this test can be a service of the editor because it's his business
-		var _res = document.body.appendChild(document.createElement("p"));
-		VH2017.currentTarget = _res;
-		WrapElements(_res);
-	}
 
-	// Styles also are designer dependent, what editor can do is to add the designer's styles just after the script node
-	// Here a function such as VH2017.head.AddDesignerStyles(code)---why do I need to manage this, to clean the code, to provide basic enable/disable...
-	// Add designer' styles
-	var  _element = document.createElement("style");
-	_element.title = "VH2017- Designer Styles";
-	_element.id = "VH2017-Designer-Styles";
-	_element.innerHTML += "*:not(hr)[data-VH2017-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
-	// Designer styles are added just after this script link
-	var _aux = document.head.querySelectorAll('script');
-	var _aux1 = document.head.querySelector('script[src="VH2017.js"]');
-	 _aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
+	VH2017.DesignerInitializeDocument();
+	
 
 	InitializeContent();
 	
@@ -135,7 +179,7 @@ function InitializeContent() {
 
 function ElementKeyDown(e) { 
          
-	console.log( e.type + " " + e.currentTarget.nodeName + " " +
+	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 
 	// All the following seem to be designer code!
@@ -191,7 +235,7 @@ function ElementKeyDown(e) {
 
 function ElementClick(e) {
 	
-	console.log( e.type + " " + e.currentTarget.nodeName + " " +
+	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 	
 	e.stopPropagation();
@@ -206,7 +250,7 @@ function ElementClick(e) {
 
 function DocumentClick(e) {
 	
-	console.log( e.type + " " + e.currentTarget.nodeName + " " +
+	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 	
 }
@@ -215,7 +259,7 @@ function DocumentClick(e) {
 
 function DocumentKeyDown(e) { 
 	
-	console.log( e.type + " " + e.currentTarget.nodeName + " " +
+	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 	
 	// This is designer code!
