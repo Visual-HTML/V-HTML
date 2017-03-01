@@ -73,11 +73,12 @@ VH2017.IncludeDynamicScript = function(url) {
 	var _elt2 = document.createElement("script");
 	/*_elt2.setAttribute("data-VH2017-Res", url);*/
 	_elt2.src =  url;
-	_elt2.type="application/javascript";
+	//_elt2.type="application/javascript";
 	/*_elt2.language="javascript";*/
 	 //document.head.appendChild(_elt2);
+	 document.body.insertBefore(_elt2,document.body.firstChild);
 	 // Scripts can be added for different purpose,
-	  VH2017.CurrentTarget.appendChild(_elt2);
+	 //VH2017.CurrentTarget.appendChild(_elt2);
 	 //document.head.appendChild(_elt2);
 	 // All these functions : AddResource, IncludeDynamicScript, RemoveResource, RemoveDynamicScript
 	 
