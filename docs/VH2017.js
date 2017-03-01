@@ -71,11 +71,11 @@ VH2017.AddResource = function(url) {
 VH2017.IncludeDynamicScript = function(url) {
 	
 	var _elt2 = document.createElement("script");
-	_elt2.setAttribute("data-VH2017-Res", url);
-	_elt2.src =  url;
+	/*_elt2.setAttribute("data-VH2017-Res", url);*/
 	_elt2.type="text/javascript";
 	_elt2.language="javascript";
 	 document.head.appendChild(_elt2);
+	_elt2.src =  url;
 	 // Scripts can be added for different purpose, 
 	 // VH2017.CurrentTarget.appendChild(_elt2);
 	 //document.head.appendChild(_elt2);
