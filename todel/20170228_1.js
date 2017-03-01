@@ -1,1 +1,1 @@
-function fa(){ alert(""); };
+function fa(){ alert("fa called !"); };
