@@ -76,7 +76,7 @@ VH2017.IncludeDynamicScript = function(url) {
 	_elt2.type="application/javascript";
 	/*_elt2.language="javascript";*/
 	 //document.head.appendChild(_elt2);
-	 // Scripts can be added for different purpose, 
+	 // Scripts can be added for different purpose,
 	  VH2017.CurrentTarget.appendChild(_elt2);
 	 //document.head.appendChild(_elt2);
 	 // All these functions : AddResource, IncludeDynamicScript, RemoveResource, RemoveDynamicScript
@@ -232,7 +232,7 @@ function InitializeDocument() {
 */
 	alert("third:");
 	
-	VH2017.CurrentTarget = document.body.querySelector(":nth-child(3)");
+	VH2017.CurrentTarget = document.body.querySelector(":nth-child(1)");
 	
 		
 	// ! including script using this code need attention on the stream of execution : you won't get code available 
