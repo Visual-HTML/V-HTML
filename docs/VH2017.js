@@ -221,30 +221,6 @@ function InitializeDocument() {
 
 	VH2017.DesignerInitializeDocument();
 	
-	/*
-	VH2017.AddResource("https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170228_0.html");
-	VH2017.RemoveResource("https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170228_0.html");
-	
-	alert("second:");
-	
-	VH2017.CurrentTarget = document.body.querySelector(":nth-child(3)");
-	VH2017.IncludeDynamicScript("https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170228_0.js");	
-		
-*/
-	alert("third:");
-	
-	VH2017.CurrentTarget = document.body.querySelector(":nth-child(1)");
-	
-		
-	// ! including script using this code need attention on the stream of execution : you won't get code available 
-	// in the "current stream/context", any instruction and function calls within script will run but accessing objects
-	// Within the stream 'here in a window onload handler
-	VH2017.IncludeDynamicScript("todel/20170228_2.js");	
-	fa();
-	// So if loading script prior to make a function call : think the logic with the script calling it self
-	// the function (if possible)
-	
-	
 	
 	InitializeContent();
 	
@@ -268,7 +244,7 @@ function InitializeContent() {
 	// while some other will not even provide the function ? it's maybe an element without click ? to check!
 	console.log("catch exception : .click() on "+VH2017.CurrentTarget.nodeName);  }
 	finally { };
-fa();
+	
 }
 
 
