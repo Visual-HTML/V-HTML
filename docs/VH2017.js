@@ -1,7 +1,5 @@
 // when page is loaded, start initialization process: set user-agent specific code
-window.addEventListener('load', InitializeUserAgent, true);
-
-
+window.addEventListener('load', InitializeUserAgent, false);
 
 // isolate editors code within VH2017, which become is an Object in window
 VH2017 = {};
@@ -9,11 +7,13 @@ VH2017.document={};
 VH2017.document.body={};
 VH2017.document.body.contentEditable={};
 VH2017.document.body.designMode={};
-VH2017.currentTarget = null;
+VH2017.CurrentTarget = null;
 VH2017.DesignerUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html";
 VH2017._TmpElt = null;
 VH2017.LoadDesignerScript = function() {
 	// First version, its a script fragment, poc'n designer
+	
+	// Designer at this time is loaded at start but I must be able to switch between designer on the same authored document
 	
 	/*
 	// This work on IE10 but completely make the process fail on Safari, Chrome.... I don't agree with their view on the
@@ -54,6 +54,58 @@ VH2017.LoadDesignerScript = function() {
 	
 	
 };
+VH2017.AddResource = function(url) {
+	
+	 var xReq = new XMLHttpRequest();
+	 xReq.open("GET", url, false);
+	 xReq.send(null);
+	 var  _element = document.createElement("head");
+	_element.innerHTML = xReq.response;
+	var _scr = _element.getElementsByTagName("script")[0];
+	var _elt2 = document.createElement("script");
+	_elt2.setAttribute("data-VH2017-Res", url);
+	_elt2.innerHTML =  _scr.childNodes[0].textContent;
+	 document.head.appendChild(_elt2);
+
+};
+VH2017.IncludeDynamicScript = function(url) {
+	
+	var _elt2 = document.createElement("script");
+	_elt2.setAttribute("data-VH2017-Res", url);
+	_elt2.src =  url;
+	/*_elt2.type="application/javascript";
+	_elt2.language="javascript";*/
+	 document.head.appendChild(_elt2);
+	 // Scripts can be added for different purpose, 
+	 // VH2017.CurrentTarget.appendChild(_elt2);
+	 //document.head.appendChild(_elt2);
+	 // All these functions : AddResource, IncludeDynamicScript, RemoveResource, RemoveDynamicScript
+	 
+	 // will allow designer, starters and custom controls to load/unload code from page with single script reference (url)
+	 // suppose to understand why : I have a designer for bootstrap and use it to get a page grid built on their code
+	 // then I jump on the basic html text formatter to fill it's content
+	 // then I go to the Painter designer) one I know that focus at painting literally : text color, background
+	 // then save as...
+
+	// if a code is to remain within document (custom controls behaviors) It's still not validated ; even not this reference and dynamic burden 
+	// Remind: Focus at function level, use the usage scenario to identify resources
+	// This will allow large amount of codes addressable on different usage scenario
+	
+	// IT'S not validated nor strong but for sure it is POC'ed, to note this difference in behavior when code is injected (AddResource)
+	// or included using a script source (IncludeDynamicScript)
+};
+VH2017.RemoveResource = function(url) {
+	
+	var _elt2 = document.querySelector("script[data-VH2017-Res='"+url+"']");
+	 document.head.removeChild(_elt2);
+
+};
+VH2017.RemoveDynamicScript = function(url) {
+
+	var _elt2 = document.querySelector("script[src='"+url+"']");
+	 document.head.removeChild(_elt2);
+	 
+};
 VH2017.LoadDesignerCSS = function() {
 	// First version, its a css fragment, poc'n designer
 		
@@ -72,7 +124,7 @@ VH2017.LoadDesignerCSS = function() {
 	 var _overridestyle = document.getElementById("VH2017-Designer-Styles");
 	 if ( this._TmpElt.getElementsByTagName('style').length > 0)
 	       _overridestyle.innerHTML = this._TmpElt.getElementsByTagName('style')[0].innerHTML;
-									     
+
 
 };
 VH2017.LoadDesignerHTML = function() {
@@ -168,8 +220,33 @@ function InitializeDocument() {
 
 	VH2017.DesignerInitializeDocument();
 	
-
+	/*
+	VH2017.AddResource("https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170228_0.html");
+	VH2017.RemoveResource("https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170228_0.html");
+	
+	alert("second:");
+	
+	VH2017.CurrentTarget = document.body.querySelector(":nth-child(3)");
+	VH2017.IncludeDynamicScript("https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170228_0.js");	
+		
+*/
+	alert("third:");
+	
+	VH2017.CurrentTarget = document.body.querySelector(":nth-child(3)");
+	
+		
+	// ! including script using this code need attention on the stream of execution : you won't get code available 
+	// in the "current stream/context", any instruction and function calls within script will run but accessing objects
+	// Within the stream 'here in a window onload handler
+	VH2017.IncludeDynamicScript("https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170228_2.js");	
+	fa();
+	// So if loading script prior to make a function call : think the logic with the script calling it self
+	// the function (if possible)
+	
+	
+	
 	InitializeContent();
+	
 	
 }
 
@@ -181,16 +258,16 @@ function InitializeContent() {
 	WrapElements();
 	
     	// first child not for designer purpose get focused
-	VH2017.currentTarget = document.body.querySelector("[contentEditable='true']");
-	VH2017.currentTarget.focus();
+	VH2017.CurrentTarget = document.body.querySelector("[contentEditable='true']");
+	VH2017.CurrentTarget.focus();
 	try { 
 	// some browser need to trigger a click after .focus()
-	VH2017.currentTarget.click(); }
+	VH2017.CurrentTarget.click(); }
 	catch(xcp) { 
 	// while some other will not even provide the function ? it's maybe an element without click ? to check!
-	console.log("catch exception : .click() on "+VH2017.currentTarget.nodeName);  }
+	console.log("catch exception : .click() on "+VH2017.CurrentTarget.nodeName);  }
 	finally { };
-
+fa();
 }
 
 
@@ -259,7 +336,7 @@ function ElementClick(e) {
 	e.stopPropagation();
 	e.preventDefault();
 	
-	VH2017.currentTarget = e.currentTarget;	
+	VH2017.CurrentTarget = e.currentTarget;	
 	VH2017.ElementClick(e);  // Inform designer that element was selected
 
 }
@@ -270,6 +347,8 @@ function DocumentClick(e) {
 	
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
+	
+	fa();
 	
 }
 
@@ -324,9 +403,9 @@ function WrapElements(elt) {
 		// This is already a designer option, a designer can choose to provide editing on text otherwise than this function 
 		elt.contentEditable = true;
 		
-		VH2017.currentTarget = elt;
+		VH2017.CurrentTarget = elt;
 		VH2017.ElementWrap(elt);  // Inform using handler
-		VH2017.currentTarget.focus();
+		VH2017.CurrentTarget.focus();
 		
 	}
 	
@@ -347,9 +426,9 @@ function WrapElementById(id) {
 	elt.removeAttribute('id');
 	
 	VH2017.WrapElement(elt);
-	VH2017.currentTarget = elt;
+	VH2017.CurrentTarget = elt;
 	//this is what is done, call removed : VH2017.ElementWrap(elt);  // Inform using handler
-	VH2017.currentTarget.focus();
+	VH2017.CurrentTarget.focus();
 	
 	// This function is used (and was created by a need of, rather, a designer code, so the editor provide
 	// this service while a designer, starter or custom control canmanage this (wrap a new injected element) its own way...
