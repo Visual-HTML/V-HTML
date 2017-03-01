@@ -239,7 +239,7 @@ function InitializeDocument() {
 	// ! including script using this code need attention on the stream of execution : you won't get code available 
 	// in the "current stream/context", any instruction and function calls within script will run but accessing objects
 	// Within the stream 'here in a window onload handler
-	VH2017.IncludeDynamicScript("https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170228_2.js");	
+	VH2017.IncludeDynamicScript("/todel/20170228_2.js");	
 	fa();
 	// So if loading script prior to make a function call : think the logic with the script calling it self
 	// the function (if possible)
