@@ -119,7 +119,7 @@ VH2017.LoadDesignerCSS = function() {
 	_element.innerHTML += "*:not(hr)[data-VH2017-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
 	// Designer styles are added just after this script link
 	var _aux = document.head.querySelectorAll('script');
-	var _aux1 = document.head.querySelector('script[src="VH2017.js"]');
+	var _aux1 = document.head.querySelector('script[src$="VH2017.js"]');
 	 _aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
 	 
 	 var _overridestyle = document.getElementById("VH2017-Designer-Styles");
