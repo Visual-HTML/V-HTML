@@ -238,6 +238,7 @@ VH2017.Clear = function() {
 	//Add Get Editor function
 	var _backeditorHTML = document.createElement("div");
 	_backeditorHTML.id = "Designer-Toolbar";
+	_backeditorHTML.setAttribute("class","position: fixed; top: 0px;");
 	var _inputButton = document.createElement("input");
 	_inputButton.value = "get editor";
 	_inputButton.setAttribute("value", "get editor");
