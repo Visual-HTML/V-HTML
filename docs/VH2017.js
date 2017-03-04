@@ -126,7 +126,7 @@ VH2017.LoadDesignerCSS = function() {
 	_element.innerHTML += "*:not(hr)[data-VH2017-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
 	//_element.innerHTML += "body { margin-top: 100px; border-top: 1px solid gray; } ";	
 	_element.innerHTML += "body { border-top: 1px solid gray; } ";	
-	//_element.innerHTML += "#Designer-Toolbar { position: absolute; top: 0px; } ";	
+	_element.innerHTML += "#Designer-Toolbar { position: fixed; top: 0px; } ";	
 	/* Designer styles are added just after this script link */
 	var _aux = document.head.querySelectorAll('script');
 	var _aux1 = document.head.querySelector('script[src$="VH2017.js"]');
