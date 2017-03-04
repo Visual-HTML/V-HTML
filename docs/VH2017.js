@@ -248,6 +248,7 @@ VH2017.Clear = function() {
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
 	_backeditor.innerHTML += "_elt.src = 'VH2017.js'; ";
 	_backeditor.innerHTML += "_elt.onload = function() { InitializeUserAgent(); }; ";
+	_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "document.head.appendChild(_elt); ";
 	//_backeditor.innerHTML += "InitializeUserAgent(); ";
 	_backeditor.innerHTML += "}; ";
