@@ -53,6 +53,7 @@ VH2017.LoadDesignerScript = function() {
 	VH2017._TmpElt = _element;
 	var _scr = _element.getElementsByTagName("script")[0];
 	var _elt2 = document.createElement("script");
+	_elt2.setAttribute("data-VH2017-dsgk","");
 	_elt2.innerHTML =  _scr.childNodes[0].textContent;
 	 document.head.appendChild(_elt2);
 	
@@ -234,6 +235,18 @@ VH2017.Clear = function() {
 	} 
 	finally { console.log("cross-browser"); };
 	
+	if (document.head.querySelector('script[data-VH2017-dsgk]') != null) {	
+		try { document.head.querySelector('script[data-VH2017-dsgk]').remove(true); console.log("used:.remove(true)"); } 
+		catch(xcp) {		
+			try {
+			document.head.querySelector('script[data-VH2017-dsgk]').removeNode(true); console.log("used:.removeNode(true)"); 
+			} catch(xcp) { 
+			document.body.removeChild(document.head.querySelector('script[data-VH2017-dsgk]')); console.log("used:.removeChild(elt)"); }
+			finally { console.log("cross-browser"); };		
+		} 
+		finally { console.log("cross-browser"); };
+	}
+	
 		
 	
 	//Add Get Editor function
@@ -384,8 +397,7 @@ function InitializeContent() {
 	VH2017.LoadDesignerScript();
 	
 
-	if ((typeof(VH2017.DesignerInitializeDocument) !== "undefined" ) 
-		    && !VH2017.document.body.Blank) VH2017.DesignerInitializeDocument();
+	if (typeof(VH2017.DesignerInitializeDocument) !== "undefined" ) VH2017.DesignerInitializeDocument();
 	
 		
 }
@@ -510,7 +522,8 @@ function WrapElements(elt) {
 				VH2017.WrapElement(_elements[i]);
 				
 				/* This try to set contentEditable only on elements that user see as to edit (//TODO: in dev, need re-work) */
-				if ((_elements[i].childNodes.length === 1 && _elements[i].childNodes[0].nodeName === "#text")
+				if ( (_elements[i].childNodes.length === 0) 
+						|| (_elements[i].childNodes.length === 1 && _elements[i].childNodes[0].nodeName === "#text")
 						|| (_elements[i].childNodes.length > 1 && _elements[i].childNodes[0].textContent != "\n  ") ) 
 					_elements[i].contentEditable = true;
 					
