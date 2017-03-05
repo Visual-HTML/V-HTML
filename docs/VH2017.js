@@ -224,7 +224,8 @@ VH2017.Clear = function() {
 	finally { console.log("cross-browser"); };
 	
 	
-	
+	// save current script source (can be altered by browser's save as logic)
+	var _currentscriptsrc = document.head.querySelector('script[src*="VH2017.js"]').src;
 	try { document.head.querySelector('script[src*="VH2017.js"]').remove(true); console.log("used:.remove(true)"); } 
 	catch(xcp) {		
 		try {
@@ -261,7 +262,7 @@ VH2017.Clear = function() {
 	var _backeditor = document.createElement("script");
 	_backeditor.innerHTML += "function GetBackEditor() {";
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
-	_backeditor.innerHTML += "_elt.src = 'VH2017.js'; ";
+	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
 	_backeditor.innerHTML += "_elt.onload = function() { InitializeUserAgent(); }; ";
 	_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "document.head.appendChild(_elt); ";
