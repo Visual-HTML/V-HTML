@@ -5,6 +5,7 @@ window.addEventListener('load', InitializeUserAgent, false);
 VH2017 = {};
 VH2017.document={};
 VH2017.document.body={};
+VH2017.document.body.Blank = false;
 VH2017.document.body.contentEditable={};
 VH2017.document.body.designMode={};
 VH2017.CurrentTarget = null;
@@ -141,7 +142,7 @@ VH2017.LoadDesignerCSS = function() {
 
 };
 VH2017.LoadDesignerHTML = function() {
-	/* First version, I had not html in my current code, poc'n designer */
+	/* First version, I had no html in my current code, poc'n designer */
 	
 	
 		if (document.body.querySelector('#Designer-Toolbar') != null) {
@@ -159,8 +160,8 @@ VH2017.LoadDesignerHTML = function() {
 	
 	var _defaultDesignerToolbar;
 	
-		_defaultDesignerToolbar = document.createElement("div");
-		_defaultDesignerToolbar.id = "Designer-Toolbar";
+	_defaultDesignerToolbar = document.createElement("div");
+	_defaultDesignerToolbar.id = "Designer-Toolbar";
 	
 	
 	var _clearButton = document.createElement("input");
@@ -171,7 +172,7 @@ VH2017.LoadDesignerHTML = function() {
 	_defaultDesignerToolbar.appendChild(_clearButton);	
 	
 	
-		document.body.insertBefore(_defaultDesignerToolbar, document.body.firstChild);
+	document.body.insertBefore(_defaultDesignerToolbar, document.body.firstChild);
 	
 };
 VH2017.Clear = function() {
@@ -305,13 +306,45 @@ function InitializeUserAgent(e) {
 
 function InitializeDocument() {
 	
+	
+	// check and remove all remainings from previous edit session
+	// If user hasnt cleared the code I can retrieve 
+	// a designer toolbar and all elements set with data-VH2017-hndk
+    	var _elements = document.querySelectorAll('body *[data-VH2017-hndk]');
+	for (var i = 0 ; i < _elements.length ; i++) {
+		VH2017.UnWrapElement(_elements[i]);
+		_elements[i].removeAttribute("contentEditable");
+	}
+	if (document.head.querySelector('#VH2017-Designer-Styles') != null) {
+		try { document.head.querySelector('#VH2017-Designer-Styles').remove(true); console.log("used:.remove(true)"); } 
+		catch(xcp) {		
+			try {
+			document.head.querySelector('#VH2017-Designer-Styles').removeNode(true); console.log("used:.removeNode(true)"); 
+			} catch(xcp) { 
+			document.head.removeChild(document.head.querySelector('#VH2017-Designer-Styles')); console.log("used:.removeChild(elt)"); }
+			finally { console.log("cross-browser"); };		
+		} 
+		finally { console.log("cross-browser"); };
+	}
+	if (document.body.querySelector('#Designer-Toolbar') != null) {
+		try { document.body.querySelector('#Designer-Toolbar').remove(true); console.log("used:.remove(true)"); } 
+		catch(xcp) {		
+			try {
+			document.body.querySelector('#Designer-Toolbar').removeNode(true); console.log("used:.removeNode(true)"); 
+			} catch(xcp) { 
+			document.body.removeChild(document.body.querySelector('#Designer-Toolbar')); console.log("used:.removeChild(elt)"); }
+			finally { console.log("cross-browser"); };		
+		} 
+		finally { console.log("cross-browser"); };
+	}
+	/////////////////// end clear document
+	
+	
 	document.addEventListener('keydown', DocumentKeyDown, false);	
 	document.body.addEventListener('click', DocumentClick, false);	
 
 
-	if (typeof(VH2017.DesignerInitializeDocument) !== "undefined" ) VH2017.DesignerInitializeDocument();
-	
-	
+
 	InitializeContent();
 	
 	
@@ -324,25 +357,35 @@ function InitializeContent() {
 	/* Begin with a procces that wrap existing content */
 	WrapElements();
 	
-    	/* first child not for designer purpose get focused */
-	VH2017.CurrentTarget = document.body.querySelector("[contentEditable='true']");
-	VH2017.CurrentTarget.focus();
-	try { 
-	/* some browser need to trigger a click after .focus() */
-	VH2017.CurrentTarget.click(); }
-	catch(xcp) { 
-	/* while some other will not even provide the function ? it's maybe an element without click ? to check! */
-	console.log("catch exception : .click() on "+VH2017.CurrentTarget.nodeName);  }
-	finally { };
+	if (document.body.querySelector("[contentEditable='true']") != null) {
+		/* first child not for designer purpose get focused */
+		VH2017.CurrentTarget = document.body.querySelector("[contentEditable='true']");
+		// here if the document is empty..
+		VH2017.CurrentTarget.focus();
+		try { 
+		/* some browser need to trigger a click after .focus() */
+		VH2017.CurrentTarget.click(); }
+		catch(xcp) { 
+		/* while some other will not even provide the function ? it's maybe an element without click ? to check! */
+		console.log("catch exception : .click() on "+VH2017.CurrentTarget.nodeName);  }
+		finally { };
+	} else {
+		// empty document processing
+		VH2017.DesignerUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html";
+		VH2017.document.body.Blank = true;
+	}
 	
-	
-	//The following is designer purpose code, placing this initializarion (of the designer toolbar)	
+	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...
  	VH2017.LoadDesignerCSS();	
 	
  	VH2017.LoadDesignerHTML();	
 	// loading script on the end make all css and html available to the script 
 	VH2017.LoadDesignerScript();
+	
+
+	if (typeof(VH2017.DesignerInitializeDocument) !== "undefined" ) VH2017.DesignerInitializeDocument();
+	
 		
 }
 
