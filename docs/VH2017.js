@@ -226,6 +226,13 @@ VH2017.Clear = function() {
 	
 	// save current script source (can be altered by browser's save as logic)
 	var _currentscriptsrc = document.head.querySelector('script[src*="VH2017.js"]').src;
+	// mht file case
+	if (window.location.href.search(/mht$/) > -1) {
+		var _aux = document.head.querySelector('script[src*="VH2017.js"]').src;
+		_currentscriptsrc = _aux.substring(_aux.indexOf('!')+1);
+	}
+
+	
 	try { document.head.querySelector('script[src*="VH2017.js"]').remove(true); console.log("used:.remove(true)"); } 
 	catch(xcp) {		
 		try {
