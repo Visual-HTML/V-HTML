@@ -384,7 +384,8 @@ function InitializeContent() {
 	VH2017.LoadDesignerScript();
 	
 
-	if (typeof(VH2017.DesignerInitializeDocument) !== "undefined" ) VH2017.DesignerInitializeDocument();
+	if ((typeof(VH2017.DesignerInitializeDocument) !== "undefined" ) 
+		    && !VH2017.document.body.Blank) VH2017.DesignerInitializeDocument();
 	
 		
 }
