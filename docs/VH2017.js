@@ -309,7 +309,8 @@ function InitializeUserAgent(e) {
 	document.designMode = "off";
 	/* by time to time (when cache is updated?) I get an error adding events on document : document undefined ? */
 
- 
+	// ensure script handle missing editor sources at document location
+ 	document.head.querySelector('script[src$="VH2017.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
 
 	InitializeDocument();
 	
