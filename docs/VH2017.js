@@ -131,7 +131,7 @@ VH2017.LoadDesignerCSS = function() {
 	_element.innerHTML += "#Designer-Toolbar { position: fixed; top: 0px; } ";	
 	/* Designer styles are added just after this script link */
 	var _aux = document.head.querySelectorAll('script');
-	var _aux1 = document.head.querySelector('script[src$="VH2017.js"]');
+	var _aux1 = document.head.querySelector('script[src*="VH2017.js"]');
 	_aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
 	 
 	 
@@ -225,12 +225,12 @@ VH2017.Clear = function() {
 	
 	
 	
-	try { document.head.querySelector('script[src$="VH2017.js"]').remove(true); console.log("used:.remove(true)"); } 
+	try { document.head.querySelector('script[src*="VH2017.js"]').remove(true); console.log("used:.remove(true)"); } 
 	catch(xcp) {		
 		try {
-		document.head.querySelector('script[src$="VH2017.js"]').removeNode(true); console.log("used:.removeNode(true)"); 
+		document.head.querySelector('script[src*="VH2017.js"]').removeNode(true); console.log("used:.removeNode(true)"); 
 		} catch(xcp) { 
-		document.body.removeChild(document.head.querySelector('script[src$="VH2017.js"]')); console.log("used:.removeChild(elt)"); }
+		document.body.removeChild(document.head.querySelector('script[src*="VH2017.js"]')); console.log("used:.removeChild(elt)"); }
 		finally { console.log("cross-browser"); };		
 	} 
 	finally { console.log("cross-browser"); };
@@ -310,10 +310,9 @@ function InitializeUserAgent(e) {
 	/* by time to time (when cache is updated?) I get an error adding events on document : document undefined ? */
 
 	// ensure script handle missing editor sources at document location
-	if (document.head.querySelector('script[src$="VH2017.js"]') !== null) {
 	// can happen if you code script reference to VH2017.js
- 	document.head.querySelector('script[src$="VH2017.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
-	}
+ 	document.head.querySelector('script[src*="VH2017.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
+	
 	
 	InitializeDocument();
 	
