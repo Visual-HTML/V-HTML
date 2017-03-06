@@ -12,6 +12,7 @@ VH2017.CurrentTarget = null;
 VH2017.DesignerUrl = null;
 //"https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html"
 VH2017._TmpElt = null;
+VH2017.SaveAs = function(file) { };
 VH2017.LoadDesignerScript = function() {
 	/*
 	// First version, its a script fragment, poc'n designer
@@ -81,7 +82,7 @@ VH2017.IncludeDynamicScript = function(url) {
 	/*_elt2.type="application/javascript";*/
 	/*_elt2.language="javascript";*/
 	 //document.head.appendChild(_elt2);
-	 document.body.insertBefore(_elt2,document.body.firstChild);
+	 document.head.appendChild(_elt2);
 	 /* Scripts can be added for different purpose,
 	 VH2017.CurrentTarget.appendChild(_elt2);
 	 document.head.appendChild(_elt2);
@@ -172,6 +173,14 @@ VH2017.LoadDesignerHTML = function() {
 	
 	_defaultDesignerToolbar.appendChild(_clearButton);	
 	
+	if (navigator.appName == "Microsoft Internet Explorer") {
+		var _saveAsButton = document.createElement("input");
+		_saveAsButton.type = "button";
+		_saveAsButton.value = "Save As";
+		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH2017.SaveAs("SaveAs.html"); }, false);
+		
+		_defaultDesignerToolbar.appendChild(_saveAsButton);	
+	}
 	
 	document.body.insertBefore(_defaultDesignerToolbar, document.body.firstChild);
 	
@@ -321,6 +330,16 @@ function InitializeUserAgent(e) {
 	// can happen if you code script reference to VH2017.js
  	document.head.querySelector('script[src*="VH2017.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
 	
+	
+	if (navigator.appName == "Microsoft Internet Explorer") {
+	 VH2017.IncludeDynamicScript("VH2017-MSIE10.js");
+	}
+	
+/*
+	if (navigator.appName == "Netscape") {
+	 VH2017.IncludeDynamicScript("VH2017-Netscape.js");
+	}
+	*/
 	
 	InitializeDocument();
 	
