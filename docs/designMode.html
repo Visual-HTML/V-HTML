@@ -4,12 +4,15 @@
 <meta charset="utf-8" />
 <title>designMode</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>document.designMode = 'on';</script>
+<script>
+  document.designMode = 'on';
+  function test() { window.opener.postMessage(window.document.body.innerHTML); };
+</script>
 </head>
 <body>
   
 <div contentEditable="false">
-<input contentEditable="false" type="button" value="test" onclick="window.opener.postMessage(window.document.body.innerHTML);" />
+<input contentEditable="false" type="button" value="test" onclick="test();" />
 </div>  
   
 </body>
