@@ -49,9 +49,9 @@ VH2017.LoadDesignerScript = function() {
 	 var xReq = new XMLHttpRequest();
 	 xReq.open("GET", this.DesignerUrl, false);
 	 xReq.send(null);
-	 var  _element = document.createElement("head");
+	 var  _element = document.createElement("html");
 	_element.innerHTML = xReq.response;
-	VH2017._TmpElt = _element;
+	this._TmpElt = _element;
 	var _scr = _element.getElementsByTagName("script")[0];
 	var _elt2 = document.createElement("script");
 	_elt2.setAttribute("data-VH2017-dsgk","");
@@ -65,7 +65,7 @@ VH2017.AddResource = function(url) {
 	 var xReq = new XMLHttpRequest();
 	 xReq.open("GET", url, false);
 	 xReq.send(null);
-	 var  _element = document.createElement("head");
+	 var  _element = document.createElement("html");
 	_element.innerHTML = xReq.response;
 	var _scr = _element.getElementsByTagName("script")[0];
 	var _elt2 = document.createElement("script");
@@ -181,6 +181,12 @@ VH2017.LoadDesignerHTML = function() {
 		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH2017.SaveAs("SaveAs.html"); }, false);
 		
 		_defaultDesignerToolbar.appendChild(_saveAsButton);	
+	}
+	
+	
+	if (this._TmpElt != null) {
+	 if ( this._TmpElt.getElementsByTagName('body').length > 0)
+	       _defaultDesignerToolbar.innerHTML += this._TmpElt.getElementsByTagName('body')[0].innerHTML;
 	}
 	
 	document.body.insertBefore(_defaultDesignerToolbar, document.body.firstChild);
@@ -428,17 +434,25 @@ function InitializeContent() {
 		finally { };
 	} else {
 		// empty document processing
-		VH2017.DesignerUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html";
+		
+		/////////////////////////////////// ? branch to designer
+		//Notepad designer:
+		//VH2017.DesignerUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html";
+		//editsDesigner designer:
+		//VH2017.DesignerUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170307.html";
+		
 		VH2017.document.body.Blank = true;
 	}
 	
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...
+	
+	// loading script on the end make all css and html available to the script 
+	VH2017.LoadDesignerScript();  // algorithm must be changed to make them in different order
+	
  	VH2017.LoadDesignerCSS();	
 	
  	VH2017.LoadDesignerHTML();	
-	// loading script on the end make all css and html available to the script 
-	VH2017.LoadDesignerScript();
 	
 
 	if (typeof(VH2017.DesignerInitializeDocument) !== "undefined" ) VH2017.DesignerInitializeDocument();
@@ -454,19 +468,19 @@ function ElementKeyDown(e) {
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 
 	/* All the following seem to be designer code! */ 
-
+/*
 	if (e.which === 13 && e.shiftKey) {	
 	/*
 	// this allow to prevent defaults for what I override, and not for a backspace , delete...
 	// This is a code related to shift+enter handling
-	*/
+	
 	   	e.preventDefault();
 		e.stopPropagation();
  
 		/*
 		// shift+enter must insert a br element at the current cursor position 
 		// https://www.w3.org/TR/html/single-page.html#the-br-element
-		*/
+		
 		var _elt = document.createElement("br"); 
 		_elt.id = Date.now();
 
@@ -476,7 +490,7 @@ function ElementKeyDown(e) {
 			/*
 			// using getSelection may need index re-compute: result in _pos
 			// document.getSelection().focusOffset only give me the cursor position within a node
-			*/
+			
 			e.currentTarget.innerHTML = 
 				e.currentTarget.innerHTML.substring(0, _pos + document.getSelection().focusOffset)
 				+ _elt.outerHTML
@@ -487,22 +501,23 @@ function ElementKeyDown(e) {
 			e.currentTarget.innerHTML += _tmp;			
 		}
 		
-		WrapElementById(_elt.id); /* This process with its id */
-		/*e.currentTarget.focus();*/
+		WrapElementById(_elt.id); // This process with its id 
+		//e.currentTarget.focus();
 		
 	}
 		
 	if (e.which === 13 && !e.shiftKey) {
-		/* prevent default only in this case: return down, not even released */
+		// prevent default only in this case: return down, not even released 
 	   	e.preventDefault();
 		e.stopPropagation();
 
-		/* Add content pressing enter */
+		// Add content pressing enter 
 		var _elt = document.createElement("p");			
 		var _res = e.currentTarget.parentNode.insertBefore(_elt, e.currentTarget.nextElementSibling);
-		/* and wrap it */
+		// and wrap it 
 		WrapElements(_res);
 	}
+	   */
 	   
 }
 
@@ -539,13 +554,15 @@ function DocumentKeyDown(e) {
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 	
 	/* This is designer code! */
+	/*
 	if (e.which === 13) {
 		// Enter on document add a new paragraph
 		e.preventDefault();
 		
-		var _res = document.body.appendChild(document.createElement("p")); /*TODO: designer must be able to say what element is added : div, ul, ol? blockquote?...*/
+		var _res = document.body.appendChild(document.createElement("p")); //TODO: designer must be able to say what element is added : div, ul, ol? blockquote?...
 		WrapElements(_res);
 	}
+	*/
 	
 }
 
