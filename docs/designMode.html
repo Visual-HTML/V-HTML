@@ -7,6 +7,10 @@
 <script>document.designMode = 'on';</script>
 </head>
 <body>
+  
+<div contentEditable="false">
 <input contentEditable="false" type="button" value="test" onclick="window.opener.postMessage(window.document.body.innerHTML);" />
+</div>  
+  
 </body>
 </html>
