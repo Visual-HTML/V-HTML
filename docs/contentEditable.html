@@ -6,5 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body contentEditable='true'>
+  
+  <div contentEditable="false">		
+<input contentEditable="false" type="button" value="test" onclick="window.opener.postMessage(window.document.body.innerHTML);" />
+  </div>  
+    
 </body>
 </html>
