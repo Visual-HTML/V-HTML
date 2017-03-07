@@ -77,8 +77,9 @@ VH2017.AddResource = function(url) {
 VH2017.IncludeDynamicScript = function(url) {
 	
 	var _elt2 = document.createElement("script");
-	_elt2.setAttribute("data-VH2017-Res", "");
+	_elt2.setAttribute("data-VH2017-Res", url);
 	_elt2.src =  url;
+	_elt2.setAttribute("onerror","e.currentTarget.src = e.currentTarget.getAttribute('data-VH2017-Res'); console.log('resolved refrence');");
 	/*_elt2.type="application/javascript";*/
 	/*_elt2.language="javascript";*/
 	 //document.head.appendChild(_elt2);
