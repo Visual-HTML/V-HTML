@@ -77,7 +77,7 @@ VH2017.AddResource = function(url) {
 VH2017.IncludeDynamicScript = function(url) {
 	
 	var _elt2 = document.createElement("script");
-	/*_elt2.setAttribute("data-VH2017-Res", url);*/
+	_elt2.setAttribute("data-VH2017-Res", url);
 	_elt2.src =  url;
 	/*_elt2.type="application/javascript";*/
 	/*_elt2.language="javascript";*/
@@ -264,7 +264,20 @@ VH2017.Clear = function() {
 		finally { console.log("cross-browser"); };
 	}
 	
-		
+	// Remove data-VH2017-Res
+	var _res = document.head.querySelectorAll('script[data-VH2017-Res]');
+	for (var i = 0; i < _res.length ; i++) {
+		try { _res[i].remove(true); console.log("used:.remove(true)"); } 
+		catch(xcp) {		
+			try {
+			_res[i].removeNode(true); console.log("used:.removeNode(true)"); 
+			} catch(xcp) { 
+			document.body.removeChild(_res[i]); console.log("used:.removeChild(elt)"); }
+			finally { console.log("cross-browser"); };		
+		} 
+		finally { console.log("cross-browser"); };
+	}
+	
 	
 	//Add Get Editor function
 	var _backeditorHTML = document.createElement("div");
