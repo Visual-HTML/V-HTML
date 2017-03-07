@@ -12,6 +12,7 @@ VH2017.CurrentTarget = null;
 VH2017.DesignerUrl = null;
 //"https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html"
 VH2017._TmpElt = null;
+VH2017.SaveAs = function(file) { };
 VH2017.LoadDesignerScript = function() {
 	/*
 	// First version, its a script fragment, poc'n designer
@@ -48,9 +49,9 @@ VH2017.LoadDesignerScript = function() {
 	 var xReq = new XMLHttpRequest();
 	 xReq.open("GET", this.DesignerUrl, false);
 	 xReq.send(null);
-	 var  _element = document.createElement("head");
+	 var  _element = document.createElement("html");
 	_element.innerHTML = xReq.response;
-	VH2017._TmpElt = _element;
+	this._TmpElt = _element;
 	var _scr = _element.getElementsByTagName("script")[0];
 	var _elt2 = document.createElement("script");
 	_elt2.setAttribute("data-VH2017-dsgk","");
@@ -64,7 +65,7 @@ VH2017.AddResource = function(url) {
 	 var xReq = new XMLHttpRequest();
 	 xReq.open("GET", url, false);
 	 xReq.send(null);
-	 var  _element = document.createElement("head");
+	 var  _element = document.createElement("html");
 	_element.innerHTML = xReq.response;
 	var _scr = _element.getElementsByTagName("script")[0];
 	var _elt2 = document.createElement("script");
@@ -76,12 +77,13 @@ VH2017.AddResource = function(url) {
 VH2017.IncludeDynamicScript = function(url) {
 	
 	var _elt2 = document.createElement("script");
-	/*_elt2.setAttribute("data-VH2017-Res", url);*/
+	_elt2.setAttribute("data-VH2017-Res", "");
 	_elt2.src =  url;
+	//_elt2.setAttribute("onerror","event.currentTarget.src = event.currentTarget.getAttribute('data-VH2017-Res'); console.log('resolved refrence');");
 	/*_elt2.type="application/javascript";*/
 	/*_elt2.language="javascript";*/
 	 //document.head.appendChild(_elt2);
-	 document.body.insertBefore(_elt2,document.body.firstChild);
+	 document.head.appendChild(_elt2);
 	 /* Scripts can be added for different purpose,
 	 VH2017.CurrentTarget.appendChild(_elt2);
 	 document.head.appendChild(_elt2);
@@ -131,7 +133,7 @@ VH2017.LoadDesignerCSS = function() {
 	_element.innerHTML += "#Designer-Toolbar { position: fixed; top: 0px; } ";	
 	/* Designer styles are added just after this script link */
 	var _aux = document.head.querySelectorAll('script');
-	var _aux1 = document.head.querySelector('script[src$="VH2017.js"]');
+	var _aux1 = document.head.querySelector('script[src*="VH2017.js"]');
 	_aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
 	 
 	 
@@ -172,6 +174,20 @@ VH2017.LoadDesignerHTML = function() {
 	
 	_defaultDesignerToolbar.appendChild(_clearButton);	
 	
+	if (navigator.appName == "Microsoft Internet Explorer") {
+		var _saveAsButton = document.createElement("input");
+		_saveAsButton.type = "button";
+		_saveAsButton.value = "Save As";
+		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH2017.SaveAs("SaveAs.html"); }, false);
+		
+		_defaultDesignerToolbar.appendChild(_saveAsButton);	
+	}
+	
+	
+	if (this._TmpElt != null) {
+	 if ( this._TmpElt.getElementsByTagName('body').length > 0)
+	       _defaultDesignerToolbar.innerHTML += this._TmpElt.getElementsByTagName('body')[0].innerHTML;
+	}
 	
 	document.body.insertBefore(_defaultDesignerToolbar, document.body.firstChild);
 	
@@ -224,13 +240,21 @@ VH2017.Clear = function() {
 	finally { console.log("cross-browser"); };
 	
 	
+	// save current script source (can be altered by browser's save as logic)
+	var _currentscriptsrc = document.head.querySelector('script[src*="VH2017.js"]').src;
+	// mht file case
+	if (window.location.href.search(/mht$/) > -1) {
+		var _aux = document.head.querySelector('script[src*="VH2017.js"]').src;
+		_currentscriptsrc = _aux.substring(_aux.indexOf('!')+1);
+	}
+
 	
-	try { document.head.querySelector('script[src$="VH2017.js"]').remove(true); console.log("used:.remove(true)"); } 
+	try { document.head.querySelector('script[src*="VH2017.js"]').remove(true); console.log("used:.remove(true)"); } 
 	catch(xcp) {		
 		try {
-		document.head.querySelector('script[src$="VH2017.js"]').removeNode(true); console.log("used:.removeNode(true)"); 
+		document.head.querySelector('script[src*="VH2017.js"]').removeNode(true); console.log("used:.removeNode(true)"); 
 		} catch(xcp) { 
-		document.body.removeChild(document.head.querySelector('script[src$="VH2017.js"]')); console.log("used:.removeChild(elt)"); }
+		document.body.removeChild(document.head.querySelector('script[src*="VH2017.js"]')); console.log("used:.removeChild(elt)"); }
 		finally { console.log("cross-browser"); };		
 	} 
 	finally { console.log("cross-browser"); };
@@ -247,7 +271,20 @@ VH2017.Clear = function() {
 		finally { console.log("cross-browser"); };
 	}
 	
-		
+	// Remove data-VH2017-Res
+	var _res = document.head.querySelectorAll('script[data-VH2017-Res]');
+	for (var i = 0; i < _res.length ; i++) {
+		try { _res[i].remove(true); console.log("used:.remove(true)"); } 
+		catch(xcp) {		
+			try {
+			_res[i].removeNode(true); console.log("used:.removeNode(true)"); 
+			} catch(xcp) { 
+			document.body.removeChild(_res[i]); console.log("used:.removeChild(elt)"); }
+			finally { console.log("cross-browser"); };		
+		} 
+		finally { console.log("cross-browser"); };
+	}
+	
 	
 	//Add Get Editor function
 	var _backeditorHTML = document.createElement("div");
@@ -261,7 +298,7 @@ VH2017.Clear = function() {
 	var _backeditor = document.createElement("script");
 	_backeditor.innerHTML += "function GetBackEditor() {";
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
-	_backeditor.innerHTML += "_elt.src = 'VH2017.js'; ";
+	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
 	_backeditor.innerHTML += "_elt.onload = function() { InitializeUserAgent(); }; ";
 	_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "document.head.appendChild(_elt); ";
@@ -309,8 +346,21 @@ function InitializeUserAgent(e) {
 	document.designMode = "off";
 	/* by time to time (when cache is updated?) I get an error adding events on document : document undefined ? */
 
- 
-
+	// ensure script handle missing editor sources at document location
+	// can happen if you code script reference to VH2017.js
+ 	document.head.querySelector('script[src*="VH2017.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
+	
+	
+	if (navigator.appName == "Microsoft Internet Explorer") {
+	 VH2017.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH2017-MSIE10.js");
+	}
+	
+/*
+	if (navigator.appName == "Netscape") {
+	 VH2017.IncludeDynamicScript("VH2017-Netscape.js");
+	}
+	*/
+	
 	InitializeDocument();
 	
 }
@@ -384,17 +434,25 @@ function InitializeContent() {
 		finally { };
 	} else {
 		// empty document processing
-		VH2017.DesignerUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html";
+		
+		/////////////////////////////////// ? branch to designer
+		//Notepad designer:
+		//VH2017.DesignerUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html";
+		//editsDesigner designer:
+		//VH2017.DesignerUrl = "https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170307.html";
+		
 		VH2017.document.body.Blank = true;
 	}
 	
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...
+	
+	// loading script on the end make all css and html available to the script 
+	VH2017.LoadDesignerScript();  // algorithm must be changed to make them in different order
+	
  	VH2017.LoadDesignerCSS();	
 	
  	VH2017.LoadDesignerHTML();	
-	// loading script on the end make all css and html available to the script 
-	VH2017.LoadDesignerScript();
 	
 
 	if (typeof(VH2017.DesignerInitializeDocument) !== "undefined" ) VH2017.DesignerInitializeDocument();
@@ -410,19 +468,19 @@ function ElementKeyDown(e) {
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 
 	/* All the following seem to be designer code! */ 
-
+/*
 	if (e.which === 13 && e.shiftKey) {	
 	/*
 	// this allow to prevent defaults for what I override, and not for a backspace , delete...
 	// This is a code related to shift+enter handling
-	*/
+	
 	   	e.preventDefault();
 		e.stopPropagation();
  
 		/*
 		// shift+enter must insert a br element at the current cursor position 
 		// https://www.w3.org/TR/html/single-page.html#the-br-element
-		*/
+		
 		var _elt = document.createElement("br"); 
 		_elt.id = Date.now();
 
@@ -432,7 +490,7 @@ function ElementKeyDown(e) {
 			/*
 			// using getSelection may need index re-compute: result in _pos
 			// document.getSelection().focusOffset only give me the cursor position within a node
-			*/
+			
 			e.currentTarget.innerHTML = 
 				e.currentTarget.innerHTML.substring(0, _pos + document.getSelection().focusOffset)
 				+ _elt.outerHTML
@@ -443,22 +501,23 @@ function ElementKeyDown(e) {
 			e.currentTarget.innerHTML += _tmp;			
 		}
 		
-		WrapElementById(_elt.id); /* This process with its id */
-		/*e.currentTarget.focus();*/
+		WrapElementById(_elt.id); // This process with its id 
+		//e.currentTarget.focus();
 		
 	}
 		
 	if (e.which === 13 && !e.shiftKey) {
-		/* prevent default only in this case: return down, not even released */
+		// prevent default only in this case: return down, not even released 
 	   	e.preventDefault();
 		e.stopPropagation();
 
-		/* Add content pressing enter */
+		// Add content pressing enter 
 		var _elt = document.createElement("p");			
 		var _res = e.currentTarget.parentNode.insertBefore(_elt, e.currentTarget.nextElementSibling);
-		/* and wrap it */
+		// and wrap it 
 		WrapElements(_res);
 	}
+	   */
 	   
 }
 
@@ -495,13 +554,15 @@ function DocumentKeyDown(e) {
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 	
 	/* This is designer code! */
+	/*
 	if (e.which === 13) {
 		// Enter on document add a new paragraph
 		e.preventDefault();
 		
-		var _res = document.body.appendChild(document.createElement("p")); /*TODO: designer must be able to say what element is added : div, ul, ol? blockquote?...*/
+		var _res = document.body.appendChild(document.createElement("p")); //TODO: designer must be able to say what element is added : div, ul, ol? blockquote?...
 		WrapElements(_res);
 	}
+	*/
 	
 }
 
@@ -574,6 +635,7 @@ function WrapElementById(id) {
 	*/
 				  
 }
+
 
 
 
