@@ -337,14 +337,14 @@ VH2017.Clear = function() {
 };
 VH2017.WrapElementCode = function(elt) {
 	/* Initialize element with required events and attributes */ 
-	elt.addEventListener('keydown', ElementKeyDown, false);
-	elt.addEventListener('click', ElementClick, false);
+	elt.addEventListener('keydown', this.ElementKeyDown, false);
+	elt.addEventListener('click', this.ElementClick, false);
 	elt.setAttribute("data-VH2017-hndk","");
 }
 VH2017.UnWrapElementCode = function(elt) {
 	/* Remove from HTMLElement required events and attributes */
-	elt.removeEventListener('keydown', ElementKeyDown, false);
-	elt.removeEventListener('click', ElementClick, false);
+	elt.removeEventListener('keydown', this.ElementKeyDown, false);
+	elt.removeEventListener('click', this.ElementClick, false);
 	elt.removeAttribute("data-VH2017-hndk","");
 }
 
