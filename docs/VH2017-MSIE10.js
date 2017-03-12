@@ -11,3 +11,22 @@ VH2017.SaveAs = function(file) {
 			  + "</html>" ]), file);
 	
 }
+
+
+VH2017.CrossBrowser.RemoveElement = function(elt) {
+	elt.parentNode.removeChild(elt);
+	
+	/*
+	// Default code is to try/catch different instructions that may work
+	try { elt.remove(true); console.log("used:.remove(true)"); } 
+		catch(xcp) {		
+			try {
+			elt.removeNode(true); console.log("used:.removeNode(true)"); 
+			} catch(xcp) { 
+			elt.parentNode.removeChild(elt); console.log("used:.removeChild(elt)"); }
+			finally { console.log("cross-browser"); };		
+		} 
+		finally { console.log("cross-browser"); };
+		// This code will be replaced with the right instruction if supplied : InitializeUserAgent will load specific code
+	*/
+};
