@@ -1,5 +1,3 @@
-/* when page is loaded, start initialization process: set user-agent specific code */
-window.addEventListener('load', InitializeUserAgent, false);
 
 /* isolate editors code within VH2017, which become is an Object in window */
 VH2017 = {};
@@ -149,6 +147,7 @@ VH2017.LoadDesignerHTML = function() {
 	
 	
 		if (document.body.querySelector('#Designer-Toolbar') != null) {
+			/*
 	try { document.body.querySelector('#Designer-Toolbar').remove(true); console.log("used:.remove(true)"); } 
 	catch(xcp) {		
 		try {
@@ -158,6 +157,9 @@ VH2017.LoadDesignerHTML = function() {
 		finally { console.log("cross-browser"); };		
 	} 
 	finally { console.log("cross-browser"); };
+	*/
+	VH2017.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
+	
 		}
 	
 	
@@ -166,6 +168,7 @@ VH2017.LoadDesignerHTML = function() {
 	_defaultDesignerToolbar = document.createElement("div");
 	_defaultDesignerToolbar.id = "Designer-Toolbar";
 	
+	_defaultDesignerToolbar.innerHTML = navigator.appName + "<br />"  + navigator.userAgent + "<br />";
 	
 	var _clearButton = document.createElement("input");
 	_clearButton.type = "button";
@@ -194,8 +197,8 @@ VH2017.LoadDesignerHTML = function() {
 };
 VH2017.Clear = function() {
 	
-	document.removeEventListener('keydown', DocumentKeyDown, false);	
-	document.body.removeEventListener('click', DocumentClick, false);	
+	document.removeEventListener('keydown', this.DocumentKeyDown, false);	
+	document.body.removeEventListener('click', this.DocumentClick, false);	
 	
     	var _elements = document.querySelectorAll('body *[data-VH2017-hndk]');
 	for (var i = 0 ; i < _elements.length ; i++) {
@@ -205,9 +208,10 @@ VH2017.Clear = function() {
 	
 	_elements = document.body.querySelectorAll("body *[contentEditable='false']");
 	for (var i = 0 ; i < _elements.length ; i++) {
+		
+		/*
 		try { _elements[i].remove(true);  console.log("used:.remove(true)"); } 
 		catch(xcp) { 
-			
 			try {
 			_elements[i].removeNode(true); console.log("used:.removeNode(true)");  
 			} catch(xcp) { 
@@ -216,8 +220,12 @@ VH2017.Clear = function() {
 			finally { console.log("cross-browser"); };			
 		} 
 		finally { console.log("cross-browser"); };
+		*/		
+		VH2017.CrossBrowser.RemoveElement(_elements[i]);
+		
 	}
 	
+	/*
 	try { document.head.querySelector('#VH2017-Designer-Styles').remove(true); console.log("used:.remove(true)"); } 
 	catch(xcp) {		
 		try {
@@ -227,8 +235,10 @@ VH2017.Clear = function() {
 		finally { console.log("cross-browser"); };		
 	} 
 	finally { console.log("cross-browser"); };
-	
+	*/
+	VH2017.CrossBrowser.RemoveElement(document.head.querySelector('#VH2017-Designer-Styles'));
 		
+	/*
 	try { document.body.querySelector('#Designer-Toolbar').remove(true); console.log("used:.remove(true)"); } 
 	catch(xcp) {		
 		try {
@@ -238,7 +248,8 @@ VH2017.Clear = function() {
 		finally { console.log("cross-browser"); };		
 	} 
 	finally { console.log("cross-browser"); };
-	
+	*/
+	VH2017.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	
 	// save current script source (can be altered by browser's save as logic)
 	var _currentscriptsrc = document.head.querySelector('script[src*="VH2017.js"]').src;
@@ -248,7 +259,7 @@ VH2017.Clear = function() {
 		_currentscriptsrc = _aux.substring(_aux.indexOf('!')+1);
 	}
 
-	
+	/*
 	try { document.head.querySelector('script[src*="VH2017.js"]').remove(true); console.log("used:.remove(true)"); } 
 	catch(xcp) {		
 		try {
@@ -258,8 +269,12 @@ VH2017.Clear = function() {
 		finally { console.log("cross-browser"); };		
 	} 
 	finally { console.log("cross-browser"); };
+	*/
+	VH2017.CrossBrowser.RemoveElement(document.head.querySelector('script[src*="VH2017.js"]'));
 	
 	if (document.head.querySelector('script[data-VH2017-dsgk]') != null) {	
+		VH2017.CrossBrowser.RemoveElement(document.head.querySelector('script[data-VH2017-dsgk]'));
+		/*
 		try { document.head.querySelector('script[data-VH2017-dsgk]').remove(true); console.log("used:.remove(true)"); } 
 		catch(xcp) {		
 			try {
@@ -269,11 +284,15 @@ VH2017.Clear = function() {
 			finally { console.log("cross-browser"); };		
 		} 
 		finally { console.log("cross-browser"); };
+		*/
+		
 	}
 	
 	// Remove data-VH2017-Res
 	var _res = document.head.querySelectorAll('script[data-VH2017-Res]');
 	for (var i = 0; i < _res.length ; i++) {
+		VH2017.CrossBrowser.RemoveElement(_res[i]);
+		/*
 		try { _res[i].remove(true); console.log("used:.remove(true)"); } 
 		catch(xcp) {		
 			try {
@@ -283,6 +302,7 @@ VH2017.Clear = function() {
 			finally { console.log("cross-browser"); };		
 		} 
 		finally { console.log("cross-browser"); };
+		*/
 	}
 	
 	
@@ -299,13 +319,14 @@ VH2017.Clear = function() {
 	_backeditor.innerHTML += "function GetBackEditor() {";
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
 	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
-	_backeditor.innerHTML += "_elt.onload = function() { InitializeUserAgent(); }; ";
+	_backeditor.innerHTML += "_elt.onload = function() { VH2017.InitializeUserAgent(); }; ";
 	_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "document.head.appendChild(_elt); ";
 	//_backeditor.innerHTML += "InitializeUserAgent(); ";
 	_backeditor.innerHTML += "}; ";
-	_backeditor.innerHTML += "function Remove() {";
-	_backeditor.innerHTML += "try { document.body.querySelector('#Designer-Toolbar').remove(true); console.log('used:.remove(true)'); } catch(xcp) { try { 		document.body.querySelector('#Designer-Toolbar').removeNode(true); console.log('used:.removeNode(true)'); } catch(xcp) { 		document.body.removeChild(document.body.querySelector('#Designer-Toolbar')); console.log('used:.removeChild(elt)'); } finally { console.log('cross-browser'); }; } finally { console.log('cross-browser'); }; ";
+	_backeditor.innerHTML += "function Remove() { ";
+	_backeditor.innerHTML += "VH2017.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));";
+	/*_backeditor.innerHTML += "try { document.body.querySelector('#Designer-Toolbar').remove(true); console.log('used:.remove(true)'); } catch(xcp) { try { 		document.body.querySelector('#Designer-Toolbar').removeNode(true); console.log('used:.removeNode(true)'); } catch(xcp) { 		document.body.removeChild(document.body.querySelector('#Designer-Toolbar')); console.log('used:.removeChild(elt)'); } finally { console.log('cross-browser'); }; } finally { console.log('cross-browser'); }; ";*/
 	_backeditor.innerHTML += "}; ";
 	 
 	_backeditorHTML.appendChild(_inputButton);
@@ -314,13 +335,13 @@ VH2017.Clear = function() {
 	document.body.insertBefore(_backeditorHTML, document.body.firstChild);
 	
 };
-VH2017.WrapElement = function(elt) {
+VH2017.WrapElementCode = function(elt) {
 	/* Initialize element with required events and attributes */ 
 	elt.addEventListener('keydown', ElementKeyDown, false);
 	elt.addEventListener('click', ElementClick, false);
 	elt.setAttribute("data-VH2017-hndk","");
 }
-VH2017.UnWrapElement = function(elt) {
+VH2017.UnWrapElementCode = function(elt) {
 	/* Remove from HTMLElement required events and attributes */
 	elt.removeEventListener('keydown', ElementKeyDown, false);
 	elt.removeEventListener('click', ElementClick, false);
@@ -331,9 +352,74 @@ VH2017.UnWrapElement = function(elt) {
 VH2017.ElementClick = function(evt) { };
 VH2017.ElementWrap = function(elt) { };
 
+VH2017.WrapDocument = function() { 
+	/* look for and attach unhandled elements ...apply on all elements not already handled and elements not set as not editable */
+	var _elements = document.body.querySelectorAll("body *:not([data-VH2017-hndk]):not([contentEditable='false'])");
+	
+	for (var i = 0 ; i < _elements.length ; i++) {
+		if ( _elements[i].nodeType === 1 
+					 && !_elements[i].hasAttribute("data-VH2017-dsgk")
+					 && !_elements[i].hasAttribute('data-VH2017-hndk') ) { 
+				
+			VH2017.WrapElement(_elements[i]);
+			
+			/* This try to set contentEditable only on elements that user see as to edit (//TODO: in dev, need re-work) */
+			if ( (_elements[i].childNodes.length === 0) 
+					|| (_elements[i].childNodes.length === 1 && _elements[i].childNodes[0].nodeName === "#text")
+					|| (_elements[i].childNodes.length > 1 && _elements[i].childNodes[0].textContent != "\n  ") ) 
+				_elements[i].contentEditable = true;
+				
+			/* Send info to handler */ 
+			VH2017.ElementWrap(_elements[i]);
+			}
+	}
+}
+		
+
+/* Wrapping elements allow to get a handle on them interactivity with a click */
+VH2017.WrapElement = function(elt) {
+	
+		VH2017.WrapElementCode(elt);
+		
+		/* This is already a designer option, a designer can choose to provide editing on text otherwise than this function */
+		elt.contentEditable = true;
+		
+		VH2017.CurrentTarget = elt;
+		VH2017.ElementWrap(elt);  /* Inform using handler */
+		VH2017.CurrentTarget.focus();
+		
+}
 
 
-function InitializeUserAgent(e) {
+/* Wrap can happen to be set on one or several elements, after all content injection this must also be called */
+VH2017.WrapElementById = function(id) {
+	/*
+	// This is the wrapper code for a temporarily identified element, 
+	// created by code generator these elements get an id only
+	// to enable this code to do a getElementById...
+	*/
+	var elt = document.getElementById(id);
+	/*
+	// This is already a designer option, a designer can choose to provide editing on text otherwise than this function 
+	//elt.contentEditable = true;
+	
+	// id can be removed
+	*/
+	elt.removeAttribute('id');
+	
+	VH2017.WrapElementCode(elt);
+	VH2017.CurrentTarget = elt;
+	/*this is what is done, call removed : VH2017.ElementWrap(elt);  --------- Inform using handler */
+	VH2017.CurrentTarget.focus();
+	/*
+	// This function is used (and was created by a need of, rather, a designer code, so the editor provide
+	// this service while a designer, starter or custom control canmanage this (wrap a new injected element) its own way...
+	*/
+				  
+}
+
+
+VH2017.InitializeUserAgent = function(e) {
 	/*
 	// jQuery remain the best solution to solve user-agent specific code but I'm trying to avoid using it at start
 	// Custom Controls and starters can use it but at the editor level I wish to implement a kind of dynamic loading
@@ -350,24 +436,50 @@ function InitializeUserAgent(e) {
 	// can happen if you code script reference to VH2017.js
  	document.head.querySelector('script[src*="VH2017.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
 	
-	
-	if (navigator.appName == "Microsoft Internet Explorer") {
+	/////////////////////////////////////// This introduce Platform-independent model where deigner code model things but no code is provided
+	/// In designer code case there is a code provided : it's the last specification instructions but for cross-browser support they can be overriden
+	// using expando, virtual functions, provided by javascript
+	// define key/test on appName and userAgent to load appropriate code for the browser
+	if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 1") > -1)) {
 	 VH2017.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH2017-MSIE10.js");
 	}
 	
-/*
-	if (navigator.appName == "Netscape") {
-	 VH2017.IncludeDynamicScript("VH2017-Netscape.js");
+	if (((navigator.appName == "Opera") && (navigator.userAgent.indexOf("Opera") > -1)) 
+		|| ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("OPR") > -1))) {
+	 VH2017.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH2017-Opera.js");
 	}
-	*/
+
+	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("OPR") == -1))   {
+	 VH2017.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH2017-Netscape.js");
+	}
+	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Firefox") > -1) && (navigator.userAgent.indexOf("OPR") == -1)) {
+	 VH2017.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH2017-Firefox.js");
+	}
 	
-	InitializeDocument();
+	///////////////// end useragent specific code
+	
+	
+	/* in the scope of an event I ca't say this.InitializeDocument(); */
+	VH2017.InitializeDocument();
 	
 }
 
+VH2017.CrossBrowser = {};
+VH2017.CrossBrowser.RemoveElement = function(elt) { 
+	// Default code is to try/catch different instructions that may work
+	try { elt.remove(true); console.log("used:.remove(true)"); } 
+		catch(xcp) {		
+			try {
+			elt.removeNode(true); console.log("used:.removeNode(true)"); 
+			} catch(xcp) { 
+			elt.parentNode.removeChild(elt); console.log("used:.removeChild(elt)"); }
+			finally { console.log("cross-browser"); };		
+		} 
+		finally { console.log("cross-browser"); };
+		// This code will be replaced with the right instruction if supplied : InitializeUserAgent will load specific code
+};
 
-
-function InitializeDocument() {
+VH2017.InitializeDocument = function() {
 	
 	
 	// check and remove all remainings from previous edit session
@@ -379,6 +491,7 @@ function InitializeDocument() {
 		_elements[i].removeAttribute("contentEditable");
 	}
 	if (document.head.querySelector('#VH2017-Designer-Styles') != null) {
+		/*
 		try { document.head.querySelector('#VH2017-Designer-Styles').remove(true); console.log("used:.remove(true)"); } 
 		catch(xcp) {		
 			try {
@@ -388,8 +501,11 @@ function InitializeDocument() {
 			finally { console.log("cross-browser"); };		
 		} 
 		finally { console.log("cross-browser"); };
+		*/
+		VH2017.CrossBrowser.RemoveElement(document.head.querySelector('#VH2017-Designer-Styles'));
 	}
 	if (document.body.querySelector('#Designer-Toolbar') != null) {
+		/*
 		try { document.body.querySelector('#Designer-Toolbar').remove(true); console.log("used:.remove(true)"); } 
 		catch(xcp) {		
 			try {
@@ -399,26 +515,28 @@ function InitializeDocument() {
 			finally { console.log("cross-browser"); };		
 		} 
 		finally { console.log("cross-browser"); };
+		*/
+		VH2017.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	}
 	/////////////////// end clear document
 	
 	
-	document.addEventListener('keydown', DocumentKeyDown, false);	
-	document.body.addEventListener('click', DocumentClick, false);	
+	document.addEventListener('keydown', this.DocumentKeyDown, false);	
+	document.body.addEventListener('click', this.DocumentClick, false);	
 
 
 
-	InitializeContent();
+	this.InitializeContent();
 	
 	
 }
 
 
 
-function InitializeContent() {	
+VH2017.InitializeContent = function() {	
 
 	/* Begin with a procces that wrap existing content */
-	WrapElements();
+	this.WrapDocument();
 	
 	if (document.body.querySelector("[contentEditable='true']") != null) {
 		/* first child not for designer purpose get focused */
@@ -448,21 +566,22 @@ function InitializeContent() {
 	//here make the document content wrapped and avoid making designer content wrapped...
 	
 	// loading script on the end make all css and html available to the script 
-	VH2017.LoadDesignerScript();  // algorithm must be changed to make them in different order
+	if (typeof(this.LoadDesignerScript) !== "undefined" ) this.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?
 	
- 	VH2017.LoadDesignerCSS();	
-	
- 	VH2017.LoadDesignerHTML();	
-	
+	if (typeof(this.LoadDesignerCSS) !== "undefined" ) this.LoadDesignerCSS();
+ 		
+	if (typeof(this.LoadDesignerHTML) !== "undefined" ) this.LoadDesignerHTML();
+	// different order, different file structure : split on several documents, one single file...
 
-	if (typeof(VH2017.DesignerInitializeDocument) !== "undefined" ) VH2017.DesignerInitializeDocument();
+
+	if (typeof(this.DesignerInitializeDocument) !== "undefined" ) this.DesignerInitializeDocument();
 	
 		
 }
 
 
 
-function ElementKeyDown(e) { 
+VH2017.ElementKeyDown =  function(e) { 
          
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
@@ -523,7 +642,7 @@ function ElementKeyDown(e) {
 
 
 
-function ElementClick(e) {
+VH2017.ElementClick = function(e) {
 	
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
@@ -531,14 +650,14 @@ function ElementClick(e) {
 	e.stopPropagation();
 	e.preventDefault();
 	
-	VH2017.CurrentTarget = e.currentTarget;	
-	VH2017.ElementClick(e);  /* Inform designer that element was selected */
+	this.CurrentTarget = e.currentTarget;	
+	this.ElementClick(e);  /* Inform designer that element was selected */
 
 }
 
 
 
-function DocumentClick(e) {
+VH2017.DocumentClick = function(e) {
 	
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
@@ -548,7 +667,7 @@ function DocumentClick(e) {
 
 
 
-function DocumentKeyDown(e) { 
+VH2017.DocumentKeyDown = function(e) { 
 	
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
@@ -567,75 +686,8 @@ function DocumentKeyDown(e) {
 }
 
 
-/* Wrapping elements allow to get a handle on them interactivity with a click */
-function WrapElements(elt) {
-	/* This is called without parameter, elt argument is undefined : the process apply on... */
-	if (typeof(elt) === "undefined") {
-			
-		/* look for and attach unhandled elements ...apply on all elements not already handled and elements not set as not editable */
-		var _elements = document.body.querySelectorAll("body *:not([data-VH2017-hndk]):not([contentEditable='false'])");
-		
-		for (var i = 0 ; i < _elements.length ; i++) {
-			if ( _elements[i].nodeType === 1 
-						 && !_elements[i].hasAttribute("data-VH2017-dsgk")
-						 && !_elements[i].hasAttribute('data-VH2017-hndk') ) { 
-					
-				VH2017.WrapElement(_elements[i]);
-				
-				/* This try to set contentEditable only on elements that user see as to edit (//TODO: in dev, need re-work) */
-				if ( (_elements[i].childNodes.length === 0) 
-						|| (_elements[i].childNodes.length === 1 && _elements[i].childNodes[0].nodeName === "#text")
-						|| (_elements[i].childNodes.length > 1 && _elements[i].childNodes[0].textContent != "\n  ") ) 
-					_elements[i].contentEditable = true;
-					
-				/* Send info to handler */ 
-				VH2017.ElementWrap(_elements[i]);
-				}
-		}
-	
-	} else {
-		
-		VH2017.WrapElement(elt);
-		
-		/* This is already a designer option, a designer can choose to provide editing on text otherwise than this function */
-		elt.contentEditable = true;
-		
-		VH2017.CurrentTarget = elt;
-		VH2017.ElementWrap(elt);  /* Inform using handler */
-		VH2017.CurrentTarget.focus();
-		
-	}
-	
-}
 
-
-
-function WrapElementById(id) {
-	/*
-	// This is the wrapper code for a temporarily identified element, 
-	// created by code generator these elements get an id only
-	// to enable this code to do a getElementById...
-	*/
-	var elt = document.getElementById(id);
-	/*
-	// This is already a designer option, a designer can choose to provide editing on text otherwise than this function 
-	//elt.contentEditable = true;
-	
-	// id can be removed
-	*/
-	elt.removeAttribute('id');
-	
-	VH2017.WrapElement(elt);
-	VH2017.CurrentTarget = elt;
-	/*this is what is done, call removed : VH2017.ElementWrap(elt);  --------- Inform using handler */
-	VH2017.CurrentTarget.focus();
-	/*
-	// This function is used (and was created by a need of, rather, a designer code, so the editor provide
-	// this service while a designer, starter or custom control canmanage this (wrap a new injected element) its own way...
-	*/
-				  
-}
-
-
+/* when page is loaded, start initialization process: set user-agent specific code */
+window.addEventListener('load', VH2017.InitializeUserAgent, false);
 
 
