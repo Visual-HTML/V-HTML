@@ -202,7 +202,7 @@ VH2017.Clear = function() {
 	
     	var _elements = document.querySelectorAll('body *[data-VH2017-hndk]');
 	for (var i = 0 ; i < _elements.length ; i++) {
-		this.UnWrapElement(_elements[i]);
+		this.UnWrapElementCode(_elements[i]);
 		_elements[i].removeAttribute("contentEditable");
 	}
 	
