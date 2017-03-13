@@ -110,17 +110,18 @@ VH20.LoadDesignerHTML = function() {
 		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.CrossBrowser.SaveAs("SaveAs.html"); }, false);
 		
 		_defaultDesignerToolbar.appendChild(_saveAsButton);	
-	}
+	};
 	
 	
 	if (this._TmpElt != null) {
 	 if ( this._TmpElt.getElementsByTagName('body').length > 0)
 	       _defaultDesignerToolbar.innerHTML += this._TmpElt.getElementsByTagName('body')[0].innerHTML;
-	}
+	};
 	
 	document.body.insertBefore(_defaultDesignerToolbar, document.body.firstChild);
 	
 };
+
 VH20.Clear = function() {
 	
 	document.removeEventListener('keydown', this.DocumentKeyDown, false);	
@@ -180,22 +181,24 @@ VH20.Clear = function() {
 	document.body.insertBefore(_backeditorHTML, document.body.firstChild);
 	
 };
+
 VH20.WrapElementCode = function(elt) {
 	/* Initialize element with required events and attributes */ 
 	elt.addEventListener('keydown', this.ElementKeyDown, false);
 	elt.addEventListener('click', this.ElementClick, false);
 	elt.setAttribute("data-VH20-hndk","");
-}
+};
+
 VH20.UnWrapElementCode = function(elt) {
 	/* Remove from HTMLElement required events and attributes */
 	elt.removeEventListener('keydown', this.ElementKeyDown, false);
 	elt.removeEventListener('click', this.ElementClick, false);
 	elt.removeAttribute("data-VH20-hndk","");
-}
+};
 
 VH20.Events = {};
 VH20.Events.ElementClick = function(evt) { };
-VH20.Events.ElementWrap = function(elt) { };
+VH20.Events.ElementWrap = function(evt) { };
 
 VH20.WrapDocument = function() { 
 	/* look for and attach unhandled elements ...apply on all elements not already handled and elements not set as not editable */
