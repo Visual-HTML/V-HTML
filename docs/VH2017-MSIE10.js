@@ -1,4 +1,4 @@
-VH2017.SaveAs = function(file) {
+VH20.CrossBrowser.SaveAs = function(file) {
 	
 	// this is added to make it work but clear isn't defined as a save as pre-condition
 	VH2017.Clear();
@@ -13,7 +13,7 @@ VH2017.SaveAs = function(file) {
 }
 
 
-VH2017.CrossBrowser.RemoveElement = function(elt) {
+VH20.CrossBrowser.RemoveElement = function(elt) {
 	elt.parentNode.removeChild(elt);
 	
 	/*
