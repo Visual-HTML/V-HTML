@@ -9,8 +9,9 @@ VH20.document.body.designMode={};
 VH20.CurrentTarget = null;
 VH20.DesignerUrl = null;
 //"https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html"
+VH20.CrossBrowser = {};
+VH20.CrossBrowser.SaveAs = function(file) { };
 VH20._TmpElt = null;
-VH20.SaveAs = function(file) { };
 VH20.LoadDesignerScript = function() {
 	/*
 	// First version, its a script fragment, poc'n designer
@@ -465,7 +466,6 @@ VH20.InitializeUserAgent = function(e) {
 	
 }
 
-VH20.CrossBrowser = {};
 VH20.CrossBrowser.RemoveElement = function(elt) { 
 	// Default code is to try/catch different instructions that may work
 	try { elt.remove(true); console.log("used:.remove(true)"); } 
