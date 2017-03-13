@@ -181,7 +181,7 @@ VH20.LoadDesignerHTML = function() {
 		var _saveAsButton = document.createElement("input");
 		_saveAsButton.type = "button";
 		_saveAsButton.value = "Save As";
-		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.SaveAs("SaveAs.html"); }, false);
+		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.CrossBrowser.SaveAs("SaveAs.html"); }, false);
 		
 		_defaultDesignerToolbar.appendChild(_saveAsButton);	
 	}
