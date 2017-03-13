@@ -1,3 +1,4 @@
+
 VH20.CrossBrowser.SaveAs = function(file) {
 	
 	// this is added to make it work but clear isn't defined as a save as pre-condition
@@ -11,6 +12,7 @@ VH20.CrossBrowser.SaveAs = function(file) {
 			  + "</html>" ]), file);
 	
 }
+
 
 
 VH20.CrossBrowser.RemoveElement = function(elt) {
