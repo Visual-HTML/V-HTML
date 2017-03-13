@@ -652,7 +652,7 @@ VH20.ElementClick = function(e) {
 	e.preventDefault();
 	
 	this.CurrentTarget = e.currentTarget;	
-	this.ElementClick(e);  /* Inform designer that element was selected */
+	VH20.ElementClick(e);  /* Inform designer that element was selected */
 
 }
 
