@@ -8,41 +8,11 @@ VH20.document.body.contentEditable={};
 VH20.document.body.designMode={};
 VH20.CurrentTarget = null;
 VH20.DesignerUrl = null;
-//"https://raw.githubusercontent.com/Visual-HTML/V-HTML/master/todel/20170226.html"
 VH20.CrossBrowser = {};
 VH20.CrossBrowser.SaveAs = function(file) { };
 VH20._TmpElt = null;
 VH20.LoadDesignerScript = function() {
-	/*
-	// First version, its a script fragment, poc'n designer
-	
-	// Designer at this time is loaded at start but I must be able to switch between designer on the same authored document
-	
-	/*
-	// This work on IE10 but completely make the process fail on Safari, Chrome.... I don't agree with their view on the
-	// response time subject reducing the capacities and flexibilities of xmlhttprequest (the problem reside more where the requested resources are...)
-	// ... but I need to make it work cross-browsers 
-	var xReq = new XMLHttpRequest();
-	xReq.open("GET", this.DesignerUrl, false); 
-	xReq.timeout = 2000;
-	xReq.ontimeout = function () {   } 
-	xReq.onreadystatechange = function (e) {
-		if (xReq.readyState == 4) {         
-			if (xReq.status = "200") {
-				var  _element = document.createElement("head");
-				_element.innerHTML = xReq.response;
-				VH20._TmpElt = _element;
-				var _scr = _element.getElementsByTagName("script")[0];
-				var _elt2 = document.createElement("script");
-				_elt2.innerHTML =  _scr.childNodes[0].textContent;
-				 document.head.appendChild(_elt2);
-			} else {
-				
-			}
-		}
-	}
-	xReq.send(null);
-	*/
+
 	if (this.DesignerUrl == null || this.DesignerUrl.replace(" /g","") == "" ) return;
 	
 	 var xReq = new XMLHttpRequest();
@@ -56,7 +26,6 @@ VH20.LoadDesignerScript = function() {
 	_elt2.setAttribute("data-VH20-dsgk","");
 	_elt2.innerHTML =  _scr.childNodes[0].textContent;
 	 document.head.appendChild(_elt2);
-	
 	
 };
 VH20.AddResource = function(url) {
@@ -78,29 +47,7 @@ VH20.IncludeDynamicScript = function(url) {
 	var _elt2 = document.createElement("script");
 	_elt2.setAttribute("data-VH20-Res", "");
 	_elt2.src =  url;
-	//_elt2.setAttribute("onerror","event.currentTarget.src = event.currentTarget.getAttribute('data-VH20-Res'); console.log('resolved refrence');");
-	/*_elt2.type="application/javascript";*/
-	/*_elt2.language="javascript";*/
-	 //document.head.appendChild(_elt2);
 	 document.head.appendChild(_elt2);
-	 /* Scripts can be added for different purpose,
-	 VH20.CurrentTarget.appendChild(_elt2);
-	 document.head.appendChild(_elt2);
-	  All these functions : AddResource, IncludeDynamicScript, RemoveResource, RemoveDynamicScript
-	 
-	 // will allow designer, starters and custom controls to load/unload code from page with single script reference (url)
-	 // suppose to understand why : I have a designer for bootstrap and use it to get a page grid built on their code
-	 // then I jump on the basic html text formatter to fill it's content
-	 // then I go to the Painter designer) one I know that focus at painting literally : text color, background
-	 // then save as...
-
-	// if a code is to remain within document (custom controls behaviors) It's still not validated ; even not this reference and dynamic burden 
-	// Remind: Focus at function level, use the usage scenario to identify resources
-	// This will allow large amount of codes addressable on different usage scenario
-	
-	// IT'S not validated nor strong but for sure it is POC'ed, to note this difference in behavior when code is injected (AddResource)
-	// or included using a script source (IncludeDynamicScript)
-	*/
 };
 VH20.RemoveResource = function(url) {
 	
@@ -115,13 +62,6 @@ VH20.RemoveDynamicScript = function(url) {
 	 
 };
 VH20.LoadDesignerCSS = function() {
-	/*
-	 First version, its a css fragment, poc'n designer
-		
-	// Styles also are designer dependent, what editor can do is to add the designer's styles just after the script node
-	// Here a function such as VH20.head.AddDesignerStyles(code)---why do I need to manage this, to clean the code, to provide basic enable-disable...
-	// Add designer' styles
-	*/
 	
 	var  _element = document.createElement("style");
 	_element.title = "VH20- Designer Styles";
@@ -144,25 +84,10 @@ VH20.LoadDesignerCSS = function() {
 
 };
 VH20.LoadDesignerHTML = function() {
-	/* First version, I had no html in my current code, poc'n designer */
 	
-	
-		if (document.body.querySelector('#Designer-Toolbar') != null) {
-			/*
-	try { document.body.querySelector('#Designer-Toolbar').remove(true); console.log("used:.remove(true)"); } 
-	catch(xcp) {		
-		try {
-		document.body.querySelector('#Designer-Toolbar').removeNode(true); console.log("used:.removeNode(true)"); 
-		} catch(xcp) { 
-		document.body.removeChild(document.body.querySelector('#Designer-Toolbar')); console.log("used:.removeChild(elt)"); }
-		finally { console.log("cross-browser"); };		
-	} 
-	finally { console.log("cross-browser"); };
-	*/
-	VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
-	
-		}
-	
+	if (document.body.querySelector('#Designer-Toolbar') != null) {
+		VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
+	};
 	
 	var _defaultDesignerToolbar;
 	
@@ -208,48 +133,9 @@ VH20.Clear = function() {
 	}
 	
 	_elements = document.body.querySelectorAll("body *[contentEditable='false']");
-	for (var i = 0 ; i < _elements.length ; i++) {
-		
-		/*
-		try { _elements[i].remove(true);  console.log("used:.remove(true)"); } 
-		catch(xcp) { 
-			try {
-			_elements[i].removeNode(true); console.log("used:.removeNode(true)");  
-			} catch(xcp) { 
-			_elements[i].parentNode.removeChild(_elements[i]); console.log("used:.removeChild(elt)");
-			}
-			finally { console.log("cross-browser"); };			
-		} 
-		finally { console.log("cross-browser"); };
-		*/		
-		VH20.CrossBrowser.RemoveElement(_elements[i]);
-		
-	}
+	for (var i = 0 ; i < _elements.length ; i++) { VH20.CrossBrowser.RemoveElement(_elements[i]); };
 	
-	/*
-	try { document.head.querySelector('#VH20-Designer-Styles').remove(true); console.log("used:.remove(true)"); } 
-	catch(xcp) {		
-		try {
-		document.head.querySelector('#VH20-Designer-Styles').removeNode(true); console.log("used:.removeNode(true)"); 
-		} catch(xcp) { 
-		document.head.removeChild(document.head.querySelector('#VH20-Designer-Styles')); console.log("used:.removeChild(elt)"); }
-		finally { console.log("cross-browser"); };		
-	} 
-	finally { console.log("cross-browser"); };
-	*/
 	VH20.CrossBrowser.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
-		
-	/*
-	try { document.body.querySelector('#Designer-Toolbar').remove(true); console.log("used:.remove(true)"); } 
-	catch(xcp) {		
-		try {
-		document.body.querySelector('#Designer-Toolbar').removeNode(true); console.log("used:.removeNode(true)"); 
-		} catch(xcp) { 
-		document.body.removeChild(document.body.querySelector('#Designer-Toolbar')); console.log("used:.removeChild(elt)"); }
-		finally { console.log("cross-browser"); };		
-	} 
-	finally { console.log("cross-browser"); };
-	*/
 	VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	
 	// save current script source (can be altered by browser's save as logic)
@@ -260,53 +146,16 @@ VH20.Clear = function() {
 		_currentscriptsrc = _aux.substring(_aux.indexOf('!')+1);
 	}
 
-	/*
-	try { document.head.querySelector('script[src*="VH20.js"]').remove(true); console.log("used:.remove(true)"); } 
-	catch(xcp) {		
-		try {
-		document.head.querySelector('script[src*="VH20.js"]').removeNode(true); console.log("used:.removeNode(true)"); 
-		} catch(xcp) { 
-		document.body.removeChild(document.head.querySelector('script[src*="VH20.js"]')); console.log("used:.removeChild(elt)"); }
-		finally { console.log("cross-browser"); };		
-	} 
-	finally { console.log("cross-browser"); };
-	*/
 	VH20.CrossBrowser.RemoveElement(document.head.querySelector('script[src*="VH20.js"]'));
 	
 	if (document.head.querySelector('script[data-VH20-dsgk]') != null) {	
 		VH20.CrossBrowser.RemoveElement(document.head.querySelector('script[data-VH20-dsgk]'));
-		/*
-		try { document.head.querySelector('script[data-VH20-dsgk]').remove(true); console.log("used:.remove(true)"); } 
-		catch(xcp) {		
-			try {
-			document.head.querySelector('script[data-VH20-dsgk]').removeNode(true); console.log("used:.removeNode(true)"); 
-			} catch(xcp) { 
-			document.body.removeChild(document.head.querySelector('script[data-VH20-dsgk]')); console.log("used:.removeChild(elt)"); }
-			finally { console.log("cross-browser"); };		
-		} 
-		finally { console.log("cross-browser"); };
-		*/
-		
-	}
+	};
 	
 	// Remove data-VH20-Res
 	var _res = document.head.querySelectorAll('script[data-VH20-Res]');
-	for (var i = 0; i < _res.length ; i++) {
-		VH20.CrossBrowser.RemoveElement(_res[i]);
-		/*
-		try { _res[i].remove(true); console.log("used:.remove(true)"); } 
-		catch(xcp) {		
-			try {
-			_res[i].removeNode(true); console.log("used:.removeNode(true)"); 
-			} catch(xcp) { 
-			document.body.removeChild(_res[i]); console.log("used:.removeChild(elt)"); }
-			finally { console.log("cross-browser"); };		
-		} 
-		finally { console.log("cross-browser"); };
-		*/
-	}
-	
-	
+	for (var i = 0; i < _res.length ; i++) { VH20.CrossBrowser.RemoveElement(_res[i]); };
+		
 	//Add Get Editor function
 	var _backeditorHTML = document.createElement("div");
 	_backeditorHTML.id = "Designer-Toolbar";
@@ -323,13 +172,7 @@ VH20.Clear = function() {
 	_backeditor.innerHTML += "_elt.onload = function() { VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.InitializeUserAgent(); }; ";
 	_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "document.head.appendChild(_elt); ";
-	//_backeditor.innerHTML += "InitializeUserAgent(); ";
 	_backeditor.innerHTML += "}; ";
-	/*_backeditor.innerHTML += "function Remove() { ";
-	_backeditor.innerHTML += "";
-	/*_backeditor.innerHTML += "try { document.body.querySelector('#Designer-Toolbar').remove(true); console.log('used:.remove(true)'); } catch(xcp) { try { 		document.body.querySelector('#Designer-Toolbar').removeNode(true); console.log('used:.removeNode(true)'); } catch(xcp) { 		document.body.removeChild(document.body.querySelector('#Designer-Toolbar')); console.log('used:.removeChild(elt)'); } finally { console.log('cross-browser'); }; } finally { console.log('cross-browser'); }; ";
-	_backeditor.innerHTML += "}; ";
-	*/
 	 
 	_backeditorHTML.appendChild(_inputButton);
 	_backeditorHTML.appendChild(_backeditor);
@@ -393,13 +236,9 @@ VH20.WrapElement = function(elt) {
 }
 
 
-/* Wrap can happen to be set on one or several elements, after all content injection this must also be called */
+
 VH20.WrapElementById = function(id) {
-	/*
-	// This is the wrapper code for a temporarily identified element, 
-	// created by code generator these elements get an id only
-	// to enable this code to do a getElementById...
-	*/
+	
 	var elt = document.getElementById(id);
 	/*
 	// This is already a designer option, a designer can choose to provide editing on text otherwise than this function 
@@ -480,8 +319,7 @@ VH20.CrossBrowser.RemoveElement = function(elt) {
 		// This code will be replaced with the right instruction if supplied : InitializeUserAgent will load specific code
 };
 
-VH20.InitializeDocument = function() {
-	
+VH20.InitializeDocument = function() {	
 	
 	// check and remove all remainings from previous edit session
 	// If user hasnt cleared the code I can retrieve 
@@ -492,31 +330,9 @@ VH20.InitializeDocument = function() {
 		_elements[i].removeAttribute("contentEditable");
 	}
 	if (document.head.querySelector('#VH20-Designer-Styles') != null) {
-		/*
-		try { document.head.querySelector('#VH20-Designer-Styles').remove(true); console.log("used:.remove(true)"); } 
-		catch(xcp) {		
-			try {
-			document.head.querySelector('#VH20-Designer-Styles').removeNode(true); console.log("used:.removeNode(true)"); 
-			} catch(xcp) { 
-			document.head.removeChild(document.head.querySelector('#VH20-Designer-Styles')); console.log("used:.removeChild(elt)"); }
-			finally { console.log("cross-browser"); };		
-		} 
-		finally { console.log("cross-browser"); };
-		*/
 		VH20.CrossBrowser.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
 	}
 	if (document.body.querySelector('#Designer-Toolbar') != null) {
-		/*
-		try { document.body.querySelector('#Designer-Toolbar').remove(true); console.log("used:.remove(true)"); } 
-		catch(xcp) {		
-			try {
-			document.body.querySelector('#Designer-Toolbar').removeNode(true); console.log("used:.removeNode(true)"); 
-			} catch(xcp) { 
-			document.body.removeChild(document.body.querySelector('#Designer-Toolbar')); console.log("used:.removeChild(elt)"); }
-			finally { console.log("cross-browser"); };		
-		} 
-		finally { console.log("cross-browser"); };
-		*/
 		VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	}
 	/////////////////// end clear document
@@ -524,7 +340,6 @@ VH20.InitializeDocument = function() {
 	
 	document.addEventListener('keydown', this.DocumentKeyDown, false);	
 	document.body.addEventListener('click', this.DocumentClick, false);	
-
 
 
 	this.InitializeContent();
@@ -586,58 +401,6 @@ VH20.ElementKeyDown =  function(e) {
          
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
-
-	/* All the following seem to be designer code! */ 
-/*
-	if (e.which === 13 && e.shiftKey) {	
-	/*
-	// this allow to prevent defaults for what I override, and not for a backspace , delete...
-	// This is a code related to shift+enter handling
-	
-	   	e.preventDefault();
-		e.stopPropagation();
- 
-		/*
-		// shift+enter must insert a br element at the current cursor position 
-		// https://www.w3.org/TR/html/single-page.html#the-br-element
-		
-		var _elt = document.createElement("br"); 
-		_elt.id = Date.now();
-
-                if ( typeof(document.getSelection().focusNode.data) !== "undefined") {
-			var _pos= e.currentTarget.innerHTML.indexOf(document.getSelection().focusNode.data);
-			_pos = (_pos === -1 ? 0 : _pos);
-			/*
-			// using getSelection may need index re-compute: result in _pos
-			// document.getSelection().focusOffset only give me the cursor position within a node
-			
-			e.currentTarget.innerHTML = 
-				e.currentTarget.innerHTML.substring(0, _pos + document.getSelection().focusOffset)
-				+ _elt.outerHTML
-				+ e.currentTarget.innerHTML.substring(_pos + document.getSelection().focusOffset, e.currentTarget.innerHTML.length);
-		} else {
-			console.log("cross-browser code used");
-			var _tmp = _elt.outerHTML.replace(">"," />")
-			e.currentTarget.innerHTML += _tmp;			
-		}
-		
-		WrapElementById(_elt.id); // This process with its id 
-		//e.currentTarget.focus();
-		
-	}
-		
-	if (e.which === 13 && !e.shiftKey) {
-		// prevent default only in this case: return down, not even released 
-	   	e.preventDefault();
-		e.stopPropagation();
-
-		// Add content pressing enter 
-		var _elt = document.createElement("p");			
-		var _res = e.currentTarget.parentNode.insertBefore(_elt, e.currentTarget.nextElementSibling);
-		// and wrap it 
-		WrapElements(_res);
-	}
-	   */
 	   
 }
 
@@ -672,18 +435,7 @@ VH20.DocumentKeyDown = function(e) {
 	
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
-	
-	/* This is designer code! */
-	/*
-	if (e.which === 13) {
-		// Enter on document add a new paragraph
-		e.preventDefault();
 		
-		var _res = document.body.appendChild(document.createElement("p")); //TODO: designer must be able to say what element is added : div, ul, ol? blockquote?...
-		WrapElements(_res);
-	}
-	*/
-	
 }
 
 
