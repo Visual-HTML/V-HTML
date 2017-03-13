@@ -350,9 +350,9 @@ VH20.UnWrapElementCode = function(elt) {
 	elt.removeAttribute("data-VH20-hndk","");
 }
 
-
-VH20.ElementClick = function(evt) { };
-VH20.ElementWrap = function(elt) { };
+VH20.Events = {};
+VH20.Events.ElementClick = function(evt) { };
+VH20.Events.ElementWrap = function(elt) { };
 
 VH20.WrapDocument = function() { 
 	/* look for and attach unhandled elements ...apply on all elements not already handled and elements not set as not editable */
@@ -372,7 +372,7 @@ VH20.WrapDocument = function() {
 				_elements[i].contentEditable = true;
 				
 			/* Send info to handler */ 
-			VH20.ElementWrap(_elements[i]);
+			VH20.Events.ElementWrap(_elements[i]);
 			}
 	}
 }
@@ -387,7 +387,7 @@ VH20.WrapElement = function(elt) {
 		elt.contentEditable = true;
 		
 		VH20.CurrentTarget = elt;
-		VH20.ElementWrap(elt);  /* Inform using handler */
+		VH20.Events.ElementWrap(elt);  /* Inform using handler */
 		VH20.CurrentTarget.focus();
 		
 }
@@ -411,7 +411,7 @@ VH20.WrapElementById = function(id) {
 	
 	VH20.WrapElementCode(elt);
 	VH20.CurrentTarget = elt;
-	/*this is what is done, call removed : VH20.ElementWrap(elt);  --------- Inform using handler */
+	/*this is what is done, call removed : VH20.Events.ElementWrap(elt);  --------- Inform using handler */
 	VH20.CurrentTarget.focus();
 	/*
 	// This function is used (and was created by a need of, rather, a designer code, so the editor provide
@@ -652,7 +652,7 @@ VH20.ElementClick = function(e) {
 	e.preventDefault();
 	
 	this.CurrentTarget = e.currentTarget;	
-	VH20.ElementClick(e);  /* Inform designer that element was selected */
+	VH20.Events.ElementClick(e);  /* Inform designer that element was selected */
 
 }
 
