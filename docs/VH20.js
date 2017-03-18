@@ -13,7 +13,7 @@ VH20.CrossBrowser.SaveAs = function(file) { };
 VH20._TmpElt = null;
 VH20.LoadDesignerScript = function() {
 
-	if (this.DesignerUrl == null || this.DesignerUrl.replace(" /g","") == "" ) return;
+	if (this.DesignerUrl == null || this.DesignerUrl.replace(/\s/g,"") == "" ) return;
 	
 	 var xReq = new XMLHttpRequest();
 	 xReq.open("GET", this.DesignerUrl, false);
@@ -61,6 +61,7 @@ VH20.RemoveDynamicScript = function(url) {
 	 document.head.removeChild(_elt2);
 	 
 };
+VH20.DesignerInitializeDocument = function() { console.log("VH20- Designer' document initialization not provided."); };
 VH20.LoadDesignerCSS = function() {
 	
 	var  _element = document.createElement("style");
@@ -348,9 +349,21 @@ VH20.InitializeDocument = function() {
 	this.InitializeContent();
 	
 	
-}
+};
 
+VH20.LoadDesigner = function(url) {
 
+	this.RemoveDesigner(); // This only remove all previous designer codes
+	
+	// loading script on the end make all css and html available to the script 
+	this.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?
+	this.LoadDesignerCSS();
+	this.LoadDesignerHTML();
+	// different order, different file structure : split on several documents, one single file...
+
+	this.DesignerInitializeDocument();
+
+};
 
 VH20.InitializeContent = function() {	
 
@@ -367,7 +380,7 @@ VH20.InitializeContent = function() {
 		VH20.CurrentTarget.click(); }
 		catch(xcp) { 
 		/* while some other will not even provide the function ? it's maybe an element without click ? to check! */
-		console.log("catch exception : .click() on "+VH20.CurrentTarget.nodeName);  }
+		console.log("catch exception : .click() on " + VH20.CurrentTarget.nodeName);  }
 		finally { };
 	} else {
 		// empty document processing
@@ -385,16 +398,14 @@ VH20.InitializeContent = function() {
 	//here make the document content wrapped and avoid making designer content wrapped...
 	
 	// loading script on the end make all css and html available to the script 
-	if (typeof(this.LoadDesignerScript) !== "undefined" ) this.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?
+	this.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?
 	
-	if (typeof(this.LoadDesignerCSS) !== "undefined" ) this.LoadDesignerCSS();
+	this.LoadDesignerCSS();
  		
-	if (typeof(this.LoadDesignerHTML) !== "undefined" ) this.LoadDesignerHTML();
+	this.LoadDesignerHTML();
 	// different order, different file structure : split on several documents, one single file...
 
-
-	if (typeof(this.DesignerInitializeDocument) !== "undefined" ) this.DesignerInitializeDocument();
-	
+	this.DesignerInitializeDocument();
 		
 }
 
