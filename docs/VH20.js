@@ -61,7 +61,7 @@ VH20.RemoveDynamicScript = function(url) {
 	 document.head.removeChild(_elt2);
 	 
 };
-VH20.DesignerInitializeDocument = function() { console.log("VH20- Designer' document initialization not provided."); };
+//VH20.DesignerInitializeDocument = function() { console.log("VH20.DesignerInitializeDocument()' document initialization not provided."); };
 VH20.LoadDesignerCSS = function() {
 	
 	var  _element = document.createElement("style");
@@ -174,9 +174,9 @@ VH20.Clear = function() {
 	_backeditor.innerHTML += "function GetBackEditor() {";
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
 	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
-	_backeditor.innerHTML += "_elt.onload = function() { VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.InitializeUserAgent(); }; ";
+	_backeditor.innerHTML += "_elt.onload = function() { VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.InitializeUserAgent(" + (this.DesignerUrl != null ? "'"+this.DesignerUrl+"'" : "") + "); }; ";
 	_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
-	_backeditor.innerHTML += "document.head.appendChild(_elt); ";
+	_backeditor.innerHTML += "document.head.insertBefore(_elt, document.head.firstChild); ";
 	_backeditor.innerHTML += "}; ";
 	 
 	_backeditorHTML.appendChild(_inputButton);
@@ -267,7 +267,7 @@ VH20.WrapElementById = function(id) {
 }
 
 
-VH20.InitializeUserAgent = function(e) {
+VH20.InitializeUserAgent = function(url) {
 	/*
 	// jQuery remain the best solution to solve user-agent specific code but I'm trying to avoid using it at start
 	// Custom Controls and starters can use it but at the editor level I wish to implement a kind of dynamic loading
@@ -305,7 +305,7 @@ VH20.InitializeUserAgent = function(e) {
 	}
 	
 	///////////////// end useragent specific code
-	
+	this.DesignerUrl = url;
 	
 	/* in the scope of an event I ca't say this.InitializeDocument(); */
 	VH20.InitializeDocument();
@@ -402,6 +402,8 @@ VH20.InitializeContent = function() {
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...
 	
+	if (typeof(this.DesignerInitializeDocument) !== "undefined") this.DesignerInitializeDocument();
+	
 	// loading script on the end make all css and html available to the script 
 	this.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?
 	
@@ -410,7 +412,6 @@ VH20.InitializeContent = function() {
 	this.LoadDesignerHTML();
 	// different order, different file structure : split on several documents, one single file...
 
-	this.DesignerInitializeDocument();
 		
 }
 
