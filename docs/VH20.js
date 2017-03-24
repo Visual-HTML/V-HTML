@@ -15,17 +15,17 @@ VH20.LoadDesignerScript = function() {
 
 	if (this.DesignerUrl == null || this.DesignerUrl.replace(/\s/g,"") == "" ) return;
 	
-	 var xReq = new XMLHttpRequest();
-	 xReq.open("GET", this.DesignerUrl, false);
-	 xReq.send(null);
-	 var  _element = document.createElement("html");
+	var xReq = new XMLHttpRequest();
+	xReq.open("GET", this.DesignerUrl, false);
+	xReq.send(null);
+	var  _element = document.createElement("html");
 	_element.innerHTML = xReq.response;
 	this._TmpElt = _element;
 	var _scr = _element.getElementsByTagName("script")[0];
 	var _elt2 = document.createElement("script");
 	_elt2.setAttribute("data-VH20-dsgk","");
 	_elt2.innerHTML =  _scr.childNodes[0].textContent;
-	 document.head.appendChild(_elt2);
+	document.head.appendChild(_elt2);
 	
 };
 VH20.AddResource = function(url) {
@@ -80,7 +80,7 @@ VH20.LoadDesignerCSS = function() {
 	if (this._TmpElt == null) return;	
 	 var _overridestyle = document.getElementById("VH20-Designer-Styles");
 	 if ( this._TmpElt.getElementsByTagName('style').length > 0)
-	       _overridestyle.innerHTML = this._TmpElt.getElementsByTagName('style')[0].innerHTML;
+	       _overridestyle.innerHTML += this._TmpElt.getElementsByTagName('style')[0].innerHTML;
 
 
 };
@@ -353,15 +353,17 @@ VH20.InitializeDocument = function() {
 
 VH20.LoadDesigner = function(url) {
 
-	this.RemoveDesigner(); // This only remove all previous designer codes
+	//this.RemoveDesigner(); // This only remove all previous designer codes
 	
 	// loading script on the end make all css and html available to the script 
-	this.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?
-	this.LoadDesignerCSS();
-	this.LoadDesignerHTML();
+	//this.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?
+	//this.LoadDesignerCSS();
+	//this.LoadDesignerHTML();
 	// different order, different file structure : split on several documents, one single file...
 
-	this.DesignerInitializeDocument();
+	this.DesignerUrl = url;
+
+	//this.DesignerInitializeDocument();
 
 };
 
