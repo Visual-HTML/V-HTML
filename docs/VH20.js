@@ -116,7 +116,10 @@ VH20.LoadDesignerHTML = function() {
 	
 	if (this._TmpElt != null) {
 	 if ( this._TmpElt.getElementsByTagName('body').length > 0)
-	       _defaultDesignerToolbar.innerHTML += this._TmpElt.getElementsByTagName('body')[0].innerHTML;
+	       //_defaultDesignerToolbar.innerHTML += this._TmpElt.getElementsByTagName('body')[0].innerHTML;
+				 var _designerContent = document.createElement("div");
+				 _designerContent.innerHTML = this._TmpElt.getElementsByTagName('body')[0].innerHTML;
+				 _defaultDesignerToolbar.appendChild(_designerContent);	
 	};
 	
 	document.body.insertBefore(_defaultDesignerToolbar, document.body.firstChild);
