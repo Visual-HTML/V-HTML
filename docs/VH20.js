@@ -402,7 +402,7 @@ VH20.InitializeContent = function() {
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...
 	
-	if (typeof(this.DesignerInitializeDocument) !== "undefined") this.DesignerInitializeDocument();
+	this.DesignerInitializeDocument();
 	
 	// loading script on the end make all css and html available to the script 
 	this.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?
@@ -420,8 +420,24 @@ VH20.InitializeContent = function() {
 VH20.ElementKeyDown =  function(e) { 
          
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
-		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
-	   
+		(document.activeElement.nodeName ? document.activeElement.nodeName : null));	   
+	VH20.OnElementKeyDown(e);
+	
+}
+
+
+VH20.OnElementKeyDown =  function(e) {
+	if (e.which === 13 && !e.shiftKey) {		
+		// prevent default only in this case: return down, not even released 		
+		e.preventDefault();		
+		e.stopPropagation();		
+		
+		// Add content pressing enter 		
+		var _elt = document.createElement("p");					
+		var _res = e.currentTarget.parentNode.insertBefore(_elt, e.currentTarget.nextElementSibling);		
+		// and wrap it 		
+		VH20.WrapElement(_res);		
+	}
 }
 
 
@@ -455,10 +471,35 @@ VH20.DocumentKeyDown = function(e) {
 	
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
-		
+	VH20.OnDocumentKeyDown(e);
 }
 
+VH20.OnDocumentKeyDown = function(e) { 
+/* This is designer code! : VH20 default hardcode notepad designer */
+	
+	if (e.which === 13) {
+		// Enter on document add a new paragraph
+		e.preventDefault();
+		
+		var _res = document.body.appendChild(document.createElement("p")); 
+		//TODO: designer must be able to say what element is added : div, ul, ol? blockquote?...
+		VH20.WrapElement(_res);
+	}
+}
 
+VH20.DesignerInitializeDocument = function() {
+	// This is a designer code: So editor must issue a call to a handler where designer 
+  // can choose what to do initializing a document
+  
+  //if (document.body.childElementCount === 0) {
+  if (VH20.document.body.Blank) {  
+    // ! if document hold only designer code it is to consider as empty... 
+    // this test can be a service of the editor because it's his business
+    var _res = document.body.appendChild(document.createElement("p"));
+    this.WrapElement(_res);
+  };
+	
+};
 
 /* when page is loaded, start initialization process: set user-agent specific code */
 window.addEventListener('load', VH20.InitializeUserAgent, false);
