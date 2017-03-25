@@ -4,10 +4,17 @@
 <title>VH20- on Designer A</title>
 <script src="VH20.js"></script>
 <script>
+/*
 VH20.DesignerInitializeDocument	= function() { 
+// VH20.DesignerInitializeDocument is part of the initialization process but for a 'real' designer: hat dsigner need to do on the content
 			VH20.LoadDesigner("https://raw.githubusercontent.com/Visual-HTML/Designers/master/DesignerA.html");
 			console.log('loaded...');
+// this code will be used by designer code: designer = a code that will interface processing to user
 };
+*/
+// in the search (CodeSources) can use only VH20.LoadDesigner: say that the function name is erroneous, lead to confusion...
+VH20.LoadDesigner("https://raw.githubusercontent.com/Visual-HTML/Designers/master/DesignerA.html");	
+// At this time, this allow to add code in the #DesignerToolbar - //TODO: the principle must completely be reviewed 
 </script>
 <STYLE type=text/css>
 <!--
