@@ -58,3 +58,21 @@ I'm rather in poc phase, looking to dress the base, this POC phase is itself at 
 -----------------------------------------------
 
 #### [GitHub Pages](https://pages.github.com/) is designed to host your personal, organization, or project pages from a GitHub repository.
+
+-----------------------------------------------
+
+ > Second level
+
+-----------------------------------------------
+Search for a designer within a CodeSources: 
+[VH20onDesignerA.html](VH20onDesignerA.html) - this is for a (designer) code source.
+
+### NOTE: VH20 by default hardcode the NotePad designer - [VH2017.html](VH2017.html)
+
+...to continue: realy load another designer logic..., code is once again confusing, all adds made for POC purpose now must be re-planned
+...main logic is based in parser logic (initalize VH20, enrich by overwritting VH20 namespace members...
+...in the general edit cycle of a document (access an edior web location, edits, save as/clear, get back editor....
+
+
+-----------------------------------------------
+[VH20onDesignerA.html](VH20onDesignerA.html) -
