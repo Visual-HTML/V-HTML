@@ -31,7 +31,7 @@ border: 1px dotted lightgray;
   <h1>Designer Content</h1>
   <p>Call VH2017.Clear()</p>
   <p>Editor’s Draft 9 May 2013 - <input contentEditable="false" value="Clear" type="button" onClick="VH20.Clear();" /> -</p>
- <p contentEditable="false">This is a text node: but within a header.</p>
+ <p  data-VH20-dsgk>This is a text node: but within a header.</p>
 </header>
 
 <p style="text-align: justify;">This page content hold designer code, 4 input of type buttons.</p>
@@ -46,9 +46,9 @@ Click the button to get all editor wrapper code removed, next step will sure be 
 <br/><br/>This don't remove the script referring editor's code file.
 </blockquote>
 
-This text is a text node within the body, it remain un-editable.
+This text is a text node within the body, it remain un-editable.  Because body (parent) not set with contentEditable
  
-<input data-VH20-dsgk value="Clear" type="button" onClick="VH20.Clear();" />
+<input contentEditable="false" value="Clear" type="button" onClick="VH20.Clear();" />
 
 
 
