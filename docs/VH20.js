@@ -137,7 +137,8 @@ VH20.Clear = function() {
 		_elements[i].removeAttribute("contentEditable");
 	}
 	
-	_elements = document.body.querySelectorAll("body *[contentEditable='false']");
+	//_elements = document.body.querySelectorAll("body *[contentEditable='false']");
+	_elements = document.body.querySelectorAll("body *[data-VH20-dsge]");
 	for (var i = 0 ; i < _elements.length ; i++) { VH20.CrossBrowser.RemoveElement(_elements[i]); };
 	
 	VH20.CrossBrowser.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
@@ -206,10 +207,12 @@ VH20.Events.ElementWrap = function(evt) { };
 
 VH20.WrapDocument = function() { 
 	/* look for and attach unhandled elements ...apply on all elements not already handled and elements not set as not editable */
+	/* ! this function can be called on a document on which .Clear() has been runned */
 	var _elements = document.body.querySelectorAll("body *:not([data-VH20-hndk]):not([contentEditable='false'])");
 	
 	for (var i = 0 ; i < _elements.length ; i++) {
 		if ( _elements[i].nodeType === 1 
+					 && !_elements[i].hasAttribute("data-VH20-dsge")
 					 && !_elements[i].hasAttribute("data-VH20-dsgk")
 					 && !_elements[i].hasAttribute('data-VH20-hndk') ) { 
 				
@@ -225,6 +228,11 @@ VH20.WrapDocument = function() {
 			VH20.Events.ElementWrap(_elements[i]);
 			}
 	}
+	/* the whole wrapping logic must be reviewed to allow to : (within document content, provide information to wrapper logic)*/
+	/* 1. make an element part of the designer : at this time it is done setting it contentEditable=false, these elements disappear with .Clear()*/
+	/* 2. make an element part of the content, but not editable ! these elements remain as content and aren't editable */
+	/* often in the specification they say to use custom tag/expando to avoid collision, following this fact I should define custom tags */
+	/* for each cases here above and use contentEditable only for its specification purpose */
 }
 		
 
