@@ -247,7 +247,7 @@ VHTML.InitializeUserAgent = function(url) {
 
 	// ensure script handle missing editor sources at document location
 	// can happen if you code script reference to VHTML.js
- 	document.head.querySelector('script[src*="VHTML.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
+ 	document.head.querySelector('script[src*="vhtml.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
 	
 	/*
 	/////////////////////////////////////// This introduce Platform-independent model where deigner code model things but no code is provided
