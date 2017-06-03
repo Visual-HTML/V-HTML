@@ -248,14 +248,16 @@ VHTML.InitializeUserAgent = function(url) {
 	// can happen if you code script reference to VHTML.js
  	document.head.querySelector('script[src*="vhtml.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
 	
-	/*
+	
 	/////////////////////////////////////// This introduce Platform-independent model where deigner code model things but no code is provided
 	/// In designer code case there is a code provided : it's the last specification instructions but for cross-browser support they can be overriden
 	// using expando, virtual functions, provided by javascript
 	// define key/test on appName and userAgent to load appropriate code for the browser
 	if (VH20.Browser.Class === "MSIE10") {
 	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-MSIE10.js");
-	} else 	
+	} 
+	
+	/*else 	
 	if (((navigator.app................(navigator.userAgent.indexOf("OPR") > -1))) {
 	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Opera.js");
 	} else
