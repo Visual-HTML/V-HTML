@@ -254,7 +254,7 @@ VHTML.InitializeUserAgent = function(url) {
 	// using expando, virtual functions, provided by javascript
 	// define key/test on appName and userAgent to load appropriate code for the browser
 	if (VH20.Browser.Class === "MSIE10") {
-	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-MSIE10.js");
+	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VHTML-MSIE10.js");
 	} 
 	
 	/*else 	
