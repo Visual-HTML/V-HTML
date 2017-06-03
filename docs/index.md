@@ -1,5 +1,8 @@
 Welcome @
 # [Visual HTML 2017](https://visual-html.github.io/V-HTML/) | [Repository](https://github.com/Visual-HTML/V-HTML)
+
+-----------------------------------------------------------------------------------
+201706: VH20/VHTML : new structure : [On A4, paragraph editor](A4-VHTML1.html)
 -----------------------------------------------
 
  > First level
