@@ -15,7 +15,7 @@ VHTML.LoadDesignerScript = function() {
 
 	if (this.DesignerUrl == null || this.DesignerUrl.replace(/\s/g,"") == "" ) return;
 	
-	VH20.ImportDynamicScript(...);
+	//VH20.ImportDynamicScript(...);
 	
 };
 //VHTML.DesignerInitializeDocument = function() { console.log("VHTML.DesignerInitializeDocument()' document initialization not provided."); };
@@ -96,10 +96,10 @@ VHTML.Clear = function() {
 	
 	//_elements = document.body.querySelectorAll("body *[contentEditable='false']");
 	_elements = document.body.querySelectorAll("body *[data-VH20-dsge]");
-	for (var i = 0 ; i < _elements.length ; i++) { VHTML.CrossBrowser.RemoveElement(_elements[i]); };
+	for (var i = 0 ; i < _elements.length ; i++) { VH20.RemoveElement(_elements[i]); };
 	
-	VHTML.CrossBrowser.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
-	VHTML.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
+	VH20.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
+	VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	
 	// save current script source (can be altered by browser's save as logic)
 	var _currentscriptsrc = document.head.querySelector('script[src*="VHTML.js"]').src;
@@ -249,6 +249,7 @@ VHTML.InitializeUserAgent = function(url) {
 	// can happen if you code script reference to VHTML.js
  	document.head.querySelector('script[src*="VHTML.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
 	
+	/*
 	/////////////////////////////////////// This introduce Platform-independent model where deigner code model things but no code is provided
 	/// In designer code case there is a code provided : it's the last specification instructions but for cross-browser support they can be overriden
 	// using expando, virtual functions, provided by javascript
@@ -265,7 +266,7 @@ VHTML.InitializeUserAgent = function(url) {
 	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Firefox") > -1) && (navigator.userAgent.indexOf("OPR") == -1)) {
 	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Firefox.js");
 	}
-	
+	*/ 
 	///////////////// end useragent specific code
 	this.DesignerUrl = url;
 	
