@@ -110,7 +110,7 @@ VHTML.Clear = function() {
 
 	VH20.RemoveElement(document.head.querySelector('script[src*="vhtml.js"]'));
 	
-	if (document.head.querySelector('script[data-VH20-dsgk]') != null) {	
+	if (document.head.querySelector('script[data-VHTML-dsgk]') != null) {	
 		VH20.RemoveElement(document.head.querySelector('script[data-VHTML-dsgk]'));
 	};
 	
