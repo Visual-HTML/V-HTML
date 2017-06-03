@@ -8,8 +8,7 @@ VHTML.document.body.contentEditable={};
 VHTML.document.body.designMode={};
 VHTML.CurrentTarget = null;
 VHTML.DesignerUrl = null;
-VHTML.CrossBrowser = {};
-VHTML.CrossBrowser.SaveAs = function(file) { };
+VHTML.document.SaveAs = function(file) { };
 VHTML._TmpElt = null;
 VHTML.LoadDesignerScript = function() {
 
@@ -44,7 +43,7 @@ VHTML.LoadDesignerCSS = function() {
 VHTML.LoadDesignerHTML = function() {
 	
 	if (document.body.querySelector('#Designer-Toolbar') != null) {
-		VHTML.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
+		VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	};
 	
 	var _defaultDesignerToolbar;
@@ -65,7 +64,7 @@ VHTML.LoadDesignerHTML = function() {
 		var _saveAsButton = document.createElement("input");
 		_saveAsButton.type = "button";
 		_saveAsButton.value = "Save As";
-		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VHTML.CrossBrowser.SaveAs("SaveAs.html"); }, false);
+		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VHTML.document.SaveAs("SaveAs.html"); }, false);
 		
 		_defaultDesignerToolbar.appendChild(_saveAsButton);	
 	};
@@ -132,7 +131,7 @@ VHTML.Clear = function() {
 	_backeditor.innerHTML += "function GetBackEditor() {";
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
 	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
-	_backeditor.innerHTML += "_elt.onload = function() { VHTML.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VHTML.InitializeUserAgent(" + (this.DesignerUrl != null ? "'"+this.DesignerUrl+"'" : "") + "); }; ";
+	_backeditor.innerHTML += "_elt.onload = function() { VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VHTML.InitializeUserAgent(" + (this.DesignerUrl != null ? "'"+this.DesignerUrl+"'" : "") + "); }; ";
 	_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "document.head.insertBefore(_elt, document.head.firstChild); ";
 	_backeditor.innerHTML += "}; ";
