@@ -24,7 +24,7 @@ VHTML.LoadDesignerCSS = function() {
 	var  _element = document.createElement("style");
 	_element.title = "VHTML- Designer Styles";
 	_element.id = "VHTML-Designer-Styles";
-	_element.innerHTML += "*:not(hr)[data-VH20-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
+	_element.innerHTML += "*:not(hr)[data-VHTML-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
 	//_element.innerHTML += "body { margin-top: 100px; border-top: 1px solid gray; } ";	
 	_element.innerHTML += "body { border-top: 1px solid gray; } ";	
 	_element.innerHTML += "#Designer-Toolbar { position: fixed; top: 0px; } ";	
@@ -88,35 +88,35 @@ VHTML.Clear = function() {
 	document.removeEventListener('keydown', this.DocumentKeyDown, false);	
 	document.body.removeEventListener('click', this.DocumentClick, false);	
 	
-    	var _elements = document.querySelectorAll('body *[data-VH20-hndk]');
+    	var _elements = document.querySelectorAll('body *[data-VHTML-hndk]');
 	for (var i = 0 ; i < _elements.length ; i++) {
 		this.UnWrapElementCode(_elements[i]);
 		_elements[i].removeAttribute("contentEditable");
 	}
 	
 	//_elements = document.body.querySelectorAll("body *[contentEditable='false']");
-	_elements = document.body.querySelectorAll("body *[data-VH20-dsge]");
+	_elements = document.body.querySelectorAll("body *[data-VHTML-dsge]");
 	for (var i = 0 ; i < _elements.length ; i++) { VH20.RemoveElement(_elements[i]); };
 	
-	VH20.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
+	VH20.RemoveElement(document.head.querySelector('#VHTML-Designer-Styles'));
 	VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	
 	// save current script source (can be altered by browser's save as logic)
-	var _currentscriptsrc = document.head.querySelector('script[src*="VHTML.js"]').src;
+	var _currentscriptsrc = document.head.querySelector('script[src*="vhtml.js"]').src;
 	// mht file case
 	if (window.location.href.search(/mht$/) > -1) {
-		var _aux = document.head.querySelector('script[src*="VHTML.js"]').src;
+		var _aux = document.head.querySelector('script[src*="vhtml.js"]').src;
 		_currentscriptsrc = _aux.substring(_aux.indexOf('!')+1);
 	}
 
-	VH20.RemoveElement(document.head.querySelector('script[src*="VHTML.js"]'));
+	VH20.RemoveElement(document.head.querySelector('script[src*="vhtml.js"]'));
 	
 	if (document.head.querySelector('script[data-VH20-dsgk]') != null) {	
-		VH20.RemoveElement(document.head.querySelector('script[data-VH20-dsgk]'));
+		VH20.RemoveElement(document.head.querySelector('script[data-VHTML-dsgk]'));
 	};
 	
 	// Remove data-VH20-Res
-	var _res = document.head.querySelectorAll('script[data-VH20-Res]');
+	var _res = document.head.querySelectorAll('script[data-VHTML-Res]');
 	for (var i = 0; i < _res.length ; i++) { VH20.RemoveElement(_res[i]); };
 		
 	//Add Get Editor function
@@ -148,14 +148,14 @@ VHTML.WrapElementCode = function(elt) {
 	/* Initialize element with required events and attributes */ 
 	elt.addEventListener('keydown', this.ElementKeyDown, false);
 	elt.addEventListener('click', this.ElementClick, false);
-	elt.setAttribute("data-VH20-hndk","");
+	elt.setAttribute("data-VHTML-hndk","");
 };
 
 VHTML.UnWrapElementCode = function(elt) {
 	/* Remove from HTMLElement required events and attributes */
 	elt.removeEventListener('keydown', this.ElementKeyDown, false);
 	elt.removeEventListener('click', this.ElementClick, false);
-	elt.removeAttribute("data-VH20-hndk","");
+	elt.removeAttribute("data-VHTML-hndk","");
 };
 
 VHTML.Events = {};
@@ -165,13 +165,13 @@ VHTML.Events.ElementWrap = function(evt) { };
 VHTML.WrapDocument = function() { 
 	/* look for and attach unhandled elements ...apply on all elements not already handled and elements not set as not editable */
 	/* ! this function can be called on a document on which .Clear() has been runned */
-	var _elements = document.body.querySelectorAll("body *:not([data-VH20-hndk]):not([contentEditable='false'])");
+	var _elements = document.body.querySelectorAll("body *:not([data-VHTML-hndk]):not([contentEditable='false'])");
 	
 	for (var i = 0 ; i < _elements.length ; i++) {
 		if ( _elements[i].nodeType === 1 
-					 && !_elements[i].hasAttribute("data-VH20-dsge")
-					 && !_elements[i].hasAttribute("data-VH20-dsgk")
-					 && !_elements[i].hasAttribute('data-VH20-hndk') ) { 
+					 && !_elements[i].hasAttribute("data-VHTML-dsge")
+					 && !_elements[i].hasAttribute("data-VHTML-dsgk")
+					 && !_elements[i].hasAttribute('data-VHTML-hndk') ) { 
 				
 			VHTML.WrapElement(_elements[i]);
 			
@@ -278,14 +278,14 @@ VHTML.InitializeDocument = function() {
 	
 	// check and remove all remainings from previous edit session
 	// If user hasnt cleared the code I can retrieve 
-	// a designer toolbar and all elements set with data-VH20-hndk
-    	var _elements = document.querySelectorAll('body *[data-VH20-hndk]');
+	// a designer toolbar and all elements set with data-VHTML-hndk
+    	var _elements = document.querySelectorAll('body *[data-VHTML-hndk]');
 	for (var i = 0 ; i < _elements.length ; i++) {
 		VHTML.UnWrapElement(_elements[i]);
 		_elements[i].removeAttribute("contentEditable");
 	}
 	if (document.head.querySelector('#VH20-Designer-Styles') != null) {
-		VH20.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
+		VH20.RemoveElement(document.head.querySelector('#VHTML-Designer-Styles'));
 	}
 	if (document.body.querySelector('#Designer-Toolbar') != null) {
 		VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
