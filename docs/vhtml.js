@@ -22,20 +22,20 @@ VHTML.LoadDesignerScript = function() {
 VHTML.LoadDesignerCSS = function() {
 	
 	var  _element = document.createElement("style");
-	_element.title = "VH20- Designer Styles";
-	_element.id = "VH20-Designer-Styles";
+	_element.title = "VHTML- Designer Styles";
+	_element.id = "VHTML-Designer-Styles";
 	_element.innerHTML += "*:not(hr)[data-VH20-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
 	//_element.innerHTML += "body { margin-top: 100px; border-top: 1px solid gray; } ";	
 	_element.innerHTML += "body { border-top: 1px solid gray; } ";	
 	_element.innerHTML += "#Designer-Toolbar { position: fixed; top: 0px; } ";	
 	/* Designer styles are added just after this script link */
 	var _aux = document.head.querySelectorAll('script');
-	var _aux1 = document.head.querySelector('script[src*="VHTML.js"]');
+	var _aux1 = document.head.querySelector('script[src*="vhtml.js"]');
 	_aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
 	 
 	 
 	if (this._TmpElt == null) return;	
-	 var _overridestyle = document.getElementById("VH20-Designer-Styles");
+	 var _overridestyle = document.getElementById("VHTML-Designer-Styles");
 	 if ( this._TmpElt.getElementsByTagName('style').length > 0)
 	       _overridestyle.innerHTML += this._TmpElt.getElementsByTagName('style')[0].innerHTML;
 
