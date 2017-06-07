@@ -12,8 +12,20 @@ VHTML.document.SaveAs = function(file) { };
 VHTML._TmpElt = null;
 VHTML.LoadDesignerScript = function() {
 
-	if (this.DesignerUrl == null || this.DesignerUrl.replace(/\s/g,"") == "" ) return;	
-	VH20.IncludeDynamicScript(this.DesignerUrl, "data-VH20-dsgk","");
+	if (this.DesignerUrl == null || this.DesignerUrl.replace(/\s/g,"") == "" ) return;
+		
+	var xReq = new XMLHttpRequest();
+	xReq.open("GET", this.DesignerUrl, false);
+	xReq.send(null);
+	var  _element = document.createElement("html");
+	_element.innerHTML = xReq.response;
+	this._TmpElt = _element;
+	var _scr = _element.getElementsByTagName("script")[0];
+	var _elt2 = document.createElement("script");
+	_elt2.setAttribute("data-VH20-dsgk","");
+	_elt2.innerHTML =  _scr.childNodes[0].textContent;
+	document.head.appendChild(_elt2);
+	
 	
 };
 //VHTML.DesignerInitializeDocument = function() { console.log("VHTML.DesignerInitializeDocument()' document initialization not provided."); };
