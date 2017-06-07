@@ -12,9 +12,8 @@ VHTML.document.SaveAs = function(file) { };
 VHTML._TmpElt = null;
 VHTML.LoadDesignerScript = function() {
 
-	if (this.DesignerUrl == null || this.DesignerUrl.replace(/\s/g,"") == "" ) return;
-	
-	//VH20.ImportDynamicScript(...);
+	if (this.DesignerUrl == null || this.DesignerUrl.replace(/\s/g,"") == "" ) return;	
+	VH20.IncludeDynamicScript(this.DesignerUrl, "data-VH20-dsgk","");
 	
 };
 //VHTML.DesignerInitializeDocument = function() { console.log("VHTML.DesignerInitializeDocument()' document initialization not provided."); };
