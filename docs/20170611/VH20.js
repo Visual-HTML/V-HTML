@@ -276,12 +276,9 @@ VH20.WrapElementById = function(id) {
 				  
 }
 
-VH20.onInitializeUserAgent = function(url) {};
+VH20.onInitializeUserAgent = function(url) {
 
-VH20.InitializeUserAgent = function(url) {
-	
-	VH20.onInitializeUserAgent(url);
-	/*
+/*
 	// jQuery remain the best solution to solve user-agent specific code but I'm trying to avoid using it at start
 	// Custom Controls and starters can use it but at the editor level I wish to implement a kind of dynamic loading
 	*/ 
@@ -322,6 +319,13 @@ VH20.InitializeUserAgent = function(url) {
 	
 	/* in the scope of an event I ca't say this.InitializeDocument(); */
 	VH20.InitializeDocument();
+	
+	
+};
+
+VH20.InitializeUserAgent = function(url) {
+	
+	VH20.onInitializeUserAgent(url);
 	
 }
 
