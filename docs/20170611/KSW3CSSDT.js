@@ -8,7 +8,7 @@ if (document.head.querySelector('script[src*="vh20.js"]') === null) {
   
   _elt.onload = function() {
     VH20.InitializeUserAgent = function(){ alert("and now ?...");}
-    
+    VH20.InitializeUserAgent();
     
   }
   
