@@ -1,7 +1,7 @@
 // This is my designer code for KSW3CSSDT.html
 
 //The first thing is to ensure VH20 is included
-if (document.head.querySelector('script[src*="vh20.js"]').length == 0) {
+if (document.head.querySelector('script[src*="vh20.js"]') === null) {
   var _elt = document.createElement("script");
   _elt.src = "VH20.js";
   var _currentscriptnode = document.head.querySelector('script[src*="KSW3CSSDT.js"]');
