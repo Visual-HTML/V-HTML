@@ -5,11 +5,19 @@ if (document.head.querySelector('script[src*="vh20.js"]') === null) {
   var _elt = document.createElement("script");
   _elt.src = "VH20.js";
   var _currentscriptnode = document.head.querySelector('script[src*="KSW3CSSDT.js"]');
+  
+  _elt.onload = function() {
+    VH20.InitializeUserAgent = function(){ alert("and now ?...");}
+    
+    
+  }
+  
+  
   document.head.appendChild(_elt, _currentscriptnode.nextElementSibling);  
 }
 
 // Setup the intialization code
-VH20.InitializeUserAgent = function(){ alert("and now ?...");}
+
 
 // Make the intialization run
 
