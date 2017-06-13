@@ -9,9 +9,10 @@ if (document.head.querySelector('script[src*="vh20.js"]') === null) {
 }
 
 // Setup the intialization code
+VH20.InitializeUserAgent = function(){ alert("and now ?...");}
 
 // Make the intialization run
 
 
-////////////////////// Other codes introduced byt the designer
+////////////////////// Other codes introduced by the designer
 
