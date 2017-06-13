@@ -8,17 +8,19 @@ if (document.head.querySelector('script[src*="vh20.js"]') === null) {
   
   _elt.onload = function() {
     
-    VH20.onInitializeUserAgent = function(url) {
     
-    VH20.InitializeUserAgent = function(){ alert("and now ?...");}
     };
-    
-    
-    
+           
   }
   
   
   document.head.appendChild(_elt, _currentscriptnode.nextElementSibling);  
+
+VH20.onInitializeUserAgent = function(url) {
+    
+    VH20.InitializeUserAgent = function(){ alert("and now ?...");}
+
+
 }
 
 // Setup the intialization code
