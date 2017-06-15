@@ -80,8 +80,9 @@ VH20.LoadDesignerCSS = function() {
 	/* Designer styles are added just after this script link */
 	var _aux = document.head.querySelectorAll('script');
 	var _aux1 = document.head.querySelector('script[src*="VH20.js"]');
-	_aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
-	 
+	//_aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
+	// CSS come before vh20 script and optional browser specific code
+	 _aux1.parentNode.insertBefore(_element, _aux1);
 	 
 	if (this._TmpElt == null) return;	
 	 var _overridestyle = document.getElementById("VH20-Designer-Styles");
