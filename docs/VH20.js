@@ -48,6 +48,13 @@ VH20.IncludeDynamicScript = function(url) {
 	_elt2.src =  url;
 	 document.head.appendChild(_elt2);
 };
+VH20.IncludeDynamicScriptAfter = function(url, elt) {
+	
+	var _elt = document.createElement("script");
+	_elt.setAttribute("data-VH20-Res", "");
+	_elt.src =  url;
+	elt.parentNode.insertBefore(_elt, elt.nextElementSibling);
+};
 VH20.RemoveResource = function(url) {
 	
 	var _elt2 = document.querySelector("script[data-VH20-Res='"+url+"']");
@@ -327,22 +334,28 @@ VH20.InitializeUserAgent = function(url) {
 	// using expando, virtual functions, provided by javascript
 	// define key/test on appName and userAgent to load appropriate code for the browser
 	if (VH20.Browser.Class === "MSIE10") {
-	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-MSIE10.js");
+	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE10.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
 	} else
 	if (VH20.Browser.Class === "MSIE11") {
-	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-MSIE11.js");
+	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE11.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
 	} else
 	if (VH20.Browser.Class === "Opera") {
-	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Opera.js");
+	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Opera.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
 	} else
 	if (VH20.Browser.Class === "Netscape")   {
-	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Netscape.js");
+	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Netscape.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
 	} else
 	if (VH20.Browser.Class === "Firefox") {
-	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Firefox.js");
+	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Firefox.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
 	} else 
 	if (VH20.Browser.Class === "Chrome")   {
-	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Chrome.js");
+	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Chrome.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
         }
 	
 	///////////////// end useragent specific code
