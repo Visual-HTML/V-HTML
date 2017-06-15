@@ -1,8 +1,38 @@
 Welcome @
 # [Visual HTML 2017](https://visual-html.github.io/V-HTML/) | [Repository](https://github.com/Visual-HTML/V-HTML)
+-----------------------------------------------------------------------------------
+20170615: Ways to load VH20 with/without designer code:
+
+- default VH20 designer: 
+
+[Blank page](VH2017.html)
+             This use a basic document structure
+             [Basic html code](VH2017-000.html)
+             
+[A4 page](VH2017-A4.html)
+             This use a page with styling for an A4 page in portrait
+             
+[A4 page 1](VH2017-A4-1.html)
+             The A4 page in portrait, with some content
+             
+             
+- checking different codes for designer load at intial document:
+
+ [Bootstrap Cover Sample 0](Bootstrap000.html) : default VH20 code run on the page
+ 
+ [Bootstrap Cover Sample 1](Bootstrap001html) : use the designer code dynamic loading of VH20 - designer code loaded within a predefined VH20 logic
+ 
+ [Bootstrap Cover Sample 2](Bootstrap002.html) : designer code manage reference to VH20, overwrite VH20 at page parsing
+
+** all these to test within the context of document edit/authoring life cycle
+
+* acces/edit/save/re-open : take quick notes, typing or copy/pasting | + pass result to a checker tool.
 
 -----------------------------------------------------------------------------------
-201706: VH20/VHTML : new structure : [On A4, paragraph editor](A4-VHTML1.html)
+20170601: VH20/VHTML : new structure : [On A4, paragraph editor](A4-VHTML1.html)
+Abandon: introduce too much complexity "for nothing"...
+for nothing: create a kind of include logic/processing but the designer code is closer to the real needs
+REM: this code is to be loaded temporarly - coming within the page as one block is enought...
 -----------------------------------------------
 
  > First level
