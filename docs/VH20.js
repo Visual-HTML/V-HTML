@@ -75,7 +75,7 @@ VH20.LoadDesignerCSS = function() {
 	_element.id = "VH20-Designer-Styles";
 	_element.innerHTML += "*:not(hr)[data-VH20-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
 	//_element.innerHTML += "body { margin-top: 100px; border-top: 1px solid gray; } ";	
-	_element.innerHTML += "body { border-top: 1px dotted lightgray; padding-top: 100px; } ";	
+	_element.innerHTML += "body { border-top: 1px dotted lightgray; padding-top: 75px; } ";	
 	_element.innerHTML += "#Designer-Toolbar { position: fixed; top: 0px; border-bottom: 1px dotted lightgray; } ";		
 	_element.innerHTML += "#Designer-Toolbar span { font-size: xx-small; } ";	
 	/* Designer styles are added just after this script link */
