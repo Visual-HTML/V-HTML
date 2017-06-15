@@ -107,12 +107,14 @@ VH20.LoadDesignerHTML = function() {
 		'<span title="navigator.userAgent">' + navigator.userAgent + '</span>' + ' ; '  + 
 		'<span title="VH20.Browser.Class">' + VH20.Browser.Class + '</span>' + '<br />';
 		
+	
 	var _clearButton = document.createElement("input");
 	_clearButton.type = "button";
 	_clearButton.value = "Clear";
 	_clearButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.Clear(); }, false);
 	
-	_defaultDesignerToolbar.appendChild(_clearButton);	
+	_defaultDesignerToolbar.appendChild(_clearButton);
+	
 	
 	if (navigator.appName == "Microsoft Internet Explorer") {
 		var _saveAsButton = document.createElement("input");
@@ -124,6 +126,15 @@ VH20.LoadDesignerHTML = function() {
 	};
 	
 	
+	var _documentTitle =  document.createElement("input");
+	_documentTitle.type = "text";
+	_documentTitle.placeholder = "document title...";
+	_documentTitle.value = document.title;
+	_documentTitle.addEventListener("change", function(e){ e.stopPropagation(); document.title = e.currentTarget.value; }, false);
+
+	_defaultDesignerToolbar.appendChild(_documentTitle);
+
+
 	if (this._TmpElt != null) {
 	 if ( this._TmpElt.getElementsByTagName('body').length > 0)
 	       //_defaultDesignerToolbar.innerHTML += this._TmpElt.getElementsByTagName('body')[0].innerHTML;
