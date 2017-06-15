@@ -140,8 +140,8 @@ VH20.Clear = function() {
 	_elements = document.body.querySelectorAll("body *[data-VH20-dsge]");
 	for (var i = 0 ; i < _elements.length ; i++) { VH20.CrossBrowser.RemoveElement(_elements[i]); };
 	
-	VH20.CrossBrowser.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
-	VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
+	VH20.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
+	VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	
 	// save current script source (can be altered by browser's save as logic)
 	var _currentscriptsrc = document.head.querySelector('script[src*="VH20.js"]').src;
@@ -151,15 +151,15 @@ VH20.Clear = function() {
 		_currentscriptsrc = _aux.substring(_aux.indexOf('!')+1);
 	}
 
-	VH20.CrossBrowser.RemoveElement(document.head.querySelector('script[src*="VH20.js"]'));
+	VH20.RemoveElement(document.head.querySelector('script[src*="VH20.js"]'));
 	
 	if (document.head.querySelector('script[data-VH20-dsgk]') != null) {	
-		VH20.CrossBrowser.RemoveElement(document.head.querySelector('script[data-VH20-dsgk]'));
+		VH20.RemoveElement(document.head.querySelector('script[data-VH20-dsgk]'));
 	};
 	
 	// Remove data-VH20-Res
 	var _res = document.head.querySelectorAll('script[data-VH20-Res]');
-	for (var i = 0; i < _res.length ; i++) { VH20.CrossBrowser.RemoveElement(_res[i]); };
+	for (var i = 0; i < _res.length ; i++) { VH20.RemoveElement(_res[i]); };
 		
 	//Add Get Editor function
 	var _backeditorHTML = document.createElement("div");
@@ -174,7 +174,7 @@ VH20.Clear = function() {
 	_backeditor.innerHTML += "function GetBackEditor() {";
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
 	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
-	_backeditor.innerHTML += "_elt.onload = function() { VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.InitializeUserAgent(" + (this.DesignerUrl != null ? "'"+this.DesignerUrl+"'" : "") + "); }; ";
+	_backeditor.innerHTML += "_elt.onload = function() { VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.InitializeUserAgent(" + (this.DesignerUrl != null ? "'"+this.DesignerUrl+"'" : "") + "); }; ";
 	_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "document.head.insertBefore(_elt, document.head.firstChild); ";
 	_backeditor.innerHTML += "}; ";
