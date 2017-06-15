@@ -276,7 +276,7 @@ VH20.WrapElementById = function(id) {
 
 VH20.Browser = {};
 VH20.Browser.Class = "default";
-(function computeBrowserClass() {
+VH20.BrowserClass = function() {
 if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 10") > -1)) {
 	 
 		VH20.Browser.Class = "MSIE10";
@@ -302,9 +302,8 @@ if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent
 	
          VH20.Browser.Class = "Chrome"; }
  return VH20.Browser.Class;
-)
-)();
-//computeBrowserClass();
+};
+VH20.BrowserClass();
 
 VH20.InitializeUserAgent = function(url) {
 	/*
