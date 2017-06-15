@@ -274,6 +274,38 @@ VH20.WrapElementById = function(id) {
 }
 
 
+VH20.Browser = {};
+VH20.Browser.Class = "default";
+(function computeBrowserClass() {
+if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 10") > -1)) {
+	 
+		VH20.Browser.Class = "MSIE10";
+	} else
+	if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 11") > -1)) {
+	
+		VH20.Browser.Class = "MSIE11";
+	} else
+	if (((navigator.appName == "Opera") && (navigator.userAgent.indexOf("Opera") > -1)) 
+		|| ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("OPR") > -1))) {
+	
+		VH20.Browser.Class = "Opera";
+	} else
+	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("OPR") == -1))   {
+	
+		VH20.Browser.Class = "Netscape";
+	} else
+	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Firefox") > -1) && (navigator.userAgent.indexOf("OPR") == -1)) {
+	
+		VH20.Browser.Class = "Firefox";
+	} else 
+	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("Chrome") > -1))   {
+	
+         VH20.Browser.Class = "Chrome"; }
+ return VH20.Browser.Class;
+)
+)();
+//computeBrowserClass();
+
 VH20.InitializeUserAgent = function(url) {
 	/*
 	// jQuery remain the best solution to solve user-agent specific code but I'm trying to avoid using it at start
@@ -295,21 +327,24 @@ VH20.InitializeUserAgent = function(url) {
 	/// In designer code case there is a code provided : it's the last specification instructions but for cross-browser support they can be overriden
 	// using expando, virtual functions, provided by javascript
 	// define key/test on appName and userAgent to load appropriate code for the browser
-	if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 1") > -1)) {
+	if (VH20.Browser.Class === "MSIE10") {
 	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-MSIE10.js");
-	}
-	
-	if (((navigator.appName == "Opera") && (navigator.userAgent.indexOf("Opera") > -1)) 
-		|| ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("OPR") > -1))) {
+	} else
+	if (VH20.Browser.Class === "MSIE11") {
+	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-MSIE11.js");
+	} else
+	if (VH20.Browser.Class === "Opera") {
 	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Opera.js");
-	}
-
-	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("OPR") == -1))   {
+	} else
+	if (VH20.Browser.Class === "Netscape")   {
 	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Netscape.js");
-	}
-	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Firefox") > -1) && (navigator.userAgent.indexOf("OPR") == -1)) {
+	} else
+	if (VH20.Browser.Class === "Firefox") {
 	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Firefox.js");
-	}
+	} else 
+	if (VH20.Browser.Class === "Chrome")   {
+	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Chrome.js");
+        }
 	
 	///////////////// end useragent specific code
 	this.DesignerUrl = url;
