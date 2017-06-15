@@ -102,8 +102,10 @@ VH20.LoadDesignerHTML = function() {
 	_defaultDesignerToolbar = document.createElement("div");
 	_defaultDesignerToolbar.id = "Designer-Toolbar";
 	
-	_defaultDesignerToolbar.innerHTML = navigator.appName + "<br />"  + navigator.userAgent + "<br />";
-	
+	_defaultDesignerToolbar.innerHTML = '<span title="navigator.appName">' + navigator.appName + '</span>' + ' ; '  + 
+		'<span title="navigator.userAgent">' + navigator.userAgent + '</span>' + ' ; '  + 
+		'<span title="VH20.Browser.Class">' + VH20.Browser.Class + '</span>' + '<br />';
+		
 	var _clearButton = document.createElement("input");
 	_clearButton.type = "button";
 	_clearButton.value = "Clear";
