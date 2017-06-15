@@ -53,7 +53,7 @@ VH20.IncludeDynamicScriptAfter = function(url, elt) {
 	var _elt = document.createElement("script");
 	_elt.setAttribute("data-VH20-Res", "");
 	_elt.src =  url;
-	elt.parentNode.insertBefore(_elt, elt);
+	elt.parentNode.insertBefore(_elt, elt.nextSibling);
 };
 VH20.RemoveResource = function(url) {
 	
