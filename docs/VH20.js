@@ -86,7 +86,7 @@ VH20.LoadDesignerCSS = function() {
 VH20.LoadDesignerHTML = function() {
 	
 	if (document.body.querySelector('#Designer-Toolbar') != null) {
-		VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
+		VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	};
 	
 	var _defaultDesignerToolbar;
@@ -107,7 +107,7 @@ VH20.LoadDesignerHTML = function() {
 		var _saveAsButton = document.createElement("input");
 		_saveAsButton.type = "button";
 		_saveAsButton.value = "Save As";
-		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.CrossBrowser.SaveAs("SaveAs.html"); }, false);
+		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.SaveAs("SaveAs.html"); }, false);
 		
 		_defaultDesignerToolbar.appendChild(_saveAsButton);	
 	};
@@ -245,7 +245,7 @@ VH20.WrapElement = function(elt) {
 		
 		VH20.CurrentTarget = elt;
 		VH20.Events.ElementWrap(elt);  /* Inform using handler */
-		VH20.CurrentTarget.focus();
+		//VH20.CurrentTarget.focus(); //avoid focusing and scrolling within the wrapping logic
 		
 }
 
@@ -378,10 +378,10 @@ VH20.InitializeDocument = function() {
 		_elements[i].removeAttribute("contentEditable");
 	}
 	if (document.head.querySelector('#VH20-Designer-Styles') != null) {
-		VH20.CrossBrowser.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
+		VH20.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
 	}
 	if (document.body.querySelector('#Designer-Toolbar') != null) {
-		VH20.CrossBrowser.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
+		VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	}
 	/////////////////// end clear document
 	
