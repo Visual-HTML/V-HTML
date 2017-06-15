@@ -8,7 +8,7 @@ VH20.SaveAs = function(file) {
 		new Blob(["<!DOCTYPE html>"
 			  +window.document.head.outerHTML
 			  +window.document.body.outerHTML
-			  + "</html>" ]), window.document.title);
+			  + "</html>" ]), window.document.title+".html");
 	
 }
 
