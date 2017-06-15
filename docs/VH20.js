@@ -8,8 +8,7 @@ VH20.document.body.contentEditable={};
 VH20.document.body.designMode={};
 VH20.CurrentTarget = null;
 VH20.DesignerUrl = null;
-VH20.CrossBrowser = {};
-VH20.CrossBrowser.SaveAs = function(file) { };
+VH20.SaveAs = function(file) { };
 VH20._TmpElt = null;
 VH20.LoadDesignerScript = function() {
 
@@ -320,7 +319,7 @@ VH20.InitializeUserAgent = function(url) {
 	
 }
 
-VH20.CrossBrowser.RemoveElement = function(elt) { 
+VH20.RemoveElement = function(elt) { 
 	// Default code is to try/catch different instructions that may work
 	try { elt.remove(true); console.log("used:.remove(true)"); } 
 		catch(xcp) {		
