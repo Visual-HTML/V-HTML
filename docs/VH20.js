@@ -538,6 +538,8 @@ VH20.DesignerInitializeDocument = function() {
     // this test can be a service of the editor because it's his business
     var _res = document.body.appendChild(document.createElement("p"));
     this.WrapElement(_res);
+	  _res.focus();
+	  _res.click();
   };
 	
 };
