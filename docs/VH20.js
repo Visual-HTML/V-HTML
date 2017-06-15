@@ -477,7 +477,8 @@ VH20.OnElementKeyDown =  function(e) {
 		var _elt = document.createElement("p");					
 		var _res = e.currentTarget.parentNode.insertBefore(_elt, e.currentTarget.nextElementSibling);		
 		// and wrap it 		
-		VH20.WrapElement(_res);		
+		VH20.WrapElement(_res);
+		VH20.CurrentTarget.focus();
 	}
 }
 
@@ -525,6 +526,7 @@ VH20.OnDocumentKeyDown = function(e) {
 		var _res = document.body.appendChild(document.createElement("p")); 
 		//TODO: designer must be able to say what element is added : div, ul, ol? blockquote?...
 		VH20.WrapElement(_res);
+		VH20.CurrentTarget.focus();
 	}
 }
 
