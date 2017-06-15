@@ -9,7 +9,7 @@ VH20.document.body.designMode={};
 VH20.CurrentTarget = null;
 VH20.DesignerUrl = null;
 VH20.SaveAs = function(file) { };
-VH20._TmpElt = null;
+//VH20._TmpElt = null; //TODO: this must disappear - write the single document designer function - remove from this code the "chain" of process based on this variable
 VH20.LoadDesignerScript = function() {
 
 	if (this.DesignerUrl == null || this.DesignerUrl.replace(/\s/g,"") == "" ) return;
