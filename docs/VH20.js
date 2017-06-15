@@ -197,7 +197,8 @@ VH20.Clear = function() {
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
 	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
 	_backeditor.innerHTML += "_elt.onload = function() { VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.InitializeUserAgent(" + (this.DesignerUrl != null ? "'"+this.DesignerUrl+"'" : "") + "); }; ";
-	_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
+	//_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
+	_elt.setAttribute("onerror", "javascript:window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
 	_backeditor.innerHTML += "document.head.insertBefore(_elt, document.head.firstChild); ";
 	_backeditor.innerHTML += "}; ";
 	 
