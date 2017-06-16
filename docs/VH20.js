@@ -169,7 +169,7 @@ VH20.Clear = function() {
 	for (var i = 0 ; i < _elements.length ; i++) { VH20.RemoveElement(_elements[i]); };
 	
 	// Designer Initialization in Initial document' head element
-	_element = document.head.querySelector("head *[data-VH20-dsgi]");
+	var _element = document.head.querySelector("head *[data-VH20-dsgi]");
 	if (_element != null) VH20.RemoveElement(_element);
 	
 	VH20.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
@@ -217,10 +217,11 @@ VH20.Clear = function() {
 		
 	document.body.insertBefore(_backeditorHTML, document.body.firstChild);
 	
-	var  _element = document.createElement("style");
+	_element = document.createElement("style");
 	_element.title = "VH20 . Designer-Toolbar";
 	_element.id = "VH20-Designer-Styles";
 	_element.innerHTML += "media print { #Designer-Toolbar { display: none; } ";	
+	document.head.appendChild(_element);
 	
 };
 
