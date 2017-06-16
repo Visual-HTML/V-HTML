@@ -81,6 +81,7 @@ VH20.LoadDesignerCSS = function() {
 	_element.innerHTML += "@media screen and (min-width:480px) { body { /*background-color: blue;*/ padding-top: 65px; } } ";		
 	_element.innerHTML += "@media screen and (min-width:640px) { body { /*background-color: transparent;*/ padding-top: 37px; } } ";	
 	_element.innerHTML += "@media print { #Designer-Toolbar { display: none; } :not(hr)[data-VH20-hndk] { min-height: inherit; border: none; } } ";	
+	_element.innerHTML += "table, tr, td { border: 1px dotted lightgray; } ";	
 	_element.innerHTML += "#Designer-Toolbar { position: fixed; top: 0px; border-bottom: 1px dotted lightgray; } ";		
 	_element.innerHTML += "#Designer-Toolbar span { font-size: xx-small; } ";	
 	/* Designer styles are added just after this script link */
