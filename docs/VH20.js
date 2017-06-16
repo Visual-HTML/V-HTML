@@ -217,6 +217,11 @@ VH20.Clear = function() {
 		
 	document.body.insertBefore(_backeditorHTML, document.body.firstChild);
 	
+	var  _element = document.createElement("style");
+	_element.title = "VH20 . Designer-Toolbar";
+	_element.id = "VH20-Designer-Styles";
+	_element.innerHTML += "media print { #Designer-Toolbar { display: none; } ";	
+	
 };
 
 VH20.WrapElementCode = function(elt) {
