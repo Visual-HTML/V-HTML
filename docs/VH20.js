@@ -168,6 +168,10 @@ VH20.Clear = function() {
 	_elements = document.body.querySelectorAll("body *[data-VH20-dsge]");
 	for (var i = 0 ; i < _elements.length ; i++) { VH20.RemoveElement(_elements[i]); };
 	
+	// Designer Initialization in Initial document' head element
+	_elements = document.head.querySelector("head *[data-VH20-dsgi]");
+	VH20.RemoveElement(_elements[i]);
+	
 	VH20.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
 	VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	
