@@ -220,7 +220,7 @@ VH20.Clear = function() {
 	_element = document.createElement("style");
 	_element.title = "VH20 . Designer-Toolbar";
 	_element.id = "VH20-Designer-Styles";
-	_element.innerHTML += "media print { #Designer-Toolbar { display: none; } ";	
+	_element.innerHTML += "@media print { #Designer-Toolbar { display: none; } ";	
 	document.head.appendChild(_element);
 	
 };
