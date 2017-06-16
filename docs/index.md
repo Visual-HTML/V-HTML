@@ -28,7 +28,11 @@ Welcome @
 
 * acces/edit/save/re-open : take quick notes, typing or copy/pasting | + pass result to a checker tool.
 
--- and onathoer case :  [Kitchen Sink/W3.CSS Demo Template](20170611/KSW3CSSDT.html)
+-- and another case :  [Kitchen Sink/W3.CSS Demo Template](20170611/KSW3CSSDT.html)
+ + this case introduce a different VH20 reference... relative to the document location - a sub-folder)
+ + that kind of page can allow to build a set of controls get directly from its content
+ + that kind of page can be edited with default designer or a custom designer
+
 
 -----------------------------------------------------------------------------------
 20170601: VH20/VHTML : new structure : [On A4, paragraph editor](A4-VHTML1.html)
