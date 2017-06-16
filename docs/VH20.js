@@ -170,7 +170,7 @@ VH20.Clear = function() {
 	
 	// Designer Initialization in Initial document' head element
 	_element = document.head.querySelector("head *[data-VH20-dsgi]");
-	VH20.RemoveElement(_element);
+	if (_element != null) VH20.RemoveElement(_element);
 	
 	VH20.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
 	VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
