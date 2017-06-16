@@ -28,6 +28,8 @@ Welcome @
 
 * acces/edit/save/re-open : take quick notes, typing or copy/pasting | + pass result to a checker tool.
 
+-- and onathoer case :  [Kitchen Sink/W3.CSS Demo Template](20170611/KSW3CSSDT.html)
+
 -----------------------------------------------------------------------------------
 20170601: VH20/VHTML : new structure : [On A4, paragraph editor](A4-VHTML1.html)
 Abandon: introduce too much complexity "for nothing"...
