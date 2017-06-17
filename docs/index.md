@@ -20,7 +20,7 @@ Welcome @
 
  [Bootstrap Cover Sample 0](Bootstrap000.html) : default VH20 code run on the page
  
- [Bootstrap Cover Sample 1](Bootstrap001html) : use the designer code dynamic loading of VH20 - designer code loaded within a predefined VH20 logic
+ [Bootstrap Cover Sample 1](Bootstrap001.html) : use the designer code dynamic loading of VH20 - designer code loaded within a predefined VH20 logic
  
  [Bootstrap Cover Sample 2](Bootstrap002.html) : designer code manage reference to VH20, overwrite VH20 at page parsing
 
