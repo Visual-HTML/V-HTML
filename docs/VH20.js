@@ -69,7 +69,7 @@ VH20.RemoveDynamicScript = function(url) {
 //VH20.DesignerInitializeDocument = function() { console.log("VH20.DesignerInitializeDocument()' document initialization not provided."); };
 VH20.LoadDesignerCSS = function() {
 	
-	var  _element = document.getElementById("style");
+	var  _element = document.createElement("style");
 	_element.title = "VH20 . Designer-Toolbar";
 	_element.id = "VH20-Designer-Styles";
 	_element.innerHTML += "*:not(hr)[data-VH20-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
