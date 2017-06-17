@@ -592,6 +592,6 @@ VH20.OnDocumentKeyDown = function(e) {
 window.addEventListener('load',  function() {
 		document.addEventListener('load', VH20.InitializeUserAgent , false);
 	}
-, false);
+, true);
 
 
