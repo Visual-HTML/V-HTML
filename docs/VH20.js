@@ -96,7 +96,6 @@ VH20.LoadDesignerCSS = function() {
 	 if ( this._TmpElt.getElementsByTagName('style').length > 0)
 	       _overridestyle.innerHTML += this._TmpElt.getElementsByTagName('style')[0].innerHTML;
 
-
 };
 VH20.LoadDesignerHTML = function() {
 	
@@ -152,7 +151,6 @@ VH20.LoadDesignerHTML = function() {
 	document.body.insertBefore(_defaultDesignerToolbar, document.body.firstChild);
 	
 };
-
 VH20.Clear = function() {
 	
 	document.removeEventListener('keydown', this.DocumentKeyDown, false);	
@@ -224,25 +222,25 @@ VH20.Clear = function() {
 	document.head.appendChild(_element);
 	
 };
-
 VH20.WrapElementCode = function(elt) {
+	
 	/* Initialize element with required events and attributes */ 
 	elt.addEventListener('keydown', this.ElementKeyDown, false);
 	elt.addEventListener('click', this.ElementClick, false);
 	elt.setAttribute("data-VH20-hndk","");
+	
 };
-
 VH20.UnWrapElementCode = function(elt) {
+	
 	/* Remove from HTMLElement required events and attributes */
 	elt.removeEventListener('keydown', this.ElementKeyDown, false);
 	elt.removeEventListener('click', this.ElementClick, false);
 	elt.removeAttribute("data-VH20-hndk","");
+	
 };
-
 VH20.Events = {};
 VH20.Events.ElementClick = function(evt) { };
 VH20.Events.ElementWrap = function(evt) { };
-
 VH20.WrapDocument = function() { 
 	/* look for and attach unhandled elements ...apply on all elements not already handled and elements not set as not editable */
 	/* ! this function can be called on a document on which .Clear() has been runned */
@@ -272,8 +270,6 @@ VH20.WrapDocument = function() {
 	/* often in the specification they say to use custom tag/expando to avoid collision, following this fact I should define custom tags */
 	/* for each cases here above and use contentEditable only for its specification purpose */
 }
-		
-
 /* Wrapping elements allow to get a handle on them interactivity with a click */
 VH20.WrapElement = function(elt) {
 	
@@ -287,9 +283,6 @@ VH20.WrapElement = function(elt) {
 		//VH20.CurrentTarget.focus(); //avoid focusing and scrolling within the wrapping logic
 		
 }
-
-
-
 VH20.WrapElementById = function(id) {
 	
 	var elt = document.getElementById(id);
@@ -311,39 +304,44 @@ VH20.WrapElementById = function(id) {
 	*/
 				  
 }
-
-
 VH20.Browser = {};
 VH20.Browser.Class = "default";
 VH20.BrowserClass = function() {
+	
 if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 10") > -1)) {
-	 
-		VH20.Browser.Class = "MSIE10";
-	} else
-	if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 11") > -1)) {
-	
-		VH20.Browser.Class = "MSIE11";
-	} else
-	if (((navigator.appName == "Opera") && (navigator.userAgent.indexOf("Opera") > -1)) 
+	VH20.Browser.Class = "MSIE10"; } 
+	else if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 11") > -1)) {
+		VH20.Browser.Class = "MSIE11"; }
+	else if (((navigator.appName == "Opera") && (navigator.userAgent.indexOf("Opera") > -1)) 
 		|| ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("OPR") > -1))) {
+		VH20.Browser.Class = "Opera"; } 
+	else if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("OPR") == -1)) {
+		VH20.Browser.Class = "Netscape"; } 
+	else if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Firefox") > -1) && (navigator.userAgent.indexOf("OPR") == -1)) {
+		VH20.Browser.Class = "Firefox"; } 
+	else if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("Chrome") > -1)) {
+		VH20.Browser.Class = "Chrome"; }
 	
-		VH20.Browser.Class = "Opera";
-	} else
-	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("OPR") == -1))   {
-	
-		VH20.Browser.Class = "Netscape";
-	} else
-	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Firefox") > -1) && (navigator.userAgent.indexOf("OPR") == -1)) {
-	
-		VH20.Browser.Class = "Firefox";
-	} else 
-	if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("Chrome") > -1))   {
-	
-         VH20.Browser.Class = "Chrome"; }
  return VH20.Browser.Class;
+	
 };
 VH20.BrowserClass();
-
+VH20.DesignerInitializeDocument = function() {
+	
+	// This is a designer code: So editor must issue a call to a handler where designer 
+  // can choose what to do initializing a document
+  
+  //if (document.body.childElementCount === 0) {
+  if (VH20.document.body.Blank) {  
+    // ! if document hold only designer code it is to consider as empty... 
+    // this test can be a service of the editor because it's his business
+    var _res = document.body.appendChild(document.createElement("p"));
+    this.WrapElement(_res);
+	  _res.focus();
+	  _res.click();
+  };
+	
+};
 VH20.InitializeUserAgent = function(url) {
 	/*
 	// jQuery remain the best solution to solve user-agent specific code but I'm trying to avoid using it at start
@@ -422,7 +420,6 @@ VH20.RemoveElement = function(elt) {
 		finally { console.log("cross-browser"); };
 		// This code will be replaced with the right instruction if supplied : InitializeUserAgent will load specific code
 };
-
 VH20.InitializeDocument = function() {	
 	
 	// check and remove all remainings from previous edit session
@@ -448,9 +445,7 @@ VH20.InitializeDocument = function() {
 
 	this.InitializeContent();
 	
-	
 };
-
 VH20.LoadDesigner = function(url) {
 
 	//this.RemoveDesigner(); // This only remove all previous designer codes
@@ -466,7 +461,6 @@ VH20.LoadDesigner = function(url) {
 	//this.DesignerInitializeDocument();
 
 };
-
 VH20.InitializeContent = function() {	
 
 	/* Begin with a procces that wrap existing content */
@@ -497,9 +491,6 @@ VH20.InitializeContent = function() {
 	}
 			
 }
-
-
-
 VH20.ElementKeyDown =  function(e) { 
          
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
@@ -507,9 +498,8 @@ VH20.ElementKeyDown =  function(e) {
 	VH20.OnElementKeyDown(e);
 	
 }
-
-
 VH20.OnElementKeyDown =  function(e) {
+	
 	if (e.which === 13 && !e.shiftKey) {		
 		// prevent default only in this case: return down, not even released 		
 		e.preventDefault();		
@@ -522,10 +512,8 @@ VH20.OnElementKeyDown =  function(e) {
 		VH20.WrapElement(_res);
 		VH20.CurrentTarget.focus();
 	}
+	
 }
-
-
-
 VH20.ElementClick = function(e) {
 	
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
@@ -538,27 +526,21 @@ VH20.ElementClick = function(e) {
 	VH20.Events.ElementClick(e);  /* Inform designer that element was selected */
 
 }
-
-
-
 VH20.DocumentClick = function(e) {
 	
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 	
-	
 }
-
-
-
 VH20.DocumentKeyDown = function(e) { 
 	
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 	VH20.OnDocumentKeyDown(e);
+	
 }
-
 VH20.OnDocumentKeyDown = function(e) { 
+	
 /* This is designer code! : VH20 default hardcode notepad designer */
 	
 	if (e.which === 13) {
@@ -570,23 +552,10 @@ VH20.OnDocumentKeyDown = function(e) {
 		VH20.WrapElement(_res);
 		VH20.CurrentTarget.focus();
 	}
+	
 }
 
-VH20.DesignerInitializeDocument = function() {
-	// This is a designer code: So editor must issue a call to a handler where designer 
-  // can choose what to do initializing a document
-  
-  //if (document.body.childElementCount === 0) {
-  if (VH20.document.body.Blank) {  
-    // ! if document hold only designer code it is to consider as empty... 
-    // this test can be a service of the editor because it's his business
-    var _res = document.body.appendChild(document.createElement("p"));
-    this.WrapElement(_res);
-	  _res.focus();
-	  _res.click();
-  };
-	
-};
+
 
 /* when page is loaded, start initialization process: set user-agent specific code */
 window.addEventListener('load', VH20.InitializeUserAgent, false);
