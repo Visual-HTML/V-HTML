@@ -328,10 +328,8 @@ VH20.DesignerInitializeDocument = function() {
 	
 };
 VH20.InitializeUserAgent = function(url) {
-	/*
-	// jQuery remain the best solution to solve user-agent specific code but I'm trying to avoid using it at start
-	// Custom Controls and starters can use it but at the editor level I wish to implement a kind of dynamic loading
-	*/ 
+	
+	if (document.body == null) return;
 	
 	VH20.document.body.contentEditable.InitalValue = document.body.contentEditable;
 	VH20.document.body.designMode.InitialValue = document.designMode;
@@ -589,6 +587,4 @@ VH20.OnDocumentKeyDown = function(e) {
 
 
 /* when page is loaded, start initialization process: set user-agent specific code */
-window.addEventListener('load', function() {
-document.addEventListener('load', VH20.InitializeUserAgent , true);
-}, false);
+window.addEventListener('load', VH20.InitializeUserAgent , false);
