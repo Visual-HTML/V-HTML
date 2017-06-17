@@ -89,11 +89,6 @@ VH20.LoadDesignerCSS = function() {
 	//_aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
 	// CSS come before vh20 script and optional browser specific code
 	 _aux1.parentNode.insertBefore(_element, _aux1);
-	 
-	if (this._TmpElt == null) return;	
-	 var _overridestyle = document.getElementById("VH20-Designer-Styles");
-	 if ( this._TmpElt.getElementsByTagName('style').length > 0)
-	       _overridestyle.innerHTML += this._TmpElt.getElementsByTagName('style')[0].innerHTML;
 
 };
 VH20.LoadDesignerHTML = function() {
@@ -138,15 +133,6 @@ VH20.LoadDesignerHTML = function() {
 
 	_defaultDesignerToolbar.appendChild(_documentTitle);
 
-
-	if (this._TmpElt != null) {
-	 if ( this._TmpElt.getElementsByTagName('body').length > 0)
-	       //_defaultDesignerToolbar.innerHTML += this._TmpElt.getElementsByTagName('body')[0].innerHTML;
-				 var _designerContent = document.createElement("div");
-				 _designerContent.innerHTML = this._TmpElt.getElementsByTagName('body')[0].innerHTML;
-				 _defaultDesignerToolbar.appendChild(_designerContent);	
-	};
-	
 	document.body.insertBefore(_defaultDesignerToolbar, document.body.firstChild);
 	
 };
@@ -412,16 +398,40 @@ VH20.InitializeUserAgent = function(url) {
 }
 VH20.SwitchDesigner = function(url) {
 	//get content at url === VH20._Tmp.... if something with script/css/html is found launch the process
+	var xReq = new XMLHttpRequest();
+	xReq.open("GET", url, false);
+	xReq.send(null);
+	
+	var  _element = document.createElement("html");
+	_element.innerHTML = xReq.response;
+	
+	// do some checks before proceed to clear
 	
 	VH20.Clear();
 	// ++ Designer specific code to clear ?
-	
+
 	// loading script on the end make all css and html available to the script 
-	VH20.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?	
-	VH20.LoadDesignerCSS(); 		
-	VH20.LoadDesignerHTML();
+	//VH20.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?
+	// = load script from source code
+	var _scr = _element.getElementsByTagName("script")[0];
+	var _elt2 = document.createElement("script");
+	_elt2.setAttribute("data-VH20-dsgk","");
+	_elt2.innerHTML =  _scr.childNodes[0].textContent;
+	document.head.appendChild(_elt2);
+
+	// VH20.LoadDesignerCSS();
+	// = load designer styles	
+	 var _overridestyle = document.getElementById("VH20-Designer-Styles");
+	 if ( _element.getElementsByTagName("style")[0].length > 0)
+	       _overridestyle.innerHTML += _element.getElementsByTagName('style')[0].innerHTML;
+
+	//VH20.LoadDesignerHTML();
 	// different order, different file structure : split on several documents, one single file...
-	
+	// = load designer body content - this must be inserted within #Designer-Toolbar
+	var _designerContent = document.createElement("div");
+	_designerContent.innerHTML = _element.getElementsByTagName('body')[0].innerHTML;
+	document.getElementById("Designer-Toolbar").appendChild(_designerContent);
+
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...	
 	VH20.DesignerInitializeDocument();
