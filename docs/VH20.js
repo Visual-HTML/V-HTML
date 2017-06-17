@@ -376,8 +376,10 @@ VH20.InitializeUserAgent = function(url) {
 	/* in the scope of an event I ca't say this.InitializeDocument(); */
 	VH20.InitializeDocument();
 	
+	// called from VH20 window/load/event handler with null in parameters
 	if (url != null) {
 		VH20.DesignerUrl = url;
+		// next test: valid url ?
 		VH20.SwitchDesigner(VH20.DesignerUrl);
     	}
 	
@@ -587,4 +589,4 @@ VH20.OnDocumentKeyDown = function(e) {
 
 
 /* when page is loaded, start initialization process: set user-agent specific code */
-window.addEventListener('load', VH20.InitializeUserAgent , false);
+window.addEventListener('load', function() { VH20.InitializeUserAgent(null); } , false);
