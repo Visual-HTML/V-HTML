@@ -391,7 +391,7 @@ VH20.InitializeUserAgent = function(url) {
 	///////////////// end useragent specific code
 	
 	
-	this.DesignerUrl = url;
+	VH20.DesignerUrl = url;
 		
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...	
