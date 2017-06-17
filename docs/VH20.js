@@ -69,7 +69,7 @@ VH20.RemoveDynamicScript = function(url) {
 //VH20.DesignerInitializeDocument = function() { console.log("VH20.DesignerInitializeDocument()' document initialization not provided."); };
 VH20.LoadDesignerCSS = function() {
 	
-	var  _element = document.createElement("style");
+	var  _element = document.getElementById("style");
 	_element.title = "VH20 . Designer-Toolbar";
 	_element.id = "VH20-Designer-Styles";
 	_element.innerHTML += "*:not(hr)[data-VH20-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
@@ -376,6 +376,8 @@ VH20.InitializeUserAgent = function(url) {
 	/* in the scope of an event I ca't say this.InitializeDocument(); */
 	VH20.InitializeDocument();
 	
+	VH20.LoadDesignerCSS(); 
+	
 	// called from VH20 window/load/event handler with null in parameters
 	if (url != null) {
 		VH20.DesignerUrl = url;
@@ -391,7 +393,7 @@ VH20.InitializeUserAgent = function(url) {
 	
 	// loading script on the end make all css and html available to the script 
 	VH20.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?	
-	VH20.LoadDesignerCSS(); 		
+			
 	VH20.LoadDesignerHTML();
 	// different order, different file structure : split on several documents, one single file...
 	
