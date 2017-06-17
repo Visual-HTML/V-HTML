@@ -382,6 +382,10 @@ VH20.InitializeUserAgent = function(url) {
 		// next test: valid url ?
 		VH20.SwitchDesigner(VH20.DesignerUrl);
     	}
+	else if (VH20.DesignerUrl != null) {
+		// next test: valid url ?
+		VH20.SwitchDesigner(VH20.DesignerUrl);
+    	}
 	
 	VH20.InitializeContent();
 	
