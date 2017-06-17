@@ -390,21 +390,20 @@ VH20.InitializeUserAgent = function(url) {
 	
 	///////////////// end useragent specific code
 	
-	
 	VH20.DesignerUrl = url;
-		
-	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
-	//here make the document content wrapped and avoid making designer content wrapped...	
-	VH20.DesignerInitializeDocument();	
+	
 	// loading script on the end make all css and html available to the script 
 	VH20.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?	
 	VH20.LoadDesignerCSS(); 		
 	VH20.LoadDesignerHTML();
 	// different order, different file structure : split on several documents, one single file...
-
 	
 	/* in the scope of an event I ca't say this.InitializeDocument(); */
 	VH20.InitializeDocument();
+	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
+	//here make the document content wrapped and avoid making designer content wrapped...	
+	VH20.DesignerInitializeDocument();
+	VH20.InitializeContent();
 	
 }
 VH20.RemoveElement = function(elt) { 
@@ -441,9 +440,6 @@ VH20.InitializeDocument = function() {
 	
 	document.addEventListener('keydown', this.DocumentKeyDown, false);	
 	document.body.addEventListener('click', this.DocumentClick, false);	
-
-
-	this.InitializeContent();
 	
 };
 VH20.LoadDesigner = function(url) {
