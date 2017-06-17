@@ -589,9 +589,4 @@ VH20.OnDocumentKeyDown = function(e) {
 
 
 /* when page is loaded, start initialization process: set user-agent specific code */
-window.addEventListener('load',  function() {
-		document.addEventListener('load', VH20.InitializeUserAgent , false);
-	}
-, false);
-
-
+document.addEventListener('load', VH20.InitializeUserAgent , false);
