@@ -411,6 +411,23 @@ VH20.InitializeUserAgent = function(url) {
 	VH20.DesignerInitializeDocument();
 	
 }
+VH20.SwitchDesigner = function(url) {
+	//get content at url === VH20._Tmp.... if something with script/css/html is found launch the process
+	
+	VH20.Clear();
+	// ++ Designer specific code to clear ?
+	
+	// loading script on the end make all css and html available to the script 
+	VH20.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?	
+	VH20.LoadDesignerCSS(); 		
+	VH20.LoadDesignerHTML();
+	// different order, different file structure : split on several documents, one single file...
+	
+	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
+	//here make the document content wrapped and avoid making designer content wrapped...	
+	VH20.DesignerInitializeDocument();
+	
+}
 VH20.RemoveElement = function(elt) { 
 	// Default code is to try/catch different instructions that may work
 	try { elt.remove(true); console.log("used:.remove(true)"); } 
