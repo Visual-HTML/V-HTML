@@ -395,11 +395,11 @@ VH20.InitializeUserAgent = function(url) {
 		
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...	
-	this.DesignerInitializeDocument();	
+	VH20.DesignerInitializeDocument();	
 	// loading script on the end make all css and html available to the script 
-	this.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?	
-	this.LoadDesignerCSS(); 		
-	this.LoadDesignerHTML();
+	VH20.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?	
+	VH20.LoadDesignerCSS(); 		
+	VH20.LoadDesignerHTML();
 	// different order, different file structure : split on several documents, one single file...
 
 	
