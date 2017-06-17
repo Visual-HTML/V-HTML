@@ -376,6 +376,8 @@ VH20.InitializeUserAgent = function(url) {
 	/* in the scope of an event I ca't say this.InitializeDocument(); */
 	VH20.InitializeDocument();
 	
+	VH20.InitializeContent();
+	
 	// loading script on the end make all css and html available to the script 
 	//VH20.LoadDesignerScript();  // algorithm must be changed to make them used in different order ?	
 	VH20.LoadDesignerCSS(); 
@@ -393,8 +395,6 @@ VH20.InitializeUserAgent = function(url) {
 		// next test: valid url ?
 		VH20.SwitchDesigner(VH20.DesignerUrl);
     	}
-	
-	VH20.InitializeContent();
 	
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...	
