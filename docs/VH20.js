@@ -9,7 +9,6 @@ VH20.document.body.designMode={};
 VH20.CurrentTarget = null;
 VH20.DesignerUrl = null;
 VH20.SaveAs = function(file) { };
-//VH20._TmpElt = null; //TODO: this must disappear - write the single document designer function - remove from this code the "chain" of process based on this variable
 VH20.LoadDesignerScript = function() {
 
 	if (this.DesignerUrl == null || this.DesignerUrl.replace(/\s/g,"") == "" ) return;
@@ -426,7 +425,11 @@ VH20.SwitchDesigner = function(url) {
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...	
 	VH20.DesignerInitializeDocument();
-	
+		
+	//Single file holding code to setup designer...
+	//VH20._TmpElt = null; //TODO: this must disappear - write the single document designer function - remove from this code the "chain" of process based on this variable
+	// this will no longer be needed, the designer loading process will become interactive 
+	// the previous version was only at page parsing
 }
 VH20.RemoveElement = function(elt) { 
 	// Default code is to try/catch different instructions that may work
