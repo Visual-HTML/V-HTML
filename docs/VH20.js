@@ -406,8 +406,8 @@ VH20.SwitchDesigner = function(url) {
 	_element.innerHTML = xReq.response;
 	
 	// do some checks before proceed to clear
-	
-	VH20.Clear();
+	// Clear isn't needed when designer is loaded in VH20.InitializeUserAgent
+	//VH20.Clear(); 
 	// ++ Designer specific code to clear ?
 
 	// loading script on the end make all css and html available to the script 
