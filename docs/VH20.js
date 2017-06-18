@@ -327,6 +327,7 @@ VH20.DesignerInitializeDocument = function() {
   };
 	
 };
+VH20.OnWindowBeforeUnload = function() { } 
 VH20.InitializeUserAgent = function(url) {
 	
 	if (document.body == null) return;
@@ -371,7 +372,12 @@ VH20.InitializeUserAgent = function(url) {
 		 document.head.querySelector('script[src*="VH20.js"]'));
         }
 	
+	
+	VH20.OnWindowBeforeUnload();
+	
 	///////////////// end useragent specific code
+	
+	
 	
 	/* in the scope of an event I ca't say this.InitializeDocument(); */
 	VH20.InitializeDocument();
@@ -590,7 +596,6 @@ VH20.OnDocumentKeyDown = function(e) {
 	}
 	
 }
-VH20.OnWindowBeforeUnload = function() { } 
 
 /* when page is loaded, start initialization process: set user-agent specific code */
 window.addEventListener('load', function() { VH20.InitializeUserAgent(null); } , false);
