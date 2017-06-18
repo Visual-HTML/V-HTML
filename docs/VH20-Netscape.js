@@ -2,11 +2,11 @@
 
 VH20.OnWindowBeforeUnload = function() {	
  
-alert("H");
+alert("I");
  
-window.onbeforeunload = function(){
+window.onbeforeunload = function(e){
    event.preventDefault(); 
-alert("H1");
+alert("I1"+e.type);
   alert("Document about to be unloaded, this allow to choose to proceed or remain on the document.");
   return false;
 };
