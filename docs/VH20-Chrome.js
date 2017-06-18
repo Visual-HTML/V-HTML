@@ -1,3 +1,5 @@
 VH20.OnWindowBeforeUnload = function() {	
-	event.returnValue = "\o/";
+  var confirmationMessage = "\o/";
+  e.returnValue = confirmationMessage;
+  return confirmationMessage;
 } 
