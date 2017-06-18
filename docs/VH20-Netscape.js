@@ -1,15 +1,9 @@
 
 VH20.OnWindowBeforeUnload = function() {	
  
-alert("D"); 
+alert("E"); 
  
-window.addEventListener("beforeunload", function (e) {
-  var confirmationMessage = "D1";
-
-  (e || window.event).returnValue = confirmationMessage;     //Gecko + IE
-  return confirmationMessage;                                //Webkit, Safari, Chrome etc.
-});
- 
+document.body.setAttribute('onbeforenload', "function(e){ return 'xxx'; }", true);
   
 } 
 
