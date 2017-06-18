@@ -2,11 +2,12 @@
 
 VH20.OnWindowBeforeUnload = function() {	
  
- alert("D");
+ alert("E");
  
  window.addEventListener("beforeunload", function () {
-  alert("D1");
+  alert("E1");
   event.returnValue = "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
+  return "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
 });
  
 (
@@ -15,7 +16,7 @@ VH20.OnWindowBeforeUnload = function() {
  
  function myFunction() {
   
-  alert("D2");
+  alert("E2");
   event.returnValue = "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
   return "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
   
