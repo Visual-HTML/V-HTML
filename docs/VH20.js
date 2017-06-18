@@ -596,13 +596,10 @@ VH20.OnWindowBeforeUnload = function() {
 	
 }
 
-
-
 /* when page is loaded, start initialization process: set user-agent specific code */
 window.addEventListener('load', function() { VH20.InitializeUserAgent(null); } , false);
 
-//window.addEventListener('beforeunload', function () { return VH20.OnWindowBeforeUnload(); }, false);
-
+//window.addEventListener('beforeunload', function () { return VH20.OnWindowBeforeUnload(); }, false); : don't work on chrome ?
 window.onbeforeunload = function () { 
 	return "Document about to be unloaded, this allow to choose to proceed or remain on the document."; 
 }
