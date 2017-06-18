@@ -2,18 +2,9 @@
 
 VH20.OnWindowBeforeUnload = function() {	
  
-alert("D");
+alert("Z");
 
- window.addEventListener("beforeunload", function (e) {
-  var confirmationMessage = "Document about to be unloaded, this allow to choose to proceed or remain on the document.");
-  alert("D1");
-  //e.returnValue = confirmationMessage;    
+window.addEventListener("beforeunload", function (event) { event.preventDefault(); });
   
-  //return confirmationMessage;
-  
-  return;
-}, false);
-  
- 
 } 
 
