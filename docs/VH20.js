@@ -372,8 +372,9 @@ VH20.InitializeUserAgent = function(url) {
 		 document.head.querySelector('script[src*="VH20.js"]'));
         }
 	
-	
-	VH20.OnWindowBeforeUnload();
+	//code structure must be reviewed to get browser specific code available at this point
+	//
+	setTimeout(function(){ VH20.OnWindowBeforeUnload(); }, 800);
 	
 	///////////////// end useragent specific code
 	
