@@ -2,7 +2,7 @@
 
 VH20.OnWindowBeforeUnload = function() {	
  
- alert("F");
+ alert("G");
  
  document.body.setAttribute("onbeforeunload", "return myFunction()");
 
