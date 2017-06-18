@@ -15,3 +15,8 @@ VH20.SaveAs = function(file) {
 
 
 VH20.RemoveElement = function(elt) { elt.parentNode.removeChild(elt); };
+
+
+VH20.OnWindowBeforeUnload = function() {	
+	return "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
+} 
