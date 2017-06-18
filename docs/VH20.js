@@ -594,7 +594,3 @@ VH20.OnWindowBeforeUnload = function() { }
 
 /* when page is loaded, start initialization process: set user-agent specific code */
 window.addEventListener('load', function() { VH20.InitializeUserAgent(null); } , false);
-
-window.addEventListener('beforeunload', function() { VH20.OnWindowBeforeUnload(); }, false); 
-
-
