@@ -558,7 +558,7 @@ VH20.ElementClick = function(e) {
 	e.stopPropagation();
 	e.preventDefault();
 	
-	this.CurrentTarget = e.currentTarget;	
+	VH20.CurrentTarget = e.currentTarget;	
 	VH20.Events.ElementClick(e);  /* Inform designer that element was selected */
 
 }
