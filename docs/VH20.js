@@ -590,7 +590,7 @@ VH20.OnDocumentKeyDown = function(e) {
 	}
 	
 }
-VH20.OnWindowBeforeUnload() = function() {
+VH20.OnWindowBeforeUnload = function() {
 	return "Window before unload, save document.";
 }
 
