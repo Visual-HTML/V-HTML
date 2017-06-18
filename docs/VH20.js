@@ -591,14 +591,16 @@ VH20.OnDocumentKeyDown = function(e) {
 	
 }
 VH20.OnWindowBeforeUnload = function() {
-	return "Window before unload, save document.";
+	
+	return "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
+	
 }
+
 
 
 /* when page is loaded, start initialization process: set user-agent specific code */
 window.addEventListener('load', function() { VH20.InitializeUserAgent(null); } , false);
 
 window.addEventListener('beforeunload', function () { return VH20.OnWindowBeforeUnload(); }, false);
-
 
 
