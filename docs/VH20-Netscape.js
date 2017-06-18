@@ -2,17 +2,18 @@
 
 VH20.OnWindowBeforeUnload = function() {	
  
- alert("A");
+ alert("B");
  
- window.onbeforeunload = function () {
+ window.onbeforeunload = function (e) {
   //event.preventDefaults();
-  alert("A1");
-  event.returnValue = "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
+  alert("B1");
+  e.returnValue = "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
   return "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
 }
  
-window.addEventListener('beforeunload', function() {
- alert("A2");
+window.addEventListener('beforeunload', function(e) {
+ alert("B2");
+ e.returnValue = "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
  return "Document about to be unloaded, this allow to choose to proceed or remain on the document.";
 }, false);
  
