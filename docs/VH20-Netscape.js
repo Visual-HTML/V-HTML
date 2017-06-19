@@ -7,7 +7,13 @@ window.onunload = function () {
   window.event.returnValue = false;   
   return false;    
 } 
-
+ 
+window.onbeforeunload = function () {  
+ alert("event caught ?");
+ //TODO: find the Safari' code to handle document unload warning
+  window.event.returnValue = false;   
+  return false;    
+} 
 
  alert(window.onunload);
  alert(window.onbeforeunload);
