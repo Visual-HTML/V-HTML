@@ -5,14 +5,14 @@ window.onunload = function () {
  
  //TODO: find the Safari' code to handle document unload warning
   window.event.returnValue = false;   
-  return "//TODO:";    
+  return "//TODO:window.onunload";    
   
 } 
  
 window.onbeforeunload = function () {
  //TODO: find the Safari' code to handle document unload warning
   window.event.returnValue = false;   
-  return "//TODO:";   
+  return "//TODO:window.onbeforeunload";   
   
 } 
 
