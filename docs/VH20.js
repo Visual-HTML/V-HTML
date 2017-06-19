@@ -66,7 +66,6 @@ VH20.RemoveDynamicScript = function(url) {
 	 document.head.removeChild(_elt2);
 	 
 };
-//VH20.DesignerInitializeDocument = function() { console.log("VH20.DesignerInitializeDocument()' document initialization not provided."); };
 VH20.LoadDesignerCSS = function() {
 	
 	var  _element = document.createElement("style");
@@ -337,34 +336,23 @@ VH20.OnWindowBeforeUnload = function() {
 	
 } 
 VH20.InitializeUserAgent = function(url) {
-	
+		
+	/* by time to time (when cache is updated?) I get an error adding events on document : document undefined ? */
 	if (document.body == null) return;
+	// avoid errors when in debug mode and rfresh that trigger the code...?
+	// all these should not be necessary in "normal"/stable context...
 	
 	VH20.document.body.contentEditable.InitalValue = document.body.contentEditable;
 	VH20.document.body.designMode.InitialValue = document.designMode;
 
 	document.body.removeAttribute("contentEditable");
 	document.designMode = "off";
-	/* by time to time (when cache is updated?) I get an error adding events on document : document undefined ? */
 
+	// set the document unload warning
+	VH20.OnWindowBeforeUnload();		
 	
-	///--------- VH20 browser specific code loading was here
 	
 	
-	
-	//code structure must be reviewed to get browser specific code, for VH20 itself, available at this point
-	// //TODO: find another code logic avoiding use of timeout to break the process/stack 
-	
-	//setTimeout(function(){ VH20.OnWindowBeforeUnload(); }, 800);
-	VH20.OnWindowBeforeUnload();
-	
-	// calling VH20.OnWindowBeforeUnload();  without timeout (what create a kind of parallel processing) will still call
-	// the empoty/default/declaration one... but I want the code get in the browser specific code...
-	
-	///////////////// end useragent specific code
-		
-	
-	/* in the scope of an event I ca't say this.InitializeDocument(); */
 	VH20.InitializeDocument();
 	
 	VH20.InitializeContent();
@@ -380,12 +368,10 @@ VH20.InitializeUserAgent = function(url) {
 	if (url != null) {
 		VH20.DesignerUrl = url;
 		// next test: valid url ?
-		VH20.SwitchDesigner(VH20.DesignerUrl);
-    	}
+		VH20.SwitchDesigner(VH20.DesignerUrl); }
 	else if (VH20.DesignerUrl != null) {
 		// next test: valid url ?
-		VH20.SwitchDesigner(VH20.DesignerUrl);
-    	}
+		VH20.SwitchDesigner(VH20.DesignerUrl); }
 	
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...	
@@ -586,46 +572,29 @@ VH20.OnDocumentKeyDown = function(e) {
 window.addEventListener('load', function() { VH20.InitializeUserAgent(null); } , false);
 
 
+// ensure script handle missing editor sources at document location
+document.head.querySelector('script[src*="VH20.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
 
 
-//------------------ VH20' browser specific code put here !
-
-	// ensure script handle missing editor sources at document location
-	// can happen if you code script reference to VH20.js
- 	document.head.querySelector('script[src*="VH20.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
-	
-	/////////////////////////////////////// This introduce Platform-independent model where deigner code model things but no code is provided
-	/// In designer code case there is a code provided : it's the last specification instructions but for cross-browser support they can be overriden
-	// using expando, virtual functions, provided by javascript
-	// define key/test on appName and userAgent to load appropriate code for the browser
-	if (VH20.Browser.Class === "MSIE10") {
-	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE10.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-	} else
-	if (VH20.Browser.Class === "MSIE11") {
-	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE11.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-	} else
-	if (VH20.Browser.Class === "Opera") {
-	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Opera.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-	} else
-	if (VH20.Browser.Class === "Netscape")   {
+// load VH20' browser specific code
+if (VH20.Browser.Class === "MSIE10") {
+	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE10.js",
+		document.head.querySelector('script[src*="VH20.js"]')); } 
+else if (VH20.Browser.Class === "MSIE11") {
+ 	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE11.js",
+	 	document.head.querySelector('script[src*="VH20.js"]')); }
+else if (VH20.Browser.Class === "Opera") {
+ 	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Opera.js",
+	 	document.head.querySelector('script[src*="VH20.js"]')); }
+else if (VH20.Browser.Class === "Netscape") {
 	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Netscape.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-	} else
-	if (VH20.Browser.Class === "Firefox") {
-	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Firefox.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-	} else 
-	if (VH20.Browser.Class === "Chrome")   {
-	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Chrome.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-        }
-	
-
-
-
-
+	 	document.head.querySelector('script[src*="VH20.js"]')); }
+else if (VH20.Browser.Class === "Firefox") {
+ 	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Firefox.js",
+		document.head.querySelector('script[src*="VH20.js"]')); }
+else if (VH20.Browser.Class === "Chrome") {
+	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Chrome.js",
+		document.head.querySelector('script[src*="VH20.js"]'));
+}
 
 
