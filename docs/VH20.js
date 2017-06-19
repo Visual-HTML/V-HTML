@@ -347,42 +347,17 @@ VH20.InitializeUserAgent = function(url) {
 	document.designMode = "off";
 	/* by time to time (when cache is updated?) I get an error adding events on document : document undefined ? */
 
-	// ensure script handle missing editor sources at document location
-	// can happen if you code script reference to VH20.js
- 	document.head.querySelector('script[src*="VH20.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
 	
-	/////////////////////////////////////// This introduce Platform-independent model where deigner code model things but no code is provided
-	/// In designer code case there is a code provided : it's the last specification instructions but for cross-browser support they can be overriden
-	// using expando, virtual functions, provided by javascript
-	// define key/test on appName and userAgent to load appropriate code for the browser
-	if (VH20.Browser.Class === "MSIE10") {
-	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE10.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-	} else
-	if (VH20.Browser.Class === "MSIE11") {
-	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE11.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-	} else
-	if (VH20.Browser.Class === "Opera") {
-	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Opera.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-	} else
-	if (VH20.Browser.Class === "Netscape")   {
-	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Netscape.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-	} else
-	if (VH20.Browser.Class === "Firefox") {
-	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Firefox.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-	} else 
-	if (VH20.Browser.Class === "Chrome")   {
-	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Chrome.js",
-		 document.head.querySelector('script[src*="VH20.js"]'));
-        }
+	///--------- VH20 browser specific code loading was here
+	
+	
 	
 	//code structure must be reviewed to get browser specific code, for VH20 itself, available at this point
 	// //TODO: find another code logic avoiding use of timeout to break the process/stack 
-	setTimeout(function(){ VH20.OnWindowBeforeUnload(); }, 800);
+	
+	//setTimeout(function(){ VH20.OnWindowBeforeUnload(); }, 800);
+	VH20.OnWindowBeforeUnload();
+	
 	// calling VH20.OnWindowBeforeUnload();  without timeout (what create a kind of parallel processing) will still call
 	// the empoty/default/declaration one... but I want the code get in the browser specific code...
 	
@@ -609,3 +584,48 @@ VH20.OnDocumentKeyDown = function(e) {
 
 /* when page is loaded, start initialization process: set user-agent specific code */
 window.addEventListener('load', function() { VH20.InitializeUserAgent(null); } , false);
+
+
+
+
+//------------------ VH20' browser specific code put here !
+
+	// ensure script handle missing editor sources at document location
+	// can happen if you code script reference to VH20.js
+ 	document.head.querySelector('script[src*="VH20.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
+	
+	/////////////////////////////////////// This introduce Platform-independent model where deigner code model things but no code is provided
+	/// In designer code case there is a code provided : it's the last specification instructions but for cross-browser support they can be overriden
+	// using expando, virtual functions, provided by javascript
+	// define key/test on appName and userAgent to load appropriate code for the browser
+	if (VH20.Browser.Class === "MSIE10") {
+	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE10.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
+	} else
+	if (VH20.Browser.Class === "MSIE11") {
+	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE11.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
+	} else
+	if (VH20.Browser.Class === "Opera") {
+	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Opera.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
+	} else
+	if (VH20.Browser.Class === "Netscape")   {
+	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Netscape.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
+	} else
+	if (VH20.Browser.Class === "Firefox") {
+	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Firefox.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
+	} else 
+	if (VH20.Browser.Class === "Chrome")   {
+	 VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Chrome.js",
+		 document.head.querySelector('script[src*="VH20.js"]'));
+        }
+	
+
+
+
+
+
+
