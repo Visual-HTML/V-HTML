@@ -1,6 +1,8 @@
 
 VH20.OnWindowBeforeUnload = function() {	
  
+ alert(window.document.body.onunload);
+ alert(window.document.body.onbeforeunload);
  alert(window.document.onunload);
  alert(window.document.onbeforeunload);
  
