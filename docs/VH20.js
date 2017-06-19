@@ -380,13 +380,14 @@ VH20.InitializeUserAgent = function(url) {
 		 document.head.querySelector('script[src*="VH20.js"]'));
         }
 	
-	//code structure must be reviewed to get browser specific code available at this point
-	//
+	//code structure must be reviewed to get browser specific code, for VH20 itself, available at this point
+	// //TODO: find another code logic avoiding use of timeout to break the process/stack 
 	setTimeout(function(){ VH20.OnWindowBeforeUnload(); }, 800);
+	// calling VH20.OnWindowBeforeUnload();  without timeout (what create a kind of parallel processing) will still call
+	// the empoty/default/declaration one... but I want the code get in the browser specific code...
 	
 	///////////////// end useragent specific code
-	
-	
+		
 	
 	/* in the scope of an event I ca't say this.InitializeDocument(); */
 	VH20.InitializeDocument();
