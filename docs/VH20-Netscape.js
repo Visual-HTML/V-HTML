@@ -1,8 +1,8 @@
 
 VH20.OnWindowBeforeUnload = function() {	
  
- alert(window.onunload);
- alert(window.onbeforeunload);
+ alert(window.document.onunload);
+ alert(window.document.onbeforeunload);
  
 window.onunload = function () {  
  alert("event caught ?");
