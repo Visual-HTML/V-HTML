@@ -189,7 +189,7 @@ VH20.Clear = function() {
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
 	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
 	
-	if ( typeof(VH20.DesignerUrl) === "String" ) {
+	if ( typeof(VH20.DesignerUrl) === "string" ) {
 		_aux = VH20.DesignerUrl;
 	}
 	else if ( VH20.DesignerUrl != null && VH20.DesignerUrl.length > 0 ) {
