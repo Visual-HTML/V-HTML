@@ -188,7 +188,7 @@ VH20.Clear = function() {
 	_backeditor.innerHTML += "function GetBackEditor() {";
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
 	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
-	_backeditor.innerHTML += "_elt.onload = function() { VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.InitializeUserAgent(" + (VH20.DesignerUrl != null ? "'" + VH20.DesignerUrl+"'" : "") + "); }; ";
+	_backeditor.innerHTML += "_elt.onload = function() { VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.Initialize(" + (VH20.DesignerUrl != null ? "'" + VH20.DesignerUrl.toString +"'" : "") + "); }; ";
 	//_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "_elt.setAttribute('onerror', 'javascript:window.open(\"https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code\");');";
 	_backeditor.innerHTML += "document.head.insertBefore(_elt, document.head.firstChild); ";
@@ -335,8 +335,9 @@ VH20.OnWindowBeforeUnload = function() {
   });
 	
 } 
-VH20.InitializeUserAgent = function(url) {
-		
+VH20.Initialize = function() {
+	// process a list of arguments as urls for designer code to load...
+	
 	/* by time to time (when cache is updated?) I get an error adding events on document : document undefined ? */
 	if (document.body == null) return;
 	// avoid errors when in debug mode and rfresh that trigger the code...?
@@ -351,8 +352,7 @@ VH20.InitializeUserAgent = function(url) {
 	// set the document unload warning
 	VH20.OnWindowBeforeUnload();		
 	
-	
-	
+		
 	VH20.InitializeDocument();
 	
 	VH20.InitializeContent();
@@ -362,17 +362,13 @@ VH20.InitializeUserAgent = function(url) {
 	VH20.LoadDesignerCSS(); 
 	VH20.LoadDesignerHTML();
 	// different order, different file structure : split on several documents, one single file...
-	
-	
-	// called from VH20 window/load/event handler with null in parameters
-	if (url != null) {
-		VH20.DesignerUrl = url;
-		// next test: valid url ?
-		VH20.SwitchDesigner(VH20.DesignerUrl); }
-	else if (VH20.DesignerUrl != null) {
-		// next test: valid url ?
-		VH20.SwitchDesigner(VH20.DesignerUrl); }
-	
+		
+	// called from VH20 window/load/event handler with no parameters
+	if (parameters.length > 0) { VH20.DesignerUrl = parameters; };
+	for (var i = 0; i < parameters.length ; i++) {
+	  VH20.SwitchDesigner(parameters[i]); 
+	}
+		
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...	
 	VH20.DesignerInitializeDocument();
@@ -388,7 +384,7 @@ VH20.SwitchDesigner = function(url) {
 	_element.innerHTML = xReq.response;
 	
 	// do some checks before proceed to clear
-	// Clear isn't needed when designer is loaded in VH20.InitializeUserAgent
+	// Clear isn't needed when designer is loaded in VH20.Initialize
 	//VH20.Clear(); 
 	// ++ Designer specific code to clear ?
 
@@ -434,7 +430,7 @@ VH20.RemoveElement = function(elt) {
 			finally { console.log("cross-browser"); };		
 		} 
 		finally { console.log("cross-browser"); };
-		// This code will be replaced with the right instruction if supplied : InitializeUserAgent will load specific code
+		// This code will be replaced with the right instruction if supplied : Initialize() will load specific code
 };
 VH20.InitializeDocument = function() {	
 	
@@ -569,7 +565,7 @@ VH20.OnDocumentKeyDown = function(e) {
 }
 
 /* when page is loaded, start initialization process: set user-agent specific code */
-window.addEventListener('load', function() { VH20.InitializeUserAgent(null); } , false);
+window.addEventListener('load', function() { VH20.Initialize(); } , false);
 
 
 // ensure script handle missing editor sources at document location
