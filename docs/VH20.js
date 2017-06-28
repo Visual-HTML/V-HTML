@@ -188,7 +188,7 @@ VH20.Clear = function() {
 	_backeditor.innerHTML += "function GetBackEditor() {";
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
 	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
-	_backeditor.innerHTML += "_elt.onload = function() { VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.Initialize(" + (VH20.DesignerUrl != null ? "'" + VH20.DesignerUrl.toString +"'" : "") + "); }; ";
+	_backeditor.innerHTML += "_elt.onload = function() { VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.Initialize(" + (VH20.DesignerUrl.length > 0 ? "'" + VH20.DesignerUrl.toString +"'" : "") + "); }; ";
 	//_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "_elt.setAttribute('onerror', 'javascript:window.open(\"https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code\");');";
 	_backeditor.innerHTML += "document.head.insertBefore(_elt, document.head.firstChild); ";
@@ -364,9 +364,9 @@ VH20.Initialize = function() {
 	// different order, different file structure : split on several documents, one single file...
 		
 	// called from VH20 window/load/event handler with no parameters
-	if (parameters.length > 0) { VH20.DesignerUrl = parameters; };
-	for (var i = 0; i < parameters.length ; i++) {
-	  VH20.SwitchDesigner(parameters[i]); 
+	if (arguments.length > 0) { VH20.DesignerUrl = arguments; };
+	for (var i = 0; i < arguments.length ; i++) {
+	  VH20.SwitchDesigner(arguments[i]); 
 	}
 		
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
