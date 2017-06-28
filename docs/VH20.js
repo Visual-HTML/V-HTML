@@ -375,7 +375,7 @@ VH20.Initialize = function() {
 	// different order, different file structure : split on several documents, one single file...
 	
 	if (VH20.DesignerUrl != null) {
-		VH20.SwitchDesigner(arguments[i]); 	
+		VH20.SwitchDesigner(VH20.DesignerUrl); 	
 	}
 	else if (arguments.length > 0) { 
 		VH20.DesignerUrl = arguments; 
