@@ -373,12 +373,16 @@ VH20.Initialize = function() {
 	VH20.LoadDesignerCSS(); 
 	VH20.LoadDesignerHTML();
 	// different order, different file structure : split on several documents, one single file...
-		
-	// called from VH20 window/load/event handler with no parameters
-	if (arguments.length > 0) { VH20.DesignerUrl = arguments; };
-	for (var i = 0; i < arguments.length ; i++) {
-	  VH20.SwitchDesigner(arguments[i]); 
+	
+	if (VH20.DesignerUrl != null) {
+		VH20.SwitchDesigner(arguments[i]); 	
 	}
+	else if (arguments.length > 0) { 
+		VH20.DesignerUrl = arguments; 
+		for (var i = 0; i < arguments.length ; i++) {
+		  VH20.SwitchDesigner(arguments[i]); 
+		}
+	};
 		
 	//The following is designer purpose code, placing this initialization (of the designer toolbar)	
 	//here make the document content wrapped and avoid making designer content wrapped...	
