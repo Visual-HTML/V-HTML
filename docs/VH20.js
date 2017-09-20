@@ -3,6 +3,10 @@
 VH20 = {};
 VH20.document={};
 VH20.document.getHead = function() { return document.head; };
+VH20.document.InitializeEvents = function() {
+   document.addEventListener('keydown', this.DocumentKeyDown, false);	
+   document.body.addEventListener('click', this.DocumentClick, false);	
+}
 VH20.document.body={};
 VH20.document.body.Blank = false;
 VH20.document.body.contentEditable={};
@@ -467,9 +471,7 @@ VH20.InitializeDocument = function() {
 	}
 	/////////////////// end clear document
 	
-	
-	document.addEventListener('keydown', this.DocumentKeyDown, false);	
-	document.body.addEventListener('click', this.DocumentClick, false);	
+	VH20.document.InitializeEvents();
 	
 };
 VH20.LoadDesigner = function(url) {
