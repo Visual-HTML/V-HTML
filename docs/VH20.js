@@ -584,7 +584,7 @@ VH20.OnDocumentKeyDown = function(e) {
 
 /* when page is loaded, start initialization process: set user-agent specific code */
 VH20.InitializeEvent = function() {
-try { window.addEventListener('load', function() { VH20.Initialize(); } , false); } catch(xcp) {};
+   window.addEventListener('load', function() { VH20.Initialize(); } , false);
 }
 
 
@@ -619,6 +619,6 @@ else if (VH20.Browser.Class === "Chrome") {
 }
 
 
-setTimeout(VH20.InitializeEvent, 3000);
+setTimeout(VH20.InitializeEvent, 5000);
 
 
