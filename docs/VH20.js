@@ -588,7 +588,8 @@ window.addEventListener('load', function() { VH20.Initialize(); } , false);
 
 
 // ensure script handle missing editor sources at document location
-document.head.querySelector('script[src*="VH20.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
+//document.head.querySelector('script[src*="VH20.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
+// document.getElementsByTagName("head")[0]
 
 
 
