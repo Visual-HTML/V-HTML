@@ -24,3 +24,10 @@ VH20.OnWindowBeforeUnload = function() {
 
 VH20.document.getHead = function() { return document.getElementsByTagName('head')[0]; } 
 
+
+
+VH20.document.InitializeEvents = function() {
+   document.attachEvent('onkeydown', this.DocumentKeyDown);
+   document.body.attachEvent('onclick', this.DocumentClick);
+}
+	
