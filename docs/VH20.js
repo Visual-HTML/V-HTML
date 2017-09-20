@@ -127,7 +127,11 @@ VH20.LoadDesignerHTML = function() {
 		var _saveAsButton = document.createElement("input");
 		_saveAsButton.type = "button";
 		_saveAsButton.value = "Save As";
-		_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.SaveAs("SaveAs.html"); }, false);
+		try {
+			_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.SaveAs("SaveAs.html"); }, false);
+		} catch(xcp) {
+			_saveAsButton.attachEvent("onclick", function(e){ e.stopPropagation(); VH20.SaveAs("SaveAs.html"); });
+		}
 		
 		_defaultDesignerToolbar.appendChild(_saveAsButton);	
 	};
@@ -137,8 +141,12 @@ VH20.LoadDesignerHTML = function() {
 	_documentTitle.type = "text";
 	_documentTitle.placeholder = "document title...";
 	_documentTitle.value = document.title;
-	_documentTitle.addEventListener("change", function(e){ e.stopPropagation(); document.title = e.currentTarget.value; }, false);
-
+	try {
+		_documentTitle.addEventListener("change", function(e){ e.stopPropagation(); document.title = e.currentTarget.value; }, false);
+	} catch(xcp) {
+		_documentTitle.attachEvent("onchange", function(e){ e.stopPropagation();  document.title = e.currentTarget.value; });
+	}
+		
 	_defaultDesignerToolbar.appendChild(_documentTitle);
 
 	document.body.insertBefore(_defaultDesignerToolbar, document.body.firstChild);
