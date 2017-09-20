@@ -593,7 +593,10 @@ document.head.querySelector('script[src*="VH20.js"]').setAttribute("onerror","wi
 
 
 // load VH20' browser specific code
-if (VH20.Browser.Class === "MSIE10") {
+if (VH20.Browser.Class === "MSIE 8.0") {
+	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE8.js",
+		document.head.querySelector('script[src*="VH20.js"]')); } 
+else if (VH20.Browser.Class === "MSIE10") {
 	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE10.js",
 		document.head.querySelector('script[src*="VH20.js"]')); } 
 else if (VH20.Browser.Class === "MSIE11") {
