@@ -302,8 +302,9 @@ VH20.WrapElementById = function(id) {
 VH20.Browser = {};
 VH20.Browser.Class = "default";
 VH20.BrowserClass = function() {
-	
-if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 10") > -1)) {
+if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 8.0") > -1)) {
+	VH20.Browser.Class = "MSIE8"; } 	
+else if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 10") > -1)) {
 	VH20.Browser.Class = "MSIE10"; } 
 	else if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 11") > -1)) {
 		VH20.Browser.Class = "MSIE11"; }
@@ -594,7 +595,7 @@ try { window.addEventListener('load', function() { VH20.Initialize(); } , false)
 
 
 // load VH20' browser specific code
-if (VH20.Browser.Class === "MSIE 8.0") {
+if (VH20.Browser.Class === "MSIE8") {
 	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE8.js",
 		document.head.querySelector('script[src*="VH20.js"]')); } 
 else if (VH20.Browser.Class === "MSIE10") {
