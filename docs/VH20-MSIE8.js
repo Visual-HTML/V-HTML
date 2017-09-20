@@ -61,3 +61,16 @@ VH20.WrapDocument = function() {
 	/* often in the specification they say to use custom tag/expando to avoid collision, following this fact I should define custom tags */
 	/* for each cases here above and use contentEditable only for its specification purpose */
 }
+
+
+
+VH20.WrapElementCode = function(elt) {
+	
+	/* Initialize element with required events and attributes */ 
+	elt.attachEvent('onkeydown', VH20.ElementKeyDown);
+	elt.attachEvent('onclick', VH20.ElementClick);
+	elt.setAttribute("data-VH20-hndk","");
+	
+};
+
+
