@@ -27,7 +27,7 @@ VH20.document.getHead = function() { return document.getElementsByTagName('head'
 
 
 VH20.document.InitializeEvents = function() {
-   document.attachEvent('onkeydown', this.DocumentKeyDown);
-   document.body.attachEvent('onclick', this.DocumentClick);
+   document.attachEvent('onkeydown', VH20.DocumentKeyDown);
+   document.body.attachEvent('onclick', VH20.DocumentClick);
 }
 	
