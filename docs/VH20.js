@@ -579,12 +579,17 @@ VH20.OnDocumentKeyDown = function(e) {
 	
 }
 
+
+
 /* when page is loaded, start initialization process: set user-agent specific code */
+VH20.InitializeEvent = function() {
 window.addEventListener('load', function() { VH20.Initialize(); } , false);
+}
 
 
 // ensure script handle missing editor sources at document location
 document.head.querySelector('script[src*="VH20.js"]').setAttribute("onerror","window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code');");
+
 
 
 // load VH20' browser specific code
@@ -607,5 +612,8 @@ else if (VH20.Browser.Class === "Chrome") {
 	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Chrome.js",
 		document.head.querySelector('script[src*="VH20.js"]'));
 }
+
+
+
 
 
