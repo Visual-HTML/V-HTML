@@ -617,6 +617,6 @@ else if (VH20.Browser.Class === "Chrome") {
 }
 
 
-
+VH20.InitializeEvent();
 
 
