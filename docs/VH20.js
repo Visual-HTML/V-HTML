@@ -588,7 +588,7 @@ VH20.InitializeEvent = function() {
    try {
 	   window.addEventListener('load', function() { VH20.Initialize(); } , false); 
    } catch(xcp) {
-	   window.attachEvent('load', function() { VH20.Initialize(); } );
+	   window.attachEvent('onload', function() { VH20.Initialize(); } );
    };
 	
 }
