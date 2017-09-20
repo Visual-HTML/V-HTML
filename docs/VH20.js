@@ -114,7 +114,11 @@ VH20.LoadDesignerHTML = function() {
 	var _clearButton = document.createElement("input");
 	_clearButton.type = "button";
 	_clearButton.value = "Clear";
-	_clearButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.Clear(); }, false);
+	try {
+		_clearButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.Clear(); }, false); 
+	} catch {
+		_clearButton.attachEvent("onclick", function(e){ e.stopPropagation(); VH20.Clear(); });
+	}
 	
 	_defaultDesignerToolbar.appendChild(_clearButton);
 	
