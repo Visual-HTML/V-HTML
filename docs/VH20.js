@@ -24,7 +24,7 @@ VH20.LoadDesignerScript = function() {
 	var _elt2 = document.createElement("script");
 	_elt2.setAttribute("data-VH20-dsgk","");
 	_elt2.innerHTML =  _scr.childNodes[0].textContent;
-	document.head.appendChild(_elt2);
+	VH20.document.getHead().appendChild(_elt2);
 	
 };
 VH20.AddResource = function(url) {
@@ -38,7 +38,7 @@ VH20.AddResource = function(url) {
 	var _elt2 = document.createElement("script");
 	_elt2.setAttribute("data-VH20-Res", url);
 	_elt2.innerHTML =  _scr.childNodes[0].textContent;
-	 document.head.appendChild(_elt2);
+	 VH20.document.getHead().appendChild(_elt2);
 
 };
 VH20.IncludeDynamicScript = function(url) {
@@ -46,7 +46,7 @@ VH20.IncludeDynamicScript = function(url) {
 	var _elt2 = document.createElement("script");
 	_elt2.setAttribute("data-VH20-Res", "");
 	_elt2.src =  url;
-	 document.head.appendChild(_elt2);
+	 VH20.document.getHead().appendChild(_elt2);
 };
 VH20.IncludeDynamicScriptAfter = function(url, elt) {
 	
@@ -58,13 +58,13 @@ VH20.IncludeDynamicScriptAfter = function(url, elt) {
 VH20.RemoveResource = function(url) {
 	
 	var _elt2 = document.querySelector("script[data-VH20-Res='"+url+"']");
-	 document.head.removeChild(_elt2);
+	 VH20.document.getHead().removeChild(_elt2);
 
 };
 VH20.RemoveDynamicScript = function(url) {
 
 	var _elt2 = document.querySelector("script[src='"+url+"']");
-	 document.head.removeChild(_elt2);
+	 VH20.document.getHead().removeChild(_elt2);
 	 
 };
 VH20.LoadDesignerCSS = function() {
@@ -84,8 +84,8 @@ VH20.LoadDesignerCSS = function() {
 	_element.innerHTML += "#Designer-Toolbar { position: fixed; top: 0px; border-bottom: 1px dotted lightgray; } ";		
 	_element.innerHTML += "#Designer-Toolbar span { font-size: xx-small; } ";	
 	/* Designer styles are added just after this script link */
-	var _aux = document.head.querySelectorAll('script');
-	var _aux1 = document.head.querySelector('script[src*="VH20.js"]');
+	var _aux = VH20.document.getHead().querySelectorAll('script');
+	var _aux1 = VH20.document.getHead().querySelector('script[src*="VH20.js"]');
 	//_aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
 	// CSS come before vh20 script and optional browser specific code
 	 _aux1.parentNode.insertBefore(_element, _aux1);
@@ -152,28 +152,28 @@ VH20.Clear = function() {
 	for (var i = 0 ; i < _elements.length ; i++) { VH20.RemoveElement(_elements[i]); };
 	
 	// Designer Initialization in Initial document' head element
-	var _element = document.head.querySelector("head *[data-VH20-dsgi]");
+	var _element = VH20.document.getHead().querySelector("head *[data-VH20-dsgi]");
 	if (_element != null) VH20.RemoveElement(_element);
 	
-	VH20.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
+	VH20.RemoveElement(VH20.document.getHead().querySelector('#VH20-Designer-Styles'));
 	VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
 	
 	// save current script source (can be altered by browser's save as logic)
-	var _currentscriptsrc = document.head.querySelector('script[src*="VH20.js"]').src;
+	var _currentscriptsrc = VH20.document.getHead().querySelector('script[src*="VH20.js"]').src;
 	// mht file case
 	if (window.location.href.search(/mht$/) > -1) {
-		var _aux = document.head.querySelector('script[src*="VH20.js"]').src;
+		var _aux = VH20.document.getHead().querySelector('script[src*="VH20.js"]').src;
 		_currentscriptsrc = _aux.substring(_aux.indexOf('!')+1);
 	}
 
-	VH20.RemoveElement(document.head.querySelector('script[src*="VH20.js"]'));
+	VH20.RemoveElement(VH20.document.getHead().querySelector('script[src*="VH20.js"]'));
 	
-	if (document.head.querySelector('script[data-VH20-dsgk]') != null) {	
-		VH20.RemoveElement(document.head.querySelector('script[data-VH20-dsgk]'));
+	if (VH20.document.getHead().querySelector('script[data-VH20-dsgk]') != null) {	
+		VH20.RemoveElement(VH20.document.getHead().querySelector('script[data-VH20-dsgk]'));
 	};
 	
 	// Remove data-VH20-Res
-	var _res = document.head.querySelectorAll('script[data-VH20-Res]');
+	var _res = VH20.document.getHead().querySelectorAll('script[data-VH20-Res]');
 	for (var i = 0; i < _res.length ; i++) { VH20.RemoveElement(_res[i]); };
 		
 	//Add Get Editor function
@@ -203,7 +203,7 @@ VH20.Clear = function() {
 	_backeditor.innerHTML += "_elt.onload = function() { VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.Initialize(" + (VH20.DesignerUrl != null ? "'" + _aux +"'" : "") + "); }; ";
 	//_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "_elt.setAttribute('onerror', 'javascript:window.open(\"https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code\");');";
-	_backeditor.innerHTML += "document.head.insertBefore(_elt, document.head.firstChild); ";
+	_backeditor.innerHTML += "document.getElementsByTagName('head')[0].insertBefore(_elt, document.getElementsByTagName('head')[0].firstChild); ";
 	_backeditor.innerHTML += "}; ";
 	 
 	_backeditorHTML.appendChild(_inputButton);
@@ -215,7 +215,7 @@ VH20.Clear = function() {
 	_element.title = "VH20 . Designer-Toolbar";
 	_element.id = "VH20-Designer-Styles";
 	_element.innerHTML += "@media print { #Designer-Toolbar { display: none; } ";	
-	document.head.appendChild(_element);
+	VH20.document.getHead().appendChild(_element);
 	
 };
 VH20.WrapElementCode = function(elt) {
@@ -412,7 +412,7 @@ VH20.SwitchDesigner = function(url) {
 	var _elt2 = document.createElement("script");
 	_elt2.setAttribute("data-VH20-dsgk","");
 	_elt2.innerHTML =  _scr.childNodes[0].textContent;
-	document.head.appendChild(_elt2);
+	VH20.document.getHead().appendChild(_elt2);
 
 	// VH20.LoadDesignerCSS();
 	// = load designer styles	
@@ -459,8 +459,8 @@ VH20.InitializeDocument = function() {
 		VH20.UnWrapElement(_elements[i]);
 		_elements[i].removeAttribute("contentEditable");
 	}
-	if (document.head.querySelector('#VH20-Designer-Styles') != null) {
-		VH20.RemoveElement(document.head.querySelector('#VH20-Designer-Styles'));
+	if (VH20.document.getHead().querySelector('#VH20-Designer-Styles') != null) {
+		VH20.RemoveElement(VH20.document.getHead().querySelector('#VH20-Designer-Styles'));
 	}
 	if (document.body.querySelector('#Designer-Toolbar') != null) {
 		VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar'));
