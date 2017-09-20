@@ -584,7 +584,7 @@ VH20.OnDocumentKeyDown = function(e) {
 
 /* when page is loaded, start initialization process: set user-agent specific code */
 VH20.InitializeEvent = function() {
-try { window.addEventListener('load', function() { VH20.Initialize(); } , false); } catch {};
+try { window.addEventListener('load', function() { VH20.Initialize(); } , false); } catch(xcp) {};
 }
 
 
@@ -597,25 +597,25 @@ try { window.addEventListener('load', function() { VH20.Initialize(); } , false)
 // load VH20' browser specific code
 if (VH20.Browser.Class === "MSIE8") {
 	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE8.js",
-		document.head.querySelector('script[src*="VH20.js"]')); } 
+		document.getElementsByTagName("head")[0].querySelector('script[src*="VH20.js"]')); } 
 else if (VH20.Browser.Class === "MSIE10") {
 	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE10.js",
-		document.head.querySelector('script[src*="VH20.js"]')); } 
+		document.getElementsByTagName("head")[0].querySelector('script[src*="VH20.js"]')); } 
 else if (VH20.Browser.Class === "MSIE11") {
  	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-MSIE11.js",
-	 	document.head.querySelector('script[src*="VH20.js"]')); }
+	 	document.getElementsByTagName("head")[0].querySelector('script[src*="VH20.js"]')); }
 else if (VH20.Browser.Class === "Opera") {
  	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Opera.js",
-	 	document.head.querySelector('script[src*="VH20.js"]')); }
+	 	document.getElementsByTagName("head")[0].querySelector('script[src*="VH20.js"]')); }
 else if (VH20.Browser.Class === "Netscape") {
 	 VH20.IncludeDynamicScript("https://visual-html.github.io/V-HTML/VH20-Netscape.js",
-	 	document.head.querySelector('script[src*="VH20.js"]')); }
+	 	document.getElementsByTagName("head")[0].querySelector('script[src*="VH20.js"]')); }
 else if (VH20.Browser.Class === "Firefox") {
  	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Firefox.js",
-		document.head.querySelector('script[src*="VH20.js"]')); }
+		document.getElementsByTagName("head")[0].querySelector('script[src*="VH20.js"]')); }
 else if (VH20.Browser.Class === "Chrome") {
 	VH20.IncludeDynamicScriptAfter("https://visual-html.github.io/V-HTML/VH20-Chrome.js",
-		document.head.querySelector('script[src*="VH20.js"]'));
+		document.getElementsByTagName("head")[0].querySelector('script[src*="VH20.js"]'));
 }
 
 
