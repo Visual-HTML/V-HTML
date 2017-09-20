@@ -1,3 +1,3 @@
 VH20.InitializeEvent = function() {
-window.attachEevent('load', function() { VH20.Initialize(); } , false);
+window.attachEvent('load', function() { VH20.Initialize(); } , false);
 }
