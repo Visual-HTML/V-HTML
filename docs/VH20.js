@@ -584,7 +584,10 @@ VH20.OnDocumentKeyDown = function(e) {
 
 /* when page is loaded, start initialization process: set user-agent specific code */
 VH20.InitializeEvent = function() {
-   window.addEventListener('load', function() { VH20.Initialize(); } , false);
+   try { window.addEventListener('load', function() { VH20.Initialize(); } , false); }
+	catch(xcp) {
+		window.attachEvent('load', function() { VH20.Initialize(); } );
+	};
 }
 
 
@@ -619,6 +622,6 @@ else if (VH20.Browser.Class === "Chrome") {
 }
 
 
-setTimeout(VH20.InitializeEvent, 10000);
+VH20.InitializeEvent();
 
 
