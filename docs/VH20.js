@@ -2,7 +2,7 @@
 /* isolate editors code within VH20, which become is an Object in window */
 VH20 = {};
 VH20.document={};
-VH20.document.getHead() = function() { return document.head; };
+VH20.document.getHead = function() { return document.head; };
 VH20.document.body={};
 VH20.document.body.Blank = false;
 VH20.document.body.contentEditable={};
