@@ -116,7 +116,7 @@ VH20.LoadDesignerHTML = function() {
 	_clearButton.value = "Clear";
 	try {
 		_clearButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.Clear(); }, false); 
-	} catch {
+	} catch(xcp) {
 		_clearButton.attachEvent("onclick", function(e){ e.stopPropagation(); VH20.Clear(); });
 	}
 	
