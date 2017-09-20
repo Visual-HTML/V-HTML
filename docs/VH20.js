@@ -584,11 +584,15 @@ VH20.OnDocumentKeyDown = function(e) {
 
 /* when page is loaded, start initialization process: set user-agent specific code */
 VH20.InitializeEvent = function() {
-   try { window.addEventListener('load', function() { VH20.Initialize(); } , false); }
-	catch(xcp) {
-		window.attachEvent('load', function() { VH20.Initialize(); } );
-	};
+	
+   try {
+	   window.addEventListener('load', function() { VH20.Initialize(); } , false); 
+   } catch(xcp) {
+	   window.attachEvent('load', function() { VH20.Initialize(); } );
+   };
+	
 }
+
 
 
 // ensure script handle missing editor sources at document location
