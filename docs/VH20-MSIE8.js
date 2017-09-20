@@ -74,3 +74,30 @@ VH20.WrapElementCode = function(elt) {
 };
 
 
+
+VH20.LoadDesignerCSS = function() {
+	
+	var  _element = document.createElement("style");
+	_element.title = "VH20 . Designer-Toolbar";
+	_element.id = "VH20-Designer-Styles";
+	_element.innerText += "*:not(hr)[data-VH20-hndk] { min-height: 20px; border: 1px dotted gray; } ";	
+	//_element.innerText += "body { margin-top: 100px; border-top: 1px solid gray; } ";	
+	_element.innerText += "body { border-top: 1px dotted lightgray; padding-top: 37px; } ";	
+	_element.innerText += "@media screen and (min-width:210px) { body { /*background-color: red;*/ padding-top: 125px; } } ";	
+	_element.innerText += "@media screen and (min-width:360px) { body { /*background-color: green;*/ padding-top: 75px; } } ";	
+	_element.innerText += "@media screen and (min-width:480px) { body { /*background-color: blue;*/ padding-top: 65px; } } ";		
+	_element.innerText += "@media screen and (min-width:640px) { body { /*background-color: transparent;*/ padding-top: 37px; } } ";	
+	_element.innerText += "@media print { #Designer-Toolbar { display: none; } :not(hr)[data-VH20-hndk] { min-height: inherit; border: none; } } ";	
+	//_element.innerText += "table, tr, td { border: 1px dotted lightgray; } ";	
+	_element.innerText += "#Designer-Toolbar { position: fixed; top: 0px; border-bottom: 1px dotted lightgray; } ";		
+	_element.innerText += "#Designer-Toolbar span { font-size: xx-small; } ";	
+	/* Designer styles are added just after this script link */
+	var _aux = VH20.document.getHead().querySelectorAll('script');
+	var _aux1 = VH20.document.getHead().querySelector('script[src*="VH20.js"]');
+	//_aux1.parentNode.insertBefore(_element, _aux1.nextElementSibling);
+	// CSS come before vh20 script and optional browser specific code
+	 _aux1.parentNode.insertBefore(_element, _aux1);
+
+};
+
+
