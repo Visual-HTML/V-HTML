@@ -22,5 +22,5 @@ VH20.OnWindowBeforeUnload = function() {
 
 
 
-VH20.document.getHead() = function() { return docuent.getElementsByTagName('head')[0]; } 
+VH20.document.getHead = function() { return docuent.getElementsByTagName('head')[0]; } 
 
