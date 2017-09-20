@@ -619,6 +619,6 @@ else if (VH20.Browser.Class === "Chrome") {
 }
 
 
-setTimeout(VH20.InitializeEvent, 5000);
+setTimeout(VH20.InitializeEvent, 10000);
 
 
