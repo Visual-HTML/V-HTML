@@ -594,6 +594,7 @@ VH20.OnElementKeyDown =  function(e) {
 }
 VH20.ElementClick = function(e) {
 	
+	try {
 	console.log( e.type + " currentTarget:" + e.currentTarget.nodeName + " activeElement:" +
 		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
 	
@@ -601,6 +602,15 @@ VH20.ElementClick = function(e) {
 	e.preventDefault();
 	
 	VH20.CurrentTarget = e.currentTarget;	
+	} catch(xcp) {
+	console.log( e.type + " currentTarget:" + e.srcElement.nodeName + " activeElement:" +
+		(document.activeElement.nodeName ? document.activeElement.nodeName : null));
+	
+	e.cancelBubble = true;
+		
+	VH20.CurrentTarget = e.srcElement;	
+	}
+	
 	VH20.Events.ElementClick(e);  /* Inform designer that element was selected */
 
 }
