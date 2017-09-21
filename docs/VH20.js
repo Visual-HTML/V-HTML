@@ -154,8 +154,17 @@ VH20.LoadDesignerHTML = function() {
 };
 VH20.Clear = function() {
 	
-	document.removeEventListener('keydown', this.DocumentKeyDown, false);	
-	document.body.removeEventListener('click', this.DocumentClick, false);	
+	try {
+		document.removeEventListener('keydown', this.DocumentKeyDown, false);	
+	} catch(xcp) {
+		document.detachEvent('onkeydown', this.DocumentKeyDown);
+	}
+		
+	try {
+		document.body.removeEventListener('click', this.DocumentClick, false);	
+	} catch(xcp) {
+		document.body.detachEvent('onclick', this.DocumentClick);
+	}
 	
     	var _elements = document.querySelectorAll('body *[data-VH20-hndk]');
 	for (var i = 0 ; i < _elements.length ; i++) {
