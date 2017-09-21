@@ -256,7 +256,7 @@ VH20.Clear = function() {
 	_element.id = "VH20-Designer-Styles";
 	try {
 	_element.innerHTML += "@media print { #Designer-Toolbar { display: none; } ";	
-	} catch() {
+	} catch(xcp) {
 	_element.text += "@media print { #Designer-Toolbar { display: none; } ";
 	}
 	VH20.document.getHead().appendChild(_element);
