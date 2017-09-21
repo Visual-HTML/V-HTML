@@ -211,9 +211,16 @@ VH20.Clear = function() {
 	_inputButton.type = "button";
 	_inputButton.setAttribute("onclick", "GetBackEditor(); ");
 	var _backeditor = document.createElement("script");
+	
+	try {
 	_backeditor.innerHTML += "function GetBackEditor() {";
 	_backeditor.innerHTML += "var _elt = document.createElement('script'); ";
 	_backeditor.innerHTML += "_elt.src = '" + _currentscriptsrc + "'; ";
+	} catch(xcp) {
+	_backeditor.text += "function GetBackEditor() {";
+	_backeditor.text += "var _elt = document.createElement('script'); ";
+	_backeditor.text += "_elt.src = '" + _currentscriptsrc + "'; ";
+	}
 	
 	if ( typeof(VH20.DesignerUrl) === "string" ) {
 		_aux = VH20.DesignerUrl;
@@ -225,12 +232,20 @@ VH20.Clear = function() {
 	}
 	}
 	
+	try {
 	_backeditor.innerHTML += "_elt.onload = function() { VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.Initialize(" + (VH20.DesignerUrl != null ? "'" + _aux +"'" : "") + "); }; ";
 	//_backeditor.innerHTML += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
 	_backeditor.innerHTML += "_elt.setAttribute('onerror', 'javascript:window.open(\"https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code\");');";
 	_backeditor.innerHTML += "document.getElementsByTagName('head')[0].insertBefore(_elt, document.getElementsByTagName('head')[0].firstChild); ";
 	_backeditor.innerHTML += "}; ";
-	 
+	} catch(xcp) {
+	_backeditor.text += "_elt.onload = function() { VH20.RemoveElement(document.body.querySelector('#Designer-Toolbar')); VH20.Initialize(" + (VH20.DesignerUrl != null ? "'" + _aux +"'" : "") + "); }; ";
+	//_backeditor.text += "_elt.onerror = function() { window.open('https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code'); }; ";
+	_backeditor.text += "_elt.setAttribute('onerror', 'javascript:window.open(\"https://github.com/Visual-HTML/V-HTML/wiki/Get-Editor-Code\");');";
+	_backeditor.text += "document.getElementsByTagName('head')[0].insertBefore(_elt, document.getElementsByTagName('head')[0].firstChild); ";
+	_backeditor.text += "}; ";
+	}
+	
 	_backeditorHTML.appendChild(_inputButton);
 	_backeditorHTML.appendChild(_backeditor);
 		
@@ -239,7 +254,11 @@ VH20.Clear = function() {
 	_element = document.createElement("style");
 	_element.title = "VH20 . Designer-Toolbar";
 	_element.id = "VH20-Designer-Styles";
+	try {
 	_element.innerHTML += "@media print { #Designer-Toolbar { display: none; } ";	
+	} catch() {
+	_element.text += "@media print { #Designer-Toolbar { display: none; } ";
+	}
 	VH20.document.getHead().appendChild(_element);
 	
 };
