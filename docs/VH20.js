@@ -246,16 +246,26 @@ VH20.Clear = function() {
 VH20.WrapElementCode = function(elt) {
 	
 	/* Initialize element with required events and attributes */ 
-	elt.addEventListener('keydown', this.ElementKeyDown, false);
-	elt.addEventListener('click', this.ElementClick, false);
+	try {
+		elt.addEventListener('keydown', this.ElementKeyDown, false);
+		elt.addEventListener('click', this.ElementClick, false);
+	} catch(xcp) {
+		elt.attachEvent('onkeydown', this.ElementKeyDown);
+		elt.attachEvent('onclick', this.ElementClick);
+	}
 	elt.setAttribute("data-VH20-hndk","");
 	
 };
 VH20.UnWrapElementCode = function(elt) {
 	
 	/* Remove from HTMLElement required events and attributes */
-	elt.removeEventListener('keydown', this.ElementKeyDown, false);
-	elt.removeEventListener('click', this.ElementClick, false);
+	try {
+		elt.removeEventListener('keydown', this.ElementKeyDown, false);
+		elt.removeEventListener('click', this.ElementClick, false);
+	} catch(xcp) {
+		elt.detachEvent('onkeydown', this.ElementKeyDown);
+		elt.detachEvent('onclick', this.ElementClick);
+	}
 	elt.removeAttribute("data-VH20-hndk","");
 	
 };
