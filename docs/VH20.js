@@ -117,7 +117,7 @@ VH20.LoadDesignerHTML = function() {
 	try {
 		_clearButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.Clear(); }, false); 
 	} catch(xcp) {
-		_clearButton.attachEvent("onclick", function(e){ e.stopPropagation(); VH20.Clear(); });
+		_clearButton.attachEvent("onclick", function(e){ e.cancelBubble = false; VH20.Clear(); });
 	}
 	
 	_defaultDesignerToolbar.appendChild(_clearButton);
@@ -130,7 +130,7 @@ VH20.LoadDesignerHTML = function() {
 		try {
 			_saveAsButton.addEventListener("click", function(e){ e.stopPropagation(); VH20.SaveAs("SaveAs.html"); }, false);
 		} catch(xcp) {
-			_saveAsButton.attachEvent("onclick", function(e){ e.stopPropagation(); VH20.SaveAs("SaveAs.html"); });
+			_saveAsButton.attachEvent("onclick", function(e){ e.cancelBubble = false; VH20.SaveAs("SaveAs.html"); });
 		}
 		
 		_defaultDesignerToolbar.appendChild(_saveAsButton);	
@@ -144,7 +144,7 @@ VH20.LoadDesignerHTML = function() {
 	try {
 		_documentTitle.addEventListener("change", function(e){ e.stopPropagation(); document.title = e.currentTarget.value; }, false);
 	} catch(xcp) {
-		_documentTitle.attachEvent("onchange", function(e){ e.stopPropagation();  document.title = e.currentTarget.value; });
+		_documentTitle.attachEvent("onchange", function(e){ e.cancelBubble = false; document.title = e.currentTarget.value; });
 	}
 		
 	_defaultDesignerToolbar.appendChild(_documentTitle);
