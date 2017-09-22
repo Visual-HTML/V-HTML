@@ -107,6 +107,12 @@ VH20.LoadDesignerHTML = function() {
 	_defaultDesignerToolbar.id = "Designer-Toolbar";
 	
 	_defaultDesignerToolbar.innerHTML = '<span title="navigator.appName">' + navigator.appName + '</span>' + ' ; '  + 
+		
+		'<span title="navigator.vendor">' + navigator.vendor + '</span>' + ' ; '  +
+		'<span title="navigator.product">' + navigator.product + '</span>' + ' ; '  +
+		'<span title="navigator.oscpu">' + navigator.oscpu + '</span>' + ' ; '  +
+		'<span title="navigator.platform">' + navigator.platform + '</span>' + ' ; '  +
+		
 		'<span title="navigator.userAgent">' + navigator.userAgent + '</span>' + ' ; '  + 
 		'<span title="VH20.Browser.Class">' + VH20.Browser.Class + '</span>' + '<br />';
 		
