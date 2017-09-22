@@ -110,7 +110,9 @@ VH20.LoadDesignerHTML = function() {
 		
 		'<span title="navigator.vendor">' + navigator.vendor + '</span>' + ' ; '  +
 		'<span title="navigator.product">' + navigator.product + '</span>' + ' ; '  +
-		'<span title="navigator.oscpu">' + navigator.oscpu + '</span>' + ' ; '  +
+		//'<span title="navigator.oscpu">' + navigator.oscpu + '</span>' + ' ; '  +
+		//TODO: troubleshooting support on browser classification- a page with all navigator object info and class made by VH20 --nice to have : edit conditions and identify one browser + add it to code
+		//TODO: troubleshooting support on browser specific code loaded - not all browsers provide developer tools - class name + all script refrecne added for browser specific code
 		'<span title="navigator.platform">' + navigator.platform + '</span>' + ' ; '  +
 		
 		'<span title="navigator.userAgent">' + navigator.userAgent + '</span>' + ' ; '  + 
