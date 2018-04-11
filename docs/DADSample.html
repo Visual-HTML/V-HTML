@@ -22,9 +22,8 @@
     }
  
     function handledrop(elt, evt) {
-         alert(evt.dataTransfer.files.length);
-        dragitem.style.display="none";
-        dragitem.innerHTML += evt.dataTransfer.files[0].type;
+
+        document.getElementById("target").innerHTML += evt.dataTransfer.files[0].type;
     }
  
  
