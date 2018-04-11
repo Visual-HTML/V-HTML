@@ -42,7 +42,7 @@
     }
  
     function handledrop(elt, evt) {
-        // alert('drop');
+         alert(evt.dataTransfer.files.length);
         dragitem.style.display="none";
         var newid=dragitem.id + '_dest';
         var dest = document.getElementById(newid);
