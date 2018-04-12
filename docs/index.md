@@ -115,7 +115,3 @@ Search for a designer within a CodeSources:
 
 -----------------------------------------------
 [VH20onDesignerA.html](VH20onDesignerA.html) -
-
-
-[BSV](BurstShootViewer.html)
-[DADS](DADSample.html)
