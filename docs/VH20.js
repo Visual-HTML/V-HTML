@@ -371,6 +371,8 @@ else if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.user
 	VH20.Browser.Class = "MSIE10"; } 
 	else if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.userAgent.indexOf("MSIE 11") > -1)) {
 		VH20.Browser.Class = "MSIE11"; }
+	else if ((navigator.userAgent.indexOf("Edg/81") > -1)) {
+		VH20.Browser.Class = "MSIE10"; }
 	else if (((navigator.appName == "Opera") && (navigator.userAgent.indexOf("Opera") > -1)) 
 		|| ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("OPR") > -1))) {
 		VH20.Browser.Class = "Opera"; } 
@@ -382,8 +384,6 @@ else if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.user
 		VH20.Browser.Class = "SamsungTV"; } 
 	else if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("Chrome") > -1) && (navigator.platform.indexOf("Linux") == -1)) {
 		VH20.Browser.Class = "Chrome"; }
-	else if ((navigator.userAgent.indexOf("Edg/81") > -1)) {
-		VH20.Browser.Class = "MSIE10"; }
 	
  return VH20.Browser.Class;
 	
