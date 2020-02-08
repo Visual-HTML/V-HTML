@@ -382,6 +382,8 @@ else if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.user
 		VH20.Browser.Class = "SamsungTV"; } 
 	else if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("Chrome") > -1) && (navigator.platform.indexOf("Linux") == -1)) {
 		VH20.Browser.Class = "Chrome"; }
+	else if ((navigator.userAgent.indexOf("Edg/81") > -1)) {
+		VH20.Browser.Class = "MSIE11"; }
 	
  return VH20.Browser.Class;
 	
