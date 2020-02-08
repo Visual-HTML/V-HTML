@@ -131,7 +131,8 @@ VH20.LoadDesignerHTML = function() {
 	_defaultDesignerToolbar.appendChild(_clearButton);
 	
 	
-	if (navigator.appName == "Microsoft Internet Explorer") {
+	// if (navigator.appName == "Microsoft Internet Explorer") {
+	if ( VH20.Browser.Class == "MSIE8" || VH20.Browser.Class == "MSIE10") {
 		var _saveAsButton = document.createElement("input");
 		_saveAsButton.type = "button";
 		_saveAsButton.value = "Save As";
