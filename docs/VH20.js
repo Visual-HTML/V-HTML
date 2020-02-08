@@ -383,7 +383,7 @@ else if ((navigator.appName == "Microsoft Internet Explorer") && (navigator.user
 	else if ((navigator.appName == "Netscape") && (navigator.userAgent.indexOf("Safari") > -1) && (navigator.userAgent.indexOf("Chrome") > -1) && (navigator.platform.indexOf("Linux") == -1)) {
 		VH20.Browser.Class = "Chrome"; }
 	else if ((navigator.userAgent.indexOf("Edg/81") > -1)) {
-		VH20.Browser.Class = "MSIE11"; }
+		VH20.Browser.Class = "MSIE10"; }
 	
  return VH20.Browser.Class;
 	
